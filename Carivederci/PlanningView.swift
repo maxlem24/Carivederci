@@ -13,16 +13,17 @@ struct PlanningView: View {
     @State private var size : CGSize = .zero
     @State private var jour = Jours.Lundi
     var body: some View {
+        GeometryReader{ geometry in
         ScrollView{
-            VStack{
-                Text("Cari-calendrier").font(.headline)
-                BoutonStack(jour :$jour)
-                jourView(jour: $jour)
+            LazyVStack{
+                Text("Cari-calendrier").font(.title)
+                BoutonStack(jour :$jour,geometry: geometry)
+                jourView(jour: $jour,geometry : geometry)
                 
             }.padding()
             .frame(alignment:.top)
         }.background(Color("BackgroundColor"))
-        
+        }
     }
 }
 
@@ -34,77 +35,81 @@ struct PlanningView_Previews: PreviewProvider {
 
 struct BoutonStack : View {
     @Binding var jour : Jours
+    let geometry : GeometryProxy
     var body: some View {
-        HStack{
+         HStack(spacing:5){
             ForEach(Jours.allCases, id: \.self) {
                 current in
                 Button("\(current.rawValue)"){
                     jour = current
-                }.padding(5).font(.footnote).background(Rectangle().fill( jour==current ? Color.gray : Color("BackgroundColor") )).cornerRadius(10).lineLimit(1)
+                }.padding(.horizontal,5).font(.headline).background(Rectangle().fill( jour==current ? Color.gray : Color("BackgroundColor") )).cornerRadius(8).lineLimit(1).frame(width: geometry.size.width*0.9/5)
             }
             
-        }.padding().frame(width: 300)
+         }.frame(width: geometry.size.width*0.9).padding(.vertical,5)
+        
+        
     }
 }
 
 struct jourView : View{
     @Binding var jour : Jours
-    @State private var size : CGSize = .zero
+    let geometry : GeometryProxy
     var body: some View {
         let actuel = Journee.semaine[jour]
         
-        VStack{
-            Text("\(jour.rawValue)").font(.subheadline).foregroundColor(Color("AccentText")).frame(width :300,height: 50).background(Rectangle().fill(Color("TitleColor"))).cornerRadius(15)
-            HStack{
-                Rectangle().frame(width: 75, height: 1)
-                Spacer()
-                Text("Matin")
-                Spacer()
-                Rectangle().frame(width: 75, height: 1)
-            }.padding(5)
+            let lineLength = geometry.size.width/4
             VStack{
-                Text("\(actuel?.Matin.nom ?? "")")
-                Text("\(actuel?.Matin.lieu ?? "")")
-                Text("\(actuel?.Matin.heure ?? "")")
-            }
-            HStack{
-                Rectangle().frame(width: 75, height: 1)
+                Text("\(jour.rawValue)").font(.title3).bold().padding(.vertical,10).foregroundColor(Color("AccentText")).frame(width :geometry.size.width).background(Rectangle().fill(Color("TitleColor"))).cornerRadius(15)
+                HStack{
+                    Rectangle().frame(width: lineLength, height: 1)
+                    Spacer()
+                    Text("Matin").font(.headline)
+                    Spacer()
+                    Rectangle().frame(width: lineLength, height: 1)
+                }.padding(.horizontal,10)
+                activiteView(activite: actuel!.Matin,width: geometry.size.width)
+                HStack{
+                    Rectangle().frame(width: lineLength, height: 1)
+                    Spacer()
+                    Text("Midi").font(.headline)
+                    Spacer()
+                    Rectangle().frame(width: lineLength, height: 1)
+                }.padding(.horizontal,10)
+                
+                activiteView(activite: actuel!.Midi,width: geometry.size.width)
+                HStack{
+                    Rectangle().frame(width: lineLength, height: 1)
+                    Spacer()
+                    Text("Après Midi").font(.headline)
+                    Spacer()
+                    Rectangle().frame(width: lineLength, height: 1)
+                }.padding(.horizontal,10)
+                activiteView(activite: actuel!.ApresMidi,width: geometry.size.width)
+                
+                HStack{
+                    Rectangle().frame(width: lineLength, height: 1)
+                    Spacer()
+                    Text("Soir").font(.headline)
+                    Spacer()
+                    Rectangle().frame(width: lineLength, height: 1)
+                }.padding(.horizontal,10)
+                activiteView(activite: actuel!.Soir,width: geometry.size.width)
                 Spacer()
-                Text("Midi")
-                Spacer()
-                Rectangle().frame(width: 75, height: 1)
-            }.padding(5)
-            
+            }.frame(width:geometry.size.width*0.9).background(Rectangle().fill(Color("CalendarBackground"))).cornerRadius(15)
+        
+    }
+}
+
+struct activiteView : View {
+    let activite : Activite
+    let width : CGFloat
+    var body: some View {
+        
             VStack{
-                Text("\(actuel?.Midi.nom ?? "")")
-                Text("\(actuel?.Midi.lieu ?? "")")
-                Text("\(actuel?.Midi.heure ?? "")")
-            }
-            HStack{
-                Rectangle().frame(width: 75, height: 1)
-                Spacer()
-                Text("Après Midi")
-                Spacer()
-                Rectangle().frame(width: 75, height: 1)
-            }.padding(5)
-            VStack{
-                Text("\(actuel?.ApresMidi.nom ?? "")")
-                Text("\(actuel?.ApresMidi.lieu ?? "")")
-                Text("\(actuel?.ApresMidi.heure ?? "")")
-            }.scaledToFill().padding().background(Rectangle().fill(Color("BackgroundColor")))
-            
-            HStack{
-                Rectangle().frame(width: 75, height: 1)
-                Spacer()
-                Text("Soir")
-                Spacer()
-                Rectangle().frame(width: 75, height: 1)
-            }.padding(5)
-            VStack{
-                Text("\(actuel?.Soir.nom ?? "")")
-                Text("\(actuel?.Soir.lieu ?? "")")
-                Text("\(actuel?.Soir.heure ?? "")")
-            }
-        }.background(Rectangle().fill(Color("CalendarBackground"))).cornerRadius(15)
+                Text("\(activite.nom)").font(.body)
+                Text("\(activite.lieu)").font(.body)
+                Text("\(activite.heure)").font(.body)
+            }.padding(5).frame(width: width*0.8).background(Color("BackgroundColor")).cornerRadius(10).padding(5)
+        
     }
 }
