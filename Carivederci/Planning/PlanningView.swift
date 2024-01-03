@@ -22,8 +22,9 @@ struct PlanningView: View {
                 
             }.padding()
             .frame(alignment:.top)
-        }.background(Color("BackgroundColor"))
         }
+        }.background(Color("BackgroundColor"))
+        
     }
 }
 
