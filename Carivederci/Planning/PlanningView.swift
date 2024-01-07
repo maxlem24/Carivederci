@@ -10,7 +10,6 @@ import SwiftUI
 
 
 struct PlanningView: View {
-    @State private var size : CGSize = .zero
     @State private var jour = Jours.Lundi
     var body: some View {
         GeometryReader{ geometry in
@@ -43,7 +42,7 @@ struct BoutonStack : View {
                 current in
                 Button("\(current.rawValue)"){
                     jour = current
-                }.padding(.horizontal,5).font(.headline).background(Rectangle().fill( jour==current ? Color.gray : Color("BackgroundColor") )).cornerRadius(8).lineLimit(1).frame(width: geometry.size.width*0.9/5)
+                }.padding(.horizontal,5).font(.headline).background(Rectangle().fill( jour==current ? Color("Button") : Color("BackgroundColor") )).cornerRadius(8).lineLimit(1).frame(width: geometry.size.width*0.9/5)
             }
             
          }.frame(width: geometry.size.width*0.9).padding(.vertical,5)
@@ -110,7 +109,7 @@ struct activiteView : View {
                 Text("\(activite.nom)").font(.body)
                 Text("\(activite.lieu)").font(.body)
                 Text("\(activite.heure)").font(.body)
-            }.padding(5).frame(width: width*0.8).background(Color("BackgroundColor")).cornerRadius(10).padding(5)
+            }.padding(5).frame(width: width*0.8).background(Color("ActiviteBackground")).cornerRadius(10).padding(5)
         
     }
 }

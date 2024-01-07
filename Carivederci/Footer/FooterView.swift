@@ -15,8 +15,8 @@ struct FooterView: View {
             Text("Page Carivederci").foregroundColor(Color.green).tabItem { Image(systemName: "info.circle") }.tag(1)
             PlanningView().tabItem { Image(systemName: "calendar") }.tag(2)
             Text("Chat").foregroundColor(/*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/).tabItem { Image(systemName: "ellipses.bubble") }.tag(3)
-            Text("Classement").foregroundColor(.yellow).tabItem { Image(systemName: "star") }.tag(4)
-        }//Methode IOS 16 toolbarBackground
+            ScoreboardView().tabItem { Image(systemName: "star") }.tag(4)
+        }.animation(.easeInOut).transition(.slide)//Methode IOS 16 toolbarBackground
     }
 }
 
