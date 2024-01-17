@@ -12,6 +12,7 @@ struct User {
     let pseudo : String
     var score = 0
     let profil : Image
+    var famille : Famille
 }
 
 struct Famille {
