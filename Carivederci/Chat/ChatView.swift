@@ -8,23 +8,21 @@
 import SwiftUI
 
 struct ChatView: View {
-    @State private var texts: [Message] = []
-    var userID : UUID = UUID()
+    @State private var texts: [Message] = [Message(content: "Test", myMessage: false)]
     var body: some View {
         GeometryReader{ geometry in
-            VStack{
+            VStack(spacing: 0){
                 ChatHeader(geometry: geometry)
                 ScrollView{
-                    VStack(alignment: .leading) {
-                        ForEach(texts, id: \.self) { message in // show received results
-                            message
-                        }
-                    }.frame(maxWidth: .infinity)  // << important !!
-                    .padding()
+                    
+                    ForEach(texts, id: \.self) { message in // show received results
+                        message
+                        
+                    }.padding().frame(width: geometry.size.width, height: geometry.size.height*0.8, alignment : .top)// << important !!
                     .edgesIgnoringSafeArea(.bottom)
                     .animation(.easeOut(duration: 0.16))
-                }
-                ChatInput(geometry: geometry,userID : userID, texts : $texts)}
+                }.background(Rectangle().fill(Color("CalendarBackground")))
+                ChatInput(geometry: geometry, texts : $texts)}
         }.background(Color("BackgroundColor"))
         
     }
@@ -40,14 +38,13 @@ struct ChatHeader: View {
     let geometry : GeometryProxy
     var body: some View {
         VStack{
-            Text("Header")
-        }.frame(width: geometry.size.width, height: geometry.size.height*0.1)
+            Text("Famille Test (Pas Encore Fini)")
+        }.frame(width: geometry.size.width, height: geometry.size.height*0.1).background(Color("TitleColor"))
     }
 }
 
 struct ChatInput : View {
     let geometry : GeometryProxy
-    let userID : UUID
     @State private var message : String = ""
     @Binding var texts: [Message]
     var body: some View {
@@ -63,19 +60,30 @@ struct ChatInput : View {
         
     }
     func add(content : String) -> Void {
-        let message = Message(userId: userID, content: content)
+        let message = Message( content: content,myMessage: true)
         self.texts.append(message)
     }
 }
 
 
 struct Message : View,Hashable {
-    var userId : UUID
-    let sendId = UUID()
     let content : String
+    let myMessage : Bool
     var body: some View {
-        VStack{
-            Text(content).border(userId == sendId ? Color.black : Color.red)
+        HStack{
+            if myMessage {
+                Spacer()
+            }
+                VStack{
+                    Text(content).padding()
+                }.background(Rectangle().fill(myMessage ? Color("Button"): Color("ActiviteBackground")).cornerRadius(10)).padding(.horizontal)
+            if !myMessage{
+                Spacer()
+            }
         }
+        
+        
+        
+        
     }
 }
