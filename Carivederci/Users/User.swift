@@ -7,12 +7,16 @@
 
 import SwiftUI
 
-struct User {
+struct User : Equatable{
     let id = UUID()
     let pseudo : String
     var score = 0
     let profil : Image
-    var famille : Famille
+    var famille : Famille?
+    static func == (left : User, right : User)-> Bool{
+        return left.id == right.id && left.pseudo == right.pseudo && left.score == right.score && left.profil == right.profil
+    }
+    
 }
 
 struct Famille {
