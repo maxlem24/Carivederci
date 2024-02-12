@@ -27,12 +27,6 @@ struct PlanningView: View {
     }
 }
 
-struct PlanningView_Previews: PreviewProvider {
-    static var previews: some View {
-        PlanningView()
-    }
-}
-
 struct BoutonStack : View {
     @Binding var jour : Jours
     let geometry : GeometryProxy

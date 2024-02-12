@@ -8,9 +8,13 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State var isLogged : Bool = false
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        if isLogged {
+            MainView()
+        } else {
+            LoginMenuView(isLogged : $isLogged)
+        }
     }
 }
 
