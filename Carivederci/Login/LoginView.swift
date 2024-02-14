@@ -11,38 +11,48 @@ struct LoginView: View {
     @Binding var isLogged : Bool
     @State var pseudo : String = ""
     @State var password : String = ""
+    let newUser : Bool
     var body: some View {
         GeometryReader{ geometry in
-            VStack(alignment : .center,spacing : 20){
+            ZStack{
+                Color("Bordeaux")
+            VStack(alignment : .leading,spacing : 20){
+                Text("Pseudo").bold().padding(5).accentColor(.white)
+                TextField(
+                    "Pseudo",
+                    text : $pseudo
+                ).foregroundColor(.white).accentColor(.white)
+                .autocapitalization(.none).disableAutocorrection(true)
+                .frame(width: geometry.size.width*0.9).padding(5).background(Rectangle().fill(Color.gray).cornerRadius(10))
+                
+                Text("Mot de passe").bold().padding(5).accentColor(.white)
+                SecureField(
+                    "Mot de passe",
+                    text : $password
+                ).foregroundColor(.white).accentColor(.white)
+                .autocapitalization(.none).disableAutocorrection(true)
+                .frame(width: geometry.size.width*0.9).padding(5).background(Rectangle().fill(Color.gray).cornerRadius(10))
                 HStack{
-                    Text("Pseudo").bold().padding()
-                    TextField(
-                        "Pseudo",
-                        text : $pseudo
-                    )
-                    .autocapitalization(.none)
-                    .disableAutocorrection(true)
-                    .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/).padding()
-                }.padding(.horizontal).frame(width: geometry.size.width*0.9, height: geometry.size.height*0.1).background(Rectangle().fill(Color("Button")).cornerRadius(10))
-                HStack{
-                    Text("Mot de passe").bold().padding()
-                    TextField(
-                        "Mot de passe",
-                        text : $password
-                    )
-                    .autocapitalization(.none)
-                    .disableAutocorrection(true)
-                    .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/).padding()
-                }.padding(.horizontal).frame(width: geometry.size.width*0.9, height: geometry.size.height*0.1).background(Rectangle().fill(Color("Button")).cornerRadius(10))
-                Button("Se connecter"){
-                    isLogged = connexion(pseudo: pseudo, password: password)
-                }.padding().frame(width: geometry.size.width*0.9, height: geometry.size.height*0.1).background(Rectangle().fill(Color("Button")).cornerRadius(10))
-               
-            }.background(Color("BackgroundColor")).frame(width: geometry.size.width, height: geometry.size.height)
+                    Spacer()
+                    Button(newUser ? "Créer un compte" : "Se connecter"){
+                        isLogged = connexion(pseudo: pseudo, password: password)
+                    }.scaledToFit().frame(width: geometry.size.width*0.5).padding(5)
+                    .background(Rectangle().fill(Color.gray).cornerRadius(10))
+                    Spacer()
+                }
+                
+            }.padding()
+            }.ignoresSafeArea()
         }
         
     }
-    
+}
+
+func connexion(pseudo:String, password:String) -> Bool {
+    if pseudo == "" || password == ""  {
+        return false
+    }
+    return true
 }
 
 

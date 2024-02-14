@@ -9,9 +9,14 @@ import SwiftUI
 
 struct ContentView: View {
     @State var isLogged : Bool = false
+    @State var hasFamily : Bool = false
     var body: some View {
         if isLogged {
-            MainView()
+            if hasFamily {
+                MainView()
+            }else {
+                FamilleMenuView(hasFamily : $hasFamily)
+            }
         } else {
             LoginMenuView(isLogged : $isLogged)
         }
