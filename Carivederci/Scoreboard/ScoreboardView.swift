@@ -11,17 +11,20 @@ struct ScoreboardView: View {
     @State private var jour = Jours.Lundi
     var body: some View {
         GeometryReader{ geometry in
+            ZStack{
+                Color("BackgroundColor")
+                LazyVStack{
+                    Text("Classement des familles").font(.title).frame(width: geometry.size.width, height: geometry.size.height/10, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/).background(Rectangle().fill(Color("Header"))).padding(.bottom,10)
+                    Podium(geometry: geometry)
+                    Scoreboard(geometry: geometry)
+                    
+                    
+                }.padding()
+                .frame(alignment:.top)
+            }.ignoresSafeArea()
             
-            LazyVStack{
-                Text("Classement des familles").font(.title).frame(width: geometry.size.width, height: geometry.size.height/10, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/).background(Rectangle().fill(Color("Header"))).padding(.bottom,10)
-                Podium(geometry: geometry)
-                Scoreboard(geometry: geometry)
-                
-                
-            }.padding()
-            .frame(alignment:.top)
             
-        }.background(Color("BackgroundColor"))
+        }
         
     }
     

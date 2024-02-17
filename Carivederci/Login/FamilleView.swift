@@ -1,17 +1,18 @@
 //
-//  LoginView.swift
+//  FamilleView.swift
 //  Carivederci
 //
-//  Created by Maxime on 12/02/2024.
+//  Created by Maxime on 17/02/2024.
 //
 
 import SwiftUI
 
-struct LoginView: View {
-    @Binding var isLogged : Bool
+struct FamilleView: View {
+    
+    @Binding var hasFamily : Bool
     @State var pseudo : String = ""
     @State var password : String = ""
-    let newUser : Bool
+    let newFamily : Bool
     var body: some View {
         GeometryReader{ geometry in
             ZStack{
@@ -34,8 +35,8 @@ struct LoginView: View {
                     .frame(width: geometry.size.width*0.9).padding(5).background(Rectangle().fill(Color.gray).cornerRadius(10))
                     HStack{
                         Spacer()
-                        Button(newUser ? "Créer un compte" : "Se connecter"){
-                            isLogged = connexion(pseudo: pseudo, password: password)
+                        Button(newFamily ? "Créer la famille" : "Rejoindre la famille"){
+                            hasFamily = connexionFamille(pseudo: pseudo, password: password)
                         }.scaledToFit().frame(width: geometry.size.width*0.5).padding(5)
                         .background(Rectangle().fill(Color.gray).cornerRadius(10))
                         Spacer()
@@ -48,11 +49,9 @@ struct LoginView: View {
     }
 }
 
-func connexion(pseudo:String, password:String) -> Bool {
+func connexionFamille(pseudo:String, password:String) -> Bool {
     if pseudo == "" || password == ""  {
         return false
     }
     return true
 }
-
-

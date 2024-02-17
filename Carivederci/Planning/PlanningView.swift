@@ -7,22 +7,23 @@
 
 import SwiftUI
 
-
-
 struct PlanningView: View {
     @State private var jour = Jours.Lundi
     var body: some View {
         GeometryReader{ geometry in
-            ScrollView{
-                LazyVStack{
-                    Text("Cari-calendrier").font(.title)
-                    BoutonStack(jour :$jour,geometry: geometry)
-                    jourView(jour: $jour,geometry : geometry)
-                    
-                }.padding()
-                .frame(alignment:.top)
+            ZStack{
+                Color("BackgroundColor").ignoresSafeArea()
+                ScrollView{
+                    VStack{
+                        Text("Cari-calendrier").font(.title)
+                        BoutonStack(jour :$jour,geometry: geometry)
+                        jourView(jour: $jour,geometry : geometry)
+                        
+                    }.padding()
+                    .frame(alignment:.top)
+                }
             }
-        }.background(Color("BackgroundColor"))
+        }
         
     }
 }
