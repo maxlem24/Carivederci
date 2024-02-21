@@ -17,11 +17,13 @@
 		7AAE08062B5826A2008EB4B5 /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAE08052B5826A2008EB4B5 /* ChatView.swift */; };
 		7AAE3DFF2B7D2EA200852F8C /* FamilleMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAE3DFE2B7D2EA200852F8C /* FamilleMenuView.swift */; };
 		7ABC411D2B81577E00A3B0DB /* FamilleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABC411C2B81577E00A3B0DB /* FamilleView.swift */; };
+		7ABE4CEE2B823EBF0037E8F5 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABE4CED2B823EBF0037E8F5 /* Models.swift */; };
+		7ABE4CF32B8241630037E8F5 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABE4CF22B8241630037E8F5 /* Data.swift */; };
+		7ABE4CFB2B824E010037E8F5 /* TestAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABE4CFA2B824E010037E8F5 /* TestAPI.swift */; };
 		7AC60F272B45D50A00B812CC /* FooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AC60F262B45D50A00B812CC /* FooterView.swift */; };
 		7ACCBEFF2B7AA33A00D007D0 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ACCBEFE2B7AA33A00D007D0 /* MainView.swift */; };
 		7ACCBF042B7AA37900D007D0 /* LoginMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ACCBF032B7AA37900D007D0 /* LoginMenuView.swift */; };
 		7ACCBF082B7AA82C00D007D0 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ACCBF072B7AA82C00D007D0 /* LoginView.swift */; };
-		7AD89D6D2B4ADD3B00A5E334 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AD89D6C2B4ADD3B00A5E334 /* User.swift */; };
 		7AD89D722B4ADF3700A5E334 /* canape.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7AD89D712B4ADF3700A5E334 /* canape.jpg */; };
 		7AD89D752B4ADF3E00A5E334 /* humain.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7AD89D742B4ADF3E00A5E334 /* humain.jpg */; };
 		7AD89D782B4ADF4700A5E334 /* dragon.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 7AD89D772B4ADF4700A5E334 /* dragon.jpeg */; };
@@ -41,11 +43,13 @@
 		7AAE08052B5826A2008EB4B5 /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
 		7AAE3DFE2B7D2EA200852F8C /* FamilleMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamilleMenuView.swift; sourceTree = "<group>"; };
 		7ABC411C2B81577E00A3B0DB /* FamilleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamilleView.swift; sourceTree = "<group>"; };
+		7ABE4CED2B823EBF0037E8F5 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		7ABE4CF22B8241630037E8F5 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
+		7ABE4CFA2B824E010037E8F5 /* TestAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestAPI.swift; sourceTree = "<group>"; };
 		7AC60F262B45D50A00B812CC /* FooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FooterView.swift; sourceTree = "<group>"; };
 		7ACCBEFE2B7AA33A00D007D0 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		7ACCBF032B7AA37900D007D0 /* LoginMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginMenuView.swift; sourceTree = "<group>"; };
 		7ACCBF072B7AA82C00D007D0 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
-		7AD89D6C2B4ADD3B00A5E334 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		7AD89D712B4ADF3700A5E334 /* canape.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = canape.jpg; sourceTree = "<group>"; };
 		7AD89D742B4ADF3E00A5E334 /* humain.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = humain.jpg; sourceTree = "<group>"; };
 		7AD89D772B4ADF4700A5E334 /* dragon.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = dragon.jpeg; sourceTree = "<group>"; };
@@ -82,11 +86,11 @@
 		7A2400172B3F01420058F50F /* Carivederci */ = {
 			isa = PBXGroup;
 			children = (
+				7ABE4CEC2B823EA50037E8F5 /* Api */,
 				7ACCBF022B7AA36300D007D0 /* Login */,
 				7ACCBEFD2B7AA32300D007D0 /* Main */,
 				7AAE08042B58254F008EB4B5 /* Chat */,
 				7AD89D702B4ADF0B00A5E334 /* TestAssets */,
-				7AD89D6B2B4ADD2F00A5E334 /* Users */,
 				7AD89D6A2B4ADD0600A5E334 /* Scoreboard */,
 				7AC60F252B45D4F400B812CC /* Footer */,
 				7A32924A2B3F057A00B8C759 /* Fonts */,
@@ -122,6 +126,15 @@
 				7AAE08052B5826A2008EB4B5 /* ChatView.swift */,
 			);
 			path = Chat;
+			sourceTree = "<group>";
+		};
+		7ABE4CEC2B823EA50037E8F5 /* Api */ = {
+			isa = PBXGroup;
+			children = (
+				7ABE4CED2B823EBF0037E8F5 /* Models.swift */,
+				7ABE4CF22B8241630037E8F5 /* Data.swift */,
+			);
+			path = Api;
 			sourceTree = "<group>";
 		};
 		7AC60F232B45D1CF00B812CC /* Planning */ = {
@@ -168,20 +181,13 @@
 			path = Scoreboard;
 			sourceTree = "<group>";
 		};
-		7AD89D6B2B4ADD2F00A5E334 /* Users */ = {
-			isa = PBXGroup;
-			children = (
-				7AD89D6C2B4ADD3B00A5E334 /* User.swift */,
-			);
-			path = Users;
-			sourceTree = "<group>";
-		};
 		7AD89D702B4ADF0B00A5E334 /* TestAssets */ = {
 			isa = PBXGroup;
 			children = (
 				7AD89D772B4ADF4700A5E334 /* dragon.jpeg */,
 				7AD89D742B4ADF3E00A5E334 /* humain.jpg */,
 				7AD89D712B4ADF3700A5E334 /* canape.jpg */,
+				7ABE4CFA2B824E010037E8F5 /* TestAPI.swift */,
 			);
 			path = TestAssets;
 			sourceTree = "<group>";
@@ -262,16 +268,18 @@
 				7A32924C2B3F072D00B8C759 /* PlanningStruct.swift in Sources */,
 				7ACCBEFF2B7AA33A00D007D0 /* MainView.swift in Sources */,
 				7A24001B2B3F01420058F50F /* ContentView.swift in Sources */,
-				7AD89D6D2B4ADD3B00A5E334 /* User.swift in Sources */,
 				7A2400192B3F01420058F50F /* CarivederciApp.swift in Sources */,
 				7AAE08062B5826A2008EB4B5 /* ChatView.swift in Sources */,
 				7AD89D7B2B4AE28C00A5E334 /* ScoreboardView.swift in Sources */,
 				7AAE3DFF2B7D2EA200852F8C /* FamilleMenuView.swift in Sources */,
+				7ABE4CF32B8241630037E8F5 /* Data.swift in Sources */,
 				7AC60F272B45D50A00B812CC /* FooterView.swift in Sources */,
+				7ABE4CFB2B824E010037E8F5 /* TestAPI.swift in Sources */,
 				7ACCBF082B7AA82C00D007D0 /* LoginView.swift in Sources */,
 				7ABC411D2B81577E00A3B0DB /* FamilleView.swift in Sources */,
 				7ACCBF042B7AA37900D007D0 /* LoginMenuView.swift in Sources */,
 				7A3292502B3F0C6300B8C759 /* PlanningView.swift in Sources */,
+				7ABE4CEE2B823EBF0037E8F5 /* Models.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

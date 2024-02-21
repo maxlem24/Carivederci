@@ -9,8 +9,8 @@ import SwiftUI
 
 struct LoginView: View {
     @Binding var isLogged : Bool
-    @State var pseudo : String = ""
-    @State var password : String = ""
+    @State var pseudo : String
+    @State var password : String
     let newUser : Bool
     var body: some View {
         GeometryReader{ geometry in
@@ -21,7 +21,7 @@ struct LoginView: View {
                     TextField(
                         "Pseudo",
                         text : $pseudo
-                    ).foregroundColor(.white).accentColor(.white)
+                    ).tag(/*@START_MENU_TOKEN@*/"Tag"/*@END_MENU_TOKEN@*/).foregroundColor(.white).accentColor(.white)
                     .autocapitalization(.none).disableAutocorrection(true)
                     .frame(width: geometry.size.width*0.9).padding(5).background(Rectangle().fill(Color.gray).cornerRadius(10))
                     

@@ -9,13 +9,14 @@ import SwiftUI
 
 struct ScoreboardView: View {
     @State private var jour = Jours.Lundi
+    @State private var familleList : FamilleList?
     var body: some View {
         GeometryReader{ geometry in
             ZStack{
                 Color("BackgroundColor")
                 LazyVStack{
                     Text("Classement des familles").font(.title).frame(width: geometry.size.width, height: geometry.size.height/10, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/).background(Rectangle().fill(Color("Header"))).padding(.bottom,10)
-                    Podium(geometry: geometry)
+                    Podium(geometry: geometry,familleList: familleList)
                     Scoreboard(geometry: geometry)
                     
                     
@@ -39,11 +40,14 @@ struct ScoreboardView_Previews: PreviewProvider {
 
 struct Podium : View {
     let geometry : GeometryProxy
+    var familleList : FamilleList?
     var body: some View {
         let widthPodium = geometry.size.width*0.9
         HStack(alignment: .bottom,spacing:0){
             VStack(spacing: -20){
                 Spacer()
+                // AsyncImage(url : URL()) { image in
+                // image.methodeDeco} placeholder : { cas vide}
                 Image("PP2").resizable().scaledToFill().clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/).overlay(Circle().stroke()).frame(width: geometry.size.width/5, height: geometry.size.width/5).zIndex(/*@START_MENU_TOKEN@*/1.0/*@END_MENU_TOKEN@*/)
                 VStack(spacing:5){
                     Text("Teamname").bold()
