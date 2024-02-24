@@ -17,8 +17,13 @@ struct FamilleView: View {
         GeometryReader{ geometry in
             ZStack{
                 Color("Bordeaux").ignoresSafeArea()
-                VStack(alignment : .leading,spacing : 20){
-                    Text("Pseudo").bold().padding(5).accentColor(.white)
+                VStack(alignment : .leading){
+                    HStack{
+                        Spacer()
+                        Image("PP2").resizable().scaledToFill().clipShape(Circle()).frame(width: geometry.size.height*0.4, height: geometry.size.height*0.4).padding(.vertical,20)
+                        Spacer()
+                    }
+                    Text("Pseudo").bold().foregroundColor(.white).padding(5)
                     TextField(
                         "Pseudo",
                         text : $pseudo
@@ -26,7 +31,7 @@ struct FamilleView: View {
                     .autocapitalization(.none).disableAutocorrection(true)
                     .frame(width: geometry.size.width*0.9).padding(5).background(Rectangle().fill(Color.gray).cornerRadius(10))
                     
-                    Text("Mot de passe").bold().padding(5).accentColor(.white)
+                    Text("Mot de passe").bold().foregroundColor(.white).padding(5)
                     SecureField(
                         "Mot de passe",
                         text : $password
@@ -35,12 +40,15 @@ struct FamilleView: View {
                     .frame(width: geometry.size.width*0.9).padding(5).background(Rectangle().fill(Color.gray).cornerRadius(10))
                     HStack{
                         Spacer()
-                        Button(newFamily ? "Créer la famille" : "Rejoindre la famille"){
+                        Button{
                             hasFamily = connexionFamille(pseudo: pseudo, password: password)
-                        }.scaledToFit().frame(width: geometry.size.width*0.5).padding(5)
-                        .background(Rectangle().fill(Color.gray).cornerRadius(10))
+                        } label :{
+                            Image(systemName: "arrow.right").resizable().foregroundColor(.white).padding(5)
+                        }.scaledToFill().frame(width: geometry.size.width*0.1,height : geometry.size.width*0.1).padding(5)
+                        .background(Circle().fill(Color.gray).cornerRadius(10))
                         Spacer()
                     }
+                    Spacer()
                     
                 }.padding()
             }

@@ -20,7 +20,6 @@ struct PlanningView: View {
                         jourView(jour: $jour,geometry : geometry)
                         
                     }.padding()
-                    .frame(alignment:.top)
                 }
             }
         }

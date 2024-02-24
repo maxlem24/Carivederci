@@ -7,10 +7,10 @@
 
 import SwiftUI
 
-let me = User(pseudo :"Test",profil:Image("PP1"))
+let me = User(id : "1",pseudo :"Test",profil:"PP1")
 
 struct ChatView: View {
-    @State private var texts: [Message] = [Message(content: "isdqhiohihiqshihsqiihsihihqsiohsihish12345567712345723456723456723456782345678232457834578345678345678345678", user: User(pseudo:"Player 2",profil: Image("PP2")))]
+    @State private var texts: [Message] = [Message(content: "isdqhiohihiqshihsqiihsihihqsiohsihish12345567712345723456723456723456782345678232457834578345678345678345678", user: User(id : "0", pseudo:"Player 2",profil: "PP2"))]
     var body: some View {
         GeometryReader{ geometry in
             VStack(spacing: 0){
@@ -88,7 +88,7 @@ struct Message : View, Hashable{
     var body: some View {
         HStack{
             if me != user {
-                user.profil.resizable().scaledToFill().clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/).overlay(Circle().stroke()).frame(width: 50, height: 50, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                Image(user.profil)                .resizable().scaledToFill().clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/).overlay(Circle().stroke()).frame(width: 50, height: 50, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
             }
             VStack{
                 Text(content).font(.body).frame(maxWidth : .infinity, alignment : .leading)

@@ -9,37 +9,43 @@ import SwiftUI
 
 struct LoginMenuView: View {
     @Binding var isLogged : Bool
+    @Binding var pseudo : String
     var body: some View {
-        NavigationView{ // NavigationStack IOS 16 + toolBarBackground
-            GeometryReader{
-                geometry in
-                ZStack{
+        ZStack{
+            
+            NavigationView{ // NavigationStack IOS 16 + toolBarBackground
+                GeometryReader{
+                    geometry in
                     Color("Bordeaux").ignoresSafeArea()
+                    
                     VStack {
-                        
-                        Image("PP2").resizable().scaledToFill().clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/).frame(width: geometry.size.width*0.7, height: geometry.size.width*0.7)
-                        Spacer()
+                        HStack{
+                            Spacer()
+                            Image("PP2").resizable().scaledToFill().clipShape(Circle()).frame(width: geometry.size.height*0.4, height: geometry.size.height*0.4).padding(.vertical,20)
+                            Spacer()
+                        }
                         NavigationLink(destination :
-                                        LoginView(isLogged:$isLogged, newUser : false)
+                                        LoginView(isLogged:$isLogged,pseudo: $pseudo, newUser : true)
                                        ,label: {
-                                        Text("Se connecter").font(.title2).foregroundColor(.white).bold().padding().frame(width: geometry.size.width*0.7, height: geometry.size.height*0.1).background(Rectangle().fill(Color("Button"))) .cornerRadius(10)
-                                       })
+                                        Text("Inscription").font(.title2).foregroundColor(.white).bold().padding().frame(width: geometry.size.width*0.7, height: geometry.size.height*0.1).background(Rectangle().fill(Color("Button"))) .cornerRadius(10)
+                                       }
+                        )
                         NavigationLink(destination :
-                                        LoginView(isLogged:$isLogged, newUser : true)
+                                        LoginView(isLogged:$isLogged,pseudo: $pseudo, newUser : false)
                                        ,label: {
-                                        Text("Créer un compte").font(.title2).foregroundColor(.white).bold().padding().frame(width: geometry.size.width*0.7, height: geometry.size.height*0.1).background(Rectangle().fill(Color("Button"))) .cornerRadius(10)
-                                       })
+                                        Text("Connexion").font(.title2).foregroundColor(.white).bold().padding().frame(width: geometry.size.width*0.7, height: geometry.size.height*0.1).background(Rectangle().fill(Color("Button"))) .cornerRadius(10)
+                                       }
+                        )
                         Spacer()
                     }
                 }
             }
-            
         }
     }
 }
 
 struct LMView_Previews: PreviewProvider {
     static var previews: some View {
-        LoginMenuView(isLogged: .constant(false))
+        LoginMenuView(isLogged: .constant(false),pseudo: .constant(""))
     }
 }

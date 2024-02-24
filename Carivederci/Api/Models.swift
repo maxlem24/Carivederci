@@ -12,7 +12,7 @@ import SwiftUI
 struct User : Codable, Equatable{
     let id : String
     let pseudo : String
-    var score : Int
+    var score : Int = 0
     let profil : String
     var famille : Famille?
     static func == (left : User, right : User)-> Bool{

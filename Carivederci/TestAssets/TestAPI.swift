@@ -8,7 +8,7 @@
 
 import Foundation
 import SwiftUI
-
+/*
 struct TestAPI {
     let url = URL(string: "https://jsonplaceholder.typicode.com/todos")!
     @State var users : [UserTest]?
@@ -29,3 +29,4 @@ struct TestAPI {
         }
     }
 }
+*/
