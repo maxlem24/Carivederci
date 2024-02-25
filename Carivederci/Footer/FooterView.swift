@@ -12,7 +12,7 @@ struct FooterView: View {
     var body: some View {
         TabView(selection : $choice){
             Text("Page Compte").foregroundColor(Color.red).tabItem { Image(systemName: "person") }.tag(0)
-            Text("Page Carivederci").foregroundColor(Color.green).tabItem { Image(systemName: "info.circle") }.tag(1)
+            CarouselView().tabItem { Image(systemName: "info.circle") }.tag(1)
             PlanningView().tabItem { Image(systemName: "calendar") }.tag(2)
             ChatView().tabItem { Image(systemName: "ellipses.bubble") }.tag(3)
             ScoreboardView().tabItem { Image(systemName: "star") }.tag(4)

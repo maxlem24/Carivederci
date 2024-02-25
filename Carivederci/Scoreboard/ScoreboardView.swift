@@ -13,16 +13,13 @@ struct ScoreboardView: View {
     var body: some View {
         GeometryReader{ geometry in
             ZStack{
-                Color("BackgroundColor")
-                LazyVStack{
-                    Text("Classement des familles").font(.title).frame(width: geometry.size.width, height: geometry.size.height/10, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/).background(Rectangle().fill(Color("Header"))).padding(.bottom,10)
+                Color("BackgroundColor").ignoresSafeArea()
+                VStack{
+                    Text("Classement des familles").font(.title).frame(width: geometry.size.width, height: geometry.size.height*0.1).padding(.top,50).background(Rectangle().fill(Color("Header")).cornerRadius(10)).padding(.bottom,10)
                     Podium(geometry: geometry,familleList: familleList)
                     Scoreboard(geometry: geometry)
-                    
-                    
-                }.padding()
-                .frame(alignment:.top)
-            }.ignoresSafeArea()
+                }.ignoresSafeArea()
+            }
             
             
         }

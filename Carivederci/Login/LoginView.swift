@@ -15,6 +15,7 @@ struct LoginView: View {
     @State var mail : String = ""
     @State var password : String = ""
     let newUser : Bool
+    @State var showMessage = false
     var body: some View {
         GeometryReader{ geometry in
             ZStack{
@@ -25,6 +26,7 @@ struct LoginView: View {
                         Image("PP2").resizable().scaledToFill().clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/).frame(width: geometry.size.height*0.4, height: geometry.size.height*0.4).padding(.vertical,20)
                         Spacer()
                     }
+                    if (!showMessage){
                     ScrollView{
                     if(newUser){
                         Group {
@@ -80,18 +82,27 @@ struct LoginView: View {
                     HStack{
                         Spacer()
                         Button{
-                            isLogged = connexion(pseudo: pseudo, password: password)
+                            if connexion(pseudo: pseudo, password: password) {
+                                if newUser {
+                                    showMessage = true
+                                }else {
+                                    isLogged = true
+                                }
+                            }
                         }label :{
                             Image(systemName: "arrow.right").resizable().foregroundColor(.white).padding(5)
                         }.scaledToFill().frame(width: geometry.size.width*0.1,height : geometry.size.width*0.1).padding(5)
-                        .background(Circle().fill(Color.gray).cornerRadius(10))
+                        .background(Circle().fill(Color.gray))
                         Spacer()
-                    } 
+                    }
+                    }
                     Spacer()
                 }.padding(.horizontal)
+                if (showMessage) {
+                    alertMessage(isLogged : $isLogged, mail : mail, geometry : geometry).padding(.horizontal,5).navigationBarBackButtonHidden(true)
+                }
             }
         }
-        
     }
 }
 
@@ -102,4 +113,20 @@ func connexion(pseudo:String, password:String) -> Bool {
     return true
 }
 
+
+struct alertMessage : View{
+    @Binding var isLogged : Bool
+    let mail : String
+    let geometry : GeometryProxy
+    var body: some View {
+        VStack {
+            Text("Un message a été envoyé a l'adresse mail suivante : \(mail)").foregroundColor(.white).padding(5)
+            Button{
+                isLogged = true
+            }label :{
+                Text("Ok").bold().foregroundColor(.white).padding(5)
+            }.scaledToFill()
+        }.padding().background(Rectangle().fill(Color.gray).cornerRadius(10)).frame(width: geometry.size.width*0.9)
+    }
+}
 

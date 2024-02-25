@@ -23,9 +23,9 @@ struct FamilleView: View {
                         Image("PP2").resizable().scaledToFill().clipShape(Circle()).frame(width: geometry.size.height*0.4, height: geometry.size.height*0.4).padding(.vertical,20)
                         Spacer()
                     }
-                    Text("Pseudo").bold().foregroundColor(.white).padding(5)
+                    Text("Nom de la famille").bold().foregroundColor(.white).padding(5)
                     TextField(
-                        "Pseudo",
+                        "Nom de la famille",
                         text : $pseudo
                     ).foregroundColor(.white).accentColor(.white)
                     .autocapitalization(.none).disableAutocorrection(true)
@@ -45,7 +45,7 @@ struct FamilleView: View {
                         } label :{
                             Image(systemName: "arrow.right").resizable().foregroundColor(.white).padding(5)
                         }.scaledToFill().frame(width: geometry.size.width*0.1,height : geometry.size.width*0.1).padding(5)
-                        .background(Circle().fill(Color.gray).cornerRadius(10))
+                        .background(Circle().fill(Color.gray))
                         Spacer()
                     }
                     Spacer()
