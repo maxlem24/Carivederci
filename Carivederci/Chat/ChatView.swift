@@ -14,7 +14,6 @@ struct ChatView: View {
     var body: some View {
         GeometryReader{ geometry in
             VStack(spacing: 0){
-                ChatHeader(geometry: geometry)
                 ScrollViewReader {
                     scrollViewProxy in
                     ScrollView{
@@ -38,15 +37,6 @@ struct ChatView: View {
 struct ChatView_Previews: PreviewProvider {
     static var previews: some View {
         ChatView()
-    }
-}
-
-struct ChatHeader: View {
-    let geometry : GeometryProxy
-    var body: some View {
-        VStack{
-            Text("Famille Test (Pas Encore Fini)")
-        }.frame(width: geometry.size.width, height: geometry.size.height*0.1).background(Color("TitleColor"))
     }
 }
 

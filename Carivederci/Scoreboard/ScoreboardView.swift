@@ -12,16 +12,10 @@ struct ScoreboardView: View {
     @State private var familleList : FamilleList?
     var body: some View {
         GeometryReader{ geometry in
-            ZStack{
-                Color("BackgroundColor").ignoresSafeArea()
-                VStack{
-                    Text("Classement des familles").font(.title).frame(width: geometry.size.width, height: geometry.size.height*0.1).padding(.top,50).background(Rectangle().fill(Color("Header")).cornerRadius(10)).padding(.bottom,10)
+            VStack(alignment : .center){
                     Podium(geometry: geometry,familleList: familleList)
                     Scoreboard(geometry: geometry)
-                }.ignoresSafeArea()
-            }
-            
-            
+            }.frame(width : geometry.size.width)
         }
         
     }
@@ -45,7 +39,7 @@ struct Podium : View {
                 Spacer()
                 // AsyncImage(url : URL()) { image in
                 // image.methodeDeco} placeholder : { cas vide}
-                Image("PP2").resizable().scaledToFill().clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/).overlay(Circle().stroke()).frame(width: geometry.size.width/5, height: geometry.size.width/5).zIndex(/*@START_MENU_TOKEN@*/1.0/*@END_MENU_TOKEN@*/)
+                Image("PP2").resizable().scaledToFill().clipShape(Circle()).overlay(Circle().stroke()).frame(width: geometry.size.width/5, height: geometry.size.width/5).zIndex(1.0)
                 VStack(spacing:5){
                     Text("Teamname").bold()
                     Text("1892").bold().foregroundColor(Color("Silver"))
@@ -56,7 +50,7 @@ struct Podium : View {
             }.frame(width: widthPodium/3, height: geometry.size.height/4)
             VStack(spacing: -20){
                 Spacer()
-                Image("PP1").resizable().scaledToFill().clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/).overlay(Circle().stroke()).frame(width: geometry.size.width/5, height: geometry.size.width/5).zIndex(/*@START_MENU_TOKEN@*/1.0/*@END_MENU_TOKEN@*/)
+                Image("PP1").resizable().scaledToFill().clipShape(Circle()).overlay(Circle().stroke()).frame(width: geometry.size.width/5, height: geometry.size.width/5).zIndex(1.0)
                 VStack(spacing:5){
                     Text("Teamname").bold()
                     Text("2435").bold().foregroundColor(.yellow)
@@ -75,7 +69,7 @@ struct Podium : View {
                     Rectangle().fill(Color("TitleColor")).cornerRadius(12))
                 
             }.frame(width: widthPodium/3, height: geometry.size.height/4)
-        }.frame(width: widthPodium)
+        }.padding(.top,20).frame(width: widthPodium))
     }
 }
 

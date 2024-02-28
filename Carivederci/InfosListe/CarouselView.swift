@@ -27,8 +27,8 @@ struct CarouselView: View {
             
             ZStack(alignment :.top) {
                 Color("BackgroundColor").ignoresSafeArea()
-                VStack{
-                    Text("Carivederci c'est :").font(.title).frame(width: geometry.size.width, height: geometry.size.height*0.1).padding(.top,50).background(Rectangle().fill(Color("CalendarBackground")).cornerRadius(10))
+
+                    
                 
                 TabView(selection: $selectedView) {
                     // Step 6: Iterate Through Images
@@ -49,7 +49,6 @@ struct CarouselView: View {
                 }
                 .frame(height: geometry.size.height*0.8) // Step 10: Set Carousel Height
                 .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
-                }.ignoresSafeArea()
             }
             .onReceive(timer) { _ in
                 // Step 16: Auto-Scrolling Logic
