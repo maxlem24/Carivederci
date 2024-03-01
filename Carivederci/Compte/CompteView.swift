@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct CompteView: View {
+    @State var notification = false
+    @State var points = 32
     var body: some View {
         GeometryReader {
             geometry in
@@ -21,9 +23,13 @@ struct CompteView: View {
                                 Image("PP1").resizable().scaledToFill().clipShape(Circle()).frame(width: geometry.size.height*0.15, height: geometry.size.height*0.15).padding(.vertical,20)
                                 Spacer()
                             }
-                            NavigationLink(destination: Text("Destination")) { Label("Changer de mot de passe", systemImage: "lock.shield.fill").font(.title3)
-                            
-                            }.background(Color.clear)
+                            NavigationLink(destination: PasswordView()) { Label("Changer de mot de passe", systemImage: "lock.shield.fill").font(.title3).foregroundColor(Color("AccentColor"))
+                            }.background(Color.clear).padding(.horizontal,10).padding(.vertical,5)
+                            HStack{
+                            Image(systemName: notification ? "bell":"bell.slash").foregroundColor(Color("AccentColor"))
+                            Toggle("Notifications", isOn: $notification).foregroundColor(Color("AccentColor"))
+                            }.padding(.horizontal,10).padding(.vertical,5)
+                            Text("Mes points : \(points) points").foregroundColor(Color("AccentColor")).padding(.horizontal,10).padding(.vertical,5)
                             Spacer()
                         }.padding()
                     }

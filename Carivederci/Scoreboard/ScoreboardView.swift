@@ -69,7 +69,7 @@ struct Podium : View {
                     Rectangle().fill(Color("TitleColor")).cornerRadius(12))
                 
             }.frame(width: widthPodium/3, height: geometry.size.height/4)
-        }.padding(.top,20).frame(width: widthPodium))
+        }.padding(.top,20).frame(width: widthPodium)
     }
 }
 
