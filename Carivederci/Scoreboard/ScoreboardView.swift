@@ -12,10 +12,13 @@ struct ScoreboardView: View {
     @State private var familleList : FamilleList?
     var body: some View {
         GeometryReader{ geometry in
-            VStack(alignment : .center){
+            ZStack{
+                Color("BackgroundColor").ignoresSafeArea()
+                VStack(alignment : .center){
                     Podium(geometry: geometry,familleList: familleList)
                     Scoreboard(geometry: geometry)
-            }.frame(width : geometry.size.width)
+                }.frame(width : geometry.size.width)
+            }
         }
         
     }
@@ -79,7 +82,7 @@ struct Scoreboard : View {
         ScrollView(){
             ForEach(1..<20){ _ in
                 HStack(){
-                    Image("PP1").resizable().scaledToFill().clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/).overlay(Circle().stroke()).frame(width: geometry.size.width/10, height: geometry.size.width/10)
+                    Image("PP1").resizable().scaledToFill().clipShape(Circle()).overlay(Circle().stroke()).frame(width: geometry.size.width/10, height: geometry.size.width/10)
                     Spacer()
                     Text("Teamname").bold()
                     Spacer()

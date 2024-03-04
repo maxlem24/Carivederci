@@ -27,9 +27,6 @@ struct CarouselView: View {
             
             ZStack(alignment :.top) {
                 Color("BackgroundColor").ignoresSafeArea()
-
-                    
-                
                 TabView(selection: $selectedView) {
                     // Step 6: Iterate Through Images
                     ForEach(0..<viewsArray.count, id: \.self) { index in

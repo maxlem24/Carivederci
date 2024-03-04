@@ -13,23 +13,27 @@ struct ChatView: View {
     @State private var texts: [Message] = [Message(content: "isdqhiohihiqshihsqiihsihihqsiohsihish12345567712345723456723456723456782345678232457834578345678345678345678", user: User(id : "0", pseudo:"Player 2",profil: "PP2"))]
     var body: some View {
         GeometryReader{ geometry in
-            VStack(spacing: 0){
-                ScrollViewReader {
-                    scrollViewProxy in
-                    ScrollView{
-                        ForEach(texts, id: \.time) { message in // show received results
-                            message
-                            
-                        }.padding().frame(width: geometry.size.width, height: geometry.size.height*0.8, alignment : .top)// << important !!
-                        .edgesIgnoringSafeArea(.bottom)
-                        .animation(.easeOut(duration: 0.16))
-                    }.onChange(of: texts.count, perform: { count in
-                        scrollViewProxy.scrollTo(texts.last, anchor: .bottom)
-                    }).background(Rectangle().fill(Color("CalendarBackground")))
-                }
-                
-                ChatInput(geometry: geometry, texts : $texts)}
-        }.background(Color("BackgroundColor"))
+            ZStack{
+                Color("BackgroundColor").ignoresSafeArea()
+                VStack(spacing: 0){
+                    ScrollViewReader {
+                        scrollViewProxy in
+                        ScrollView{
+                            ForEach(texts, id: \.time) { message in // show received results
+                                message
+                                
+                            }.padding().frame(width: geometry.size.width, height: geometry.size.height*0.8, alignment : .top)// << important !!
+                            .edgesIgnoringSafeArea(.bottom)
+                            .animation(.easeOut(duration: 0.16))
+                        }.onChange(of: texts.count, perform: { count in
+                            scrollViewProxy.scrollTo(texts.last, anchor: .bottom)
+                        }).background(Rectangle().fill(Color("CalendarBackground")))
+                    }
+                    
+                    ChatInput(geometry: geometry, texts : $texts)}
+            }
+            
+        }
         
     }
 }
