@@ -21,6 +21,13 @@ struct User : Codable, Equatable{
     
 }
 
+class AppUser : ObservableObject {
+    @Published var user : User?
+    func setUser(user : User) {
+        self.user = user
+    }
+}
+
 struct Famille : Codable{
     let id : String
     let nom : String

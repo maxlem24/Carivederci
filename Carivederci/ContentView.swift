@@ -8,18 +8,18 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State var isLogged : Bool = false
     @State var hasFamily : Bool = false
     @State var pseudo : String = ""
+    @StateObject var appUser = AppUser()
     var body: some View {
-        if isLogged {
+        if appUser.user != nil {
             if hasFamily {
-                MainView()
+                MainView().environmentObject(appUser)
             }else {
-                FamilleMenuView(hasFamily : $hasFamily, pseudo: $pseudo)
+                FamilleMenuView(hasFamily : $hasFamily, pseudo: $pseudo).environmentObject(appUser)
             }
         } else {
-            LoginMenuView(isLogged : $isLogged, pseudo : $pseudo)
+            LoginMenuView(pseudo : $pseudo).environmentObject(appUser)
         }
     }
 }
