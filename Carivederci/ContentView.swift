@@ -8,15 +8,16 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State var hasFamily : Bool = false
+    @State var skipFamille : Bool = false
     @State var pseudo : String = ""
     @StateObject var appUser = AppUser()
     var body: some View {
         if appUser.user != nil {
-            if hasFamily {
+            if appUser.user?.famille != nil  || skipFamille{
                 MainView().environmentObject(appUser)
             }else {
-                FamilleMenuView(hasFamily : $hasFamily, pseudo: $pseudo).environmentObject(appUser)
+                FamilleMenuView(skipFamille : $skipFamille)
+                    .environmentObject(appUser)
             }
         } else {
             LoginMenuView(pseudo : $pseudo).environmentObject(appUser)

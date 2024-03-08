@@ -8,8 +8,7 @@
 import SwiftUI
 
 struct FamilleView: View {
-    
-    @Binding var hasFamily : Bool
+    @EnvironmentObject var appUser : AppUser
     @State var nomFamille : String = ""
     @State var password : String = ""
     let newFamily : Bool
@@ -41,7 +40,7 @@ struct FamilleView: View {
                     HStack{
                         Spacer()
                         Button{
-                            hasFamily = connexionFamille(nomFamille: nomFamille, password: password)
+                            appUser.user?.famille = connexionFamille(nomFamille: nomFamille, password: password)
                         } label :{
                             Image(systemName: "arrow.right").resizable().foregroundColor(.white).padding(5)
                         }.scaledToFill().frame(width: geometry.size.width*0.1,height : geometry.size.width*0.1).padding(5)
@@ -57,9 +56,9 @@ struct FamilleView: View {
     }
 }
 
-func connexionFamille(nomFamille:String, password:String) -> Bool {
+func connexionFamille(nomFamille:String, password:String) -> Famille? {
     if nomFamille == "" || password == ""  {
-        return false
+        return nil
     }
-    return true
+    return Famille(id: "123456", nom: nomFamille, score: 0, profil: "PP3")
 }
