@@ -9,7 +9,6 @@ import SwiftUI
 
 struct ContentView: View {
     @State var skipFamille : Bool = false
-    @State var pseudo : String = ""
     @StateObject var appUser = AppUser()
     var body: some View {
         if appUser.user != nil {
@@ -20,7 +19,7 @@ struct ContentView: View {
                     .environmentObject(appUser)
             }
         } else {
-            LoginMenuView(pseudo : $pseudo).environmentObject(appUser)
+            LoginMenuView().environmentObject(appUser)
         }
     }
 }

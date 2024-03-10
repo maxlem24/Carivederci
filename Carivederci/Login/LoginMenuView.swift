@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct LoginMenuView: View {
-    @Binding var pseudo : String
     var body: some View {
         ZStack{
             
@@ -24,13 +23,13 @@ struct LoginMenuView: View {
                             Spacer()
                         }
                         NavigationLink(destination :
-                                        LoginView(pseudo: $pseudo, newUser : true)
+                                        LoginView(newUser : true)
                                        ,label: {
                                         Text("Inscription").font(.title2).foregroundColor(.white).bold().padding().frame(width: geometry.size.width*0.7, height: geometry.size.height*0.1).background(Rectangle().fill(Color("Button"))) .cornerRadius(10)
                                        }
                         )
                         NavigationLink(destination :
-                                        LoginView(pseudo: $pseudo, newUser : false)
+                                        LoginView(newUser : false)
                                        ,label: {
                                         Text("Connexion").font(.title2).foregroundColor(.white).bold().padding().frame(width: geometry.size.width*0.7, height: geometry.size.height*0.1).background(Rectangle().fill(Color("Button"))) .cornerRadius(10)
                                        }
