@@ -42,3 +42,18 @@ struct FamilleList : Codable {
         }
     }
 }
+
+struct Sponsor : Codable {
+    let imageName : String
+    let marqueName : String
+}
+
+extension Sponsor {
+    static let listeSponsor : [Sponsor] = [
+        Sponsor(imageName: "Redbull", marqueName: "Redbull"),
+        Sponsor(imageName: "Lydia", marqueName: "Lydia"),
+        Sponsor(imageName: "osakatoys", marqueName: "Osakatoys"),
+        Sponsor(imageName: "briquesrouges", marqueName: "Festival les briques rouges"),
+        Sponsor(imageName: "Karos", marqueName: "Karos")
+    ]
+}

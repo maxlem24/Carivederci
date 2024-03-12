@@ -10,7 +10,9 @@ import SwiftUI
 struct FamilleView: View {
     @EnvironmentObject var appUser : AppUser
     @State var nomFamille : String = ""
+    @State var nomFamilleError : String = ""
     @State var password : String = ""
+    @State var passwordError : String = ""
     let newFamily : Bool
     var body: some View {
         GeometryReader{ geometry in
@@ -22,25 +24,17 @@ struct FamilleView: View {
                         Image("PP2").resizable().scaledToFill().clipShape(Circle()).frame(width: geometry.size.height*0.4, height: geometry.size.height*0.4).padding(.vertical,20)
                         Spacer()
                     }
-                    Text("Nom de la famille").bold().foregroundColor(.white).padding(5)
-                    TextField(
-                        "Nom de la famille",
-                        text : $nomFamille
-                    ).foregroundColor(.white).accentColor(.white)
-                    .autocapitalization(.none).disableAutocorrection(true)
-                    .frame(width: geometry.size.width*0.9).padding(5).background(Rectangle().fill(Color.gray).cornerRadius(10))
-                    
-                    Text("Mot de passe").bold().foregroundColor(.white).padding(5)
-                    SecureField(
-                        "Mot de passe",
-                        text : $password
-                    ).foregroundColor(.white).accentColor(.white)
-                    .autocapitalization(.none).disableAutocorrection(true)
-                    .frame(width: geometry.size.width*0.9).padding(5).background(Rectangle().fill(Color.gray).cornerRadius(10))
+                    FieldView(nom: "Nom de la famille", field: $nomFamille, errorField: $nomFamilleError, width: geometry.size.width*0.9)
+                    FieldView(nom: "Mot de passe", field: $password, errorField: $passwordError, width: geometry.size.width*0.9, isSecure: true)
+
                     HStack{
                         Spacer()
                         Button{
-                            appUser.user?.famille = connexionFamille(nomFamille: nomFamille, password: password)
+                            nomFamilleError = isValidPseudo(nomFamille) ? "" : "Nom de Famille invalide : il doit contenir au moins 6 caractères et pas de caractère spéciaux"
+                            passwordError = isValidPassword(password) ? "" : "Mot de passe invalide : il doit contenir au moins 8 caractères, avec une majuscule, une minuscule, un chiffre et un caractère spécial"
+                            if nomFamilleError == "" && passwordError == "" {
+                                appUser.user?.famille = Famille(id: "123456", nom: nomFamille, score: 0, profil: "PP3")
+                            }
                         } label :{
                             Image(systemName: "arrow.right").resizable().foregroundColor(.white).padding(5)
                         }.scaledToFill().frame(width: geometry.size.width*0.1,height : geometry.size.width*0.1).padding(5)
@@ -54,11 +48,4 @@ struct FamilleView: View {
         }
         
     }
-}
-
-func connexionFamille(nomFamille:String, password:String) -> Famille? {
-    if nomFamille == "" || password == ""  {
-        return nil
-    }
-    return Famille(id: "123456", nom: nomFamille, score: 0, profil: "PP3")
 }

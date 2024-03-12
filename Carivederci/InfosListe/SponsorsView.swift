@@ -8,15 +8,23 @@
 import SwiftUI
 
 struct SponsorsView: View {
+    var sponsors = Sponsor.listeSponsor
     var body: some View {
         GeometryReader{
             geometry in
             ScrollView{
-                VStack(spacing:0){
-                    SponsorBox(imageName: "Redbull", marqueName: "Redbull", backgroundColor: Color.white)
-                        .frame(width: geometry.size.width,height: geometry.size.height*0.3)
-                    SponsorBox(imageName: "Lydia", marqueName: "Lydia", backgroundColor: Color.white)
-                        .frame(width: geometry.size.width,height: geometry.size.height*0.3)
+                let isEven = sponsors.count % 2 == 0
+                ForEach(0..<sponsors.count/2){index in
+                    HStack{
+                        let SponsorLeft = sponsors[2*index]
+                        let SponsorRight = sponsors[2*index+1]
+                        SponsorBox(imageName: SponsorLeft.imageName, marqueName: SponsorLeft.marqueName).frame(height: geometry.size.height*0.3)
+                        SponsorBox(imageName: SponsorRight.imageName, marqueName: SponsorRight.marqueName).frame(height: geometry.size.height*0.3)
+                    }.padding(5)
+                }
+                if !isEven {
+                    let lastSponsor = sponsors[sponsors.count-1]
+                    SponsorBox(imageName: lastSponsor.imageName, marqueName: lastSponsor.marqueName).frame(width: geometry.size.width/2,height: geometry.size.height*0.3)
                 }
             }
         }
@@ -33,15 +41,14 @@ struct SponsorsView_Previews: PreviewProvider {
 struct SponsorBox : View{
     let imageName : String
     let marqueName : String
-    let backgroundColor : Color
     var body: some View {
         GeometryReader {
             geometry in
             VStack(spacing:0){
                 Image(imageName).resizable().scaledToFit().padding(5)
-                    .frame(width: geometry.size.width,height: geometry.size.height*0.9).background(backgroundColor)
-                Text(marqueName).bold().font(.headline).foregroundColor(.white).padding(5)
-                        .frame(width: geometry.size.width,height: geometry.size.height*0.1)
+                    .frame(height: geometry.size.height*0.8)
+                Text(marqueName).bold().font(.headline).foregroundColor(.white).multilineTextAlignment(.center).fixedSize(horizontal: false, vertical: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/).padding(5)
+                        .frame(width: geometry.size.width,height: geometry.size.height*0.2)
                         .background(Rectangle().fill(Color("Button")).cornerRadius(5))
             }
         }
