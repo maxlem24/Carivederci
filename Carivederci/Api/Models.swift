@@ -23,6 +23,12 @@ struct User : Codable, Equatable{
 
 class AppUser : ObservableObject {
     @Published var user : User?
+    init(user : User) {
+        self.user = user
+    }
+    init() {
+        self.user = nil
+    }
 }
 
 struct Famille : Codable{
