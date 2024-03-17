@@ -15,6 +15,7 @@ struct User : Codable, Equatable{
     var score : Int = 0
     let profil : String
     var famille : Famille?
+    var isAdmin :Bool = false
     static func == (left : User, right : User)-> Bool{
         return left.id == right.id && left.pseudo == right.pseudo && left.score == right.score && left.profil == right.profil
     }

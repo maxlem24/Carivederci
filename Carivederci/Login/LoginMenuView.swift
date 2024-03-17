@@ -25,15 +25,13 @@ struct LoginMenuView: View {
                         NavigationLink(destination :
                                         LoginView(newUser : true)
                                        ,label: {
-                                        Text("Inscription").font(.title2).foregroundColor(.white).bold().padding().frame(width: geometry.size.width*0.7, height: geometry.size.height*0.1).background(Rectangle().fill(Color("Button"))) .cornerRadius(10)
-                                       }
-                        )
+                                        Text("Inscription").font(.title2).foregroundColor(.white).bold().padding().frame(width: geometry.size.width*0.7, height: geometry.size.height*0.1).background(RoundedRectangle(cornerRadius: 10).fill(Color("Button")))
+                                       })
                         NavigationLink(destination :
                                         LoginView(newUser : false)
                                        ,label: {
-                                        Text("Connexion").font(.title2).foregroundColor(.white).bold().padding().frame(width: geometry.size.width*0.7, height: geometry.size.height*0.1).background(Rectangle().fill(Color("Button"))) .cornerRadius(10)
-                                       }
-                        )
+                                        Text("Connexion").font(.title2).foregroundColor(.white).bold().padding().frame(width: geometry.size.width*0.7, height: geometry.size.height*0.1).background(RoundedRectangle(cornerRadius: 10).fill(Color("Button")))
+                                       })
                         Spacer()
                     }
                 }

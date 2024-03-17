@@ -43,7 +43,7 @@ extension Journee {
         Jours.Mardi : Journee(
             Allo : [Activite(nom:"Allo Enlevement"),Activite(nom:"Allo Mugshot")],
             Midi: [Activite(nom: "Jeu du midi"),Activite(nom: "Fresque BDA")],
-            Soir: [Activite(nom: "Nympheas Bis")]
+            Soir: [Activite(nom: "Carick'n'Roll")]
         ),
         Jours.Mercredi : Journee(
             Allo : [Activite(nom:"Allo Body Guard")],

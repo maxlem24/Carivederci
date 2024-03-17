@@ -8,49 +8,87 @@
 import SwiftUI
 
 struct CompteView: View {
-    @State var notification = false
+    @AppStorage("notification") var notification : Bool = false
     @EnvironmentObject var appUser : AppUser
+    @State var points : Int?
     var body: some View {
         GeometryReader {
             geometry in
-            
             NavigationView {
                 ZStack(alignment :.topLeading) {
                     Color("BackgroundColor").ignoresSafeArea()
-                    VStack(alignment:.leading){
+                    VStack(spacing : 20){
                         HStack{
                             Spacer()
                             VStack{
                                 Image(appUser.user!.profil).resizable().scaledToFit().clipShape(Circle())
                                 Text(appUser.user!.pseudo).bold().font(.title3)
                                     .foregroundColor(Color("AccentColor"))
-                                    .padding(.horizontal,10)
                             }
                             .frame(width: geometry.size.height*0.15, height: geometry.size.height*0.25)
                             Spacer()
                         }
-                        NavigationLink(destination: PasswordView()) { Label("Changer de mot de passe", systemImage: "lock.shield.fill")
-                            .font(.title3)
-                            .foregroundColor(Color("AccentColor"))
-                        }.background(Color.clear).padding(.horizontal,15).padding(.vertical,5)
+                        HStack{
+                            NavigationLink(destination: PasswordView()) { Label("Changer de mot de passe", systemImage: "lock.shield.fill")
+                                .font(.title3)
+                                .foregroundColor(Color("AccentColor"))
+                                Spacer()
+                            }
+                            
+                        }.background(Color.clear)
                         HStack{
                             Image(systemName: notification ? "bell":"bell.slash")
                                 .foregroundColor(Color("AccentColor"))
                             Toggle("Notifications", isOn: $notification)
                                 .font(.title3)
                                 .foregroundColor(Color("AccentColor"))
-                        }.padding(.horizontal,15).padding(.vertical,5)
-                        Text("Mes points : \(appUser.user!.score) points").font(.title3).foregroundColor(Color("AccentColor")).padding(.horizontal,15).padding(.vertical,5)
-                        Spacer()
-                        Text("L'association Carivederci est responsable du traitement des données nécessaires au fonctionnement de l'application")
-                            .font(.footnote)
-                            .padding(.horizontal,15)
-                        Text("Plus d'informations en cliquant ici").bold()
-                            .font(.footnote)
-                            .padding(.horizontal,15).onTapGesture {
-                                getRGPD()
+                        }
+                        HStack{
+                            Text("Mes points : ")
+                                .font(.title3)
+                                .foregroundColor(Color("AccentColor"))
+                            Spacer()
+                            Text("\(appUser.user!.score) points")
+                                .font(.title3)
+                                .foregroundColor(Color("AccentColor"))
+                            
+                        }
+                        if(appUser.user!.isAdmin) {
+                            VStack{
+                                Text("Generer un QR-Code")
+                                    .font(.title3)
+                                    .foregroundColor(Color("AccentColor"))
+                                TextField("Nombre de points", value: $points, formatter: NumberFormatter())
+                                    .keyboardType(.numberPad)
+                                    .font(.title3)
+                                    .foregroundColor(Color("AccentColor"))
+                                    .padding(.horizontal,5)
+                                    .overlay(RoundedRectangle(cornerRadius: 10).stroke())
+                                NavigationLink(destination :
+                                                QRCodeView(points: points ?? 0)
+                                               ,label: {
+                                                Text("Generer").font(.title3)
+                                                    .foregroundColor(Color("AccentColor"))
+                                                    .padding(5)
+                                                    .background(RoundedRectangle(cornerRadius: 10).fill(Color("Button")))
+                                               })
                             }
-                    }
+                            
+                        }
+                        Spacer()
+                        VStack{
+                            Text("L'association Carivederci est responsable du traitement des données nécessaires au fonctionnement de l'application")
+                                .font(.footnote)
+                                .foregroundColor(Color("AccentColor"))
+                            Text("Plus d'informations en cliquant ici").bold()
+                                .font(.footnote)
+                                .foregroundColor(Color("AccentColor"))
+                                .onTapGesture {
+                                    getRGPD()
+                                }
+                            
+                        }
+                    }.padding(.horizontal,15)
                 }
             }
         }
@@ -59,7 +97,7 @@ struct CompteView: View {
 
 struct CompteView_Previews: PreviewProvider {
     static var previews: some View {
-        CompteView().environmentObject(AppUser(user : User(id: "1234-ABCD", pseudo: "Test",score: 1024, profil: "PP2")))
+        CompteView().environmentObject(AppUser(user : User(id: "1234-ABCD", pseudo: "Test",score: 1024, profil: "PP2",isAdmin: true)))
         
     }
 }
@@ -73,7 +111,7 @@ func getRGPD(){
         let actualPath = resourceDocPath.appendingPathComponent(pdfNameFromUrl)
         do {
             try pdfData?.write(to: actualPath, options: .atomic)
-            print("pdf successfully saved!\(actualPath)")
+            print("pdf successfully saved!")
         } catch {
             print("Pdf could not be saved")
         }
