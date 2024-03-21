@@ -12,11 +12,10 @@ enum Views {
     case couleur
     case logo
     case teams
-    case sponsors
 }
 
 struct CarouselView: View {
-    let viewsArray : [Views] = [.theme,.couleur,.logo,.teams,.sponsors,.theme]
+    let viewsArray : [Views] = [.theme,.couleur,.logo,.teams,.theme]
     let timer = Timer.publish(every: 3.0, on: .main, in: .common).autoconnect()
     
     @State private var selectedView: Int = 0
@@ -39,8 +38,6 @@ struct CarouselView: View {
                             LogoView()
                         case .teams :
                             TeamsView()
-                        case .sponsors :
-                            SponsorsView()
                         }
                     }
                 }

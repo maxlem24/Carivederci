@@ -31,7 +31,6 @@ struct LoginView: View {
                     Image(systemName: "arrow.right").resizable().foregroundColor(.white).padding(5)
                 }.scaledToFill().frame(width: geometry.size.width*0.1,height : geometry.size.width*0.1).padding(5)
                 .background(Circle().fill(Color.gray))
-                /*
                 VStack(alignment : .leading){
                     HStack{
                         Spacer()
@@ -42,14 +41,14 @@ struct LoginView: View {
                         ScrollView{
                             let width = geometry.size.width*0.9
                             if(newUser){
-                                FieldView(nom:"Nom",field:nom,errorField : nomError, width : width)
-                                FieldView(nom:"Prenom",field:prenom,errorField : prenomError, width : width)
+                                FieldView(nom:"Nom",field:$nom,errorField : $nomError, width : width)
+                                FieldView(nom:"Prenom",field:$prenom,errorField : $prenomError, width : width)
                             }
-                            FieldView(nom:"Pseudo",field:pseudo, errorField : pseudoError, width : width)
+                            FieldView(nom:"Pseudo",field:$pseudo, errorField : $pseudoError, width : width)
                             if(newUser){
-                                FieldView(nom:"Adresse Email",field:mail, errorField : mailError, width : width)
+                                FieldView(nom:"Adresse Email",field:$mail, errorField : $mailError, width : width)
                             }
-                            FieldView(nom: "Mot de passe", field: password, errorField: passwordError, width: width, isSecure: true)
+                            FieldView(nom: "Mot de passe", field: $password, errorField: $passwordError, width: width, isSecure: true)
                         }
                         HStack{
                             Spacer()
@@ -79,7 +78,7 @@ struct LoginView: View {
                 }.padding(.horizontal)
                 if (showMessage) {
                     alertMessage( mail : mail,pseudo : pseudo, geometry : geometry).padding(.horizontal,5).navigationBarBackButtonHidden(true)
-                }*/
+                }
             }
         }
     }

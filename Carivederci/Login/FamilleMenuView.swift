@@ -11,7 +11,7 @@ struct FamilleMenuView: View {
     @Binding var skipFamille : Bool
     @EnvironmentObject var appUser : AppUser
     var body: some View {
-        NavigationView{ // NavigationStack IOS 16 + toolBarBackground
+        NavigationStack{
             GeometryReader{
                 geometry in
                 ZStack{
@@ -26,14 +26,14 @@ struct FamilleMenuView: View {
                         NavigationLink(destination :
                                         FamilleView( newFamily : true)
                                        ,label: {
-                                        Text("Créer une Famille").font(.title2).foregroundColor(.white).bold().padding().frame(width: geometry.size.width*0.7, height: geometry.size.height*0.1).background(Rectangle().fill(Color("Button"))) .cornerRadius(10)
-                                       }
+                            Text("Créer une Famille").font(.title2).foregroundColor(.white).bold().padding().frame(width: geometry.size.width*0.7, height: geometry.size.height*0.1).background(Rectangle().fill(Color("Button"))) .cornerRadius(10)
+                        }
                         )
                         NavigationLink(destination :
                                         FamilleView(newFamily : false)
                                        ,label: {
-                                        Text("Rejoindre une famille").font(.title2).bold().foregroundColor(.white).padding().frame(width: geometry.size.width*0.7, height: geometry.size.height*0.1).background(Rectangle().fill(Color("Button"))) .cornerRadius(10)
-                                       }
+                            Text("Rejoindre une famille").font(.title2).bold().foregroundColor(.white).padding().frame(width: geometry.size.width*0.7, height: geometry.size.height*0.1).background(Rectangle().fill(Color("Button"))) .cornerRadius(10)
+                        }
                         )
                         Text("Accéder à l'application").font(.title2).foregroundColor(.white).bold().padding().frame(width: geometry.size.width*0.7, height: geometry.size.height*0.1).background(Rectangle().fill(Color("Button"))) .cornerRadius(10).onTapGesture {
                             skipFamille = true
@@ -41,7 +41,7 @@ struct FamilleMenuView: View {
                         Spacer()
                     }
                 }
-            }
+            }.toolbar(.hidden)
         }
     }
 }

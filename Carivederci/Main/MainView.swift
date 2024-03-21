@@ -31,9 +31,11 @@ struct MainView: View {
                         CompteView().foregroundColor(Color.red).tabItem { Image(systemName: "person") }.tag(0)
                         CarouselView().tabItem { Image(systemName: "info.circle") }.tag(1)
                         PlanningView().tabItem { Image(systemName: "calendar") }.tag(2)
-                        ChatView().tabItem { Image(systemName: "ellipses.bubble") }.tag(3)
-                        ScoreboardView().background(Color.clear).tabItem { Image(systemName: "star") }.tag(4)
-                    }.animation(.easeInOut).transition(.slide)//Methode IOS 16 toolbarBackground
+                        SponsorsView().tabItem { Image(systemName: "ellipses.bubble") }.tag(3)
+                        ScoreboardView().tabItem { Image(systemName: "star") }.tag(4)
+                    }.animation(.easeInOut,value: choice)
+                        .transition(.slide)
+                .toolbarBackground(Color("Bordeaux"))
                 }.ignoresSafeArea()
             }
         }

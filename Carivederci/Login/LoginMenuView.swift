@@ -10,8 +10,7 @@ import SwiftUI
 struct LoginMenuView: View {
     var body: some View {
         ZStack{
-            
-            NavigationView{ // NavigationStack IOS 16 + toolBarBackground
+            NavigationStack{ // NavigationStack IOS 16 + toolBarBackground
                 GeometryReader{
                     geometry in
                     Color("Bordeaux").ignoresSafeArea()

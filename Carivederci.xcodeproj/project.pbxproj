@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -16,7 +16,6 @@
 		7A3292502B3F0C6300B8C759 /* PlanningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A32924F2B3F0C6300B8C759 /* PlanningView.swift */; };
 		7A9D4FED2B922EBD00E771EB /* PasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A9D4FEC2B922EBD00E771EB /* PasswordView.swift */; };
 		7AA9C7852B8FAA8700FDB0EC /* CompteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA9C7842B8FAA8700FDB0EC /* CompteView.swift */; };
-		7AAE08062B5826A2008EB4B5 /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAE08052B5826A2008EB4B5 /* ChatView.swift */; };
 		7AAE3DFF2B7D2EA200852F8C /* FamilleMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAE3DFE2B7D2EA200852F8C /* FamilleMenuView.swift */; };
 		7ABC411D2B81577E00A3B0DB /* FamilleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABC411C2B81577E00A3B0DB /* FamilleView.swift */; };
 		7ABC5AF32B8BAD9E003BFA94 /* CarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABC5AF22B8BAD9E003BFA94 /* CarouselView.swift */; };
@@ -57,7 +56,6 @@
 		7A32924F2B3F0C6300B8C759 /* PlanningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanningView.swift; sourceTree = "<group>"; };
 		7A9D4FEC2B922EBD00E771EB /* PasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordView.swift; sourceTree = "<group>"; };
 		7AA9C7842B8FAA8700FDB0EC /* CompteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompteView.swift; sourceTree = "<group>"; };
-		7AAE08052B5826A2008EB4B5 /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
 		7AAE3DFE2B7D2EA200852F8C /* FamilleMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamilleMenuView.swift; sourceTree = "<group>"; };
 		7ABC411C2B81577E00A3B0DB /* FamilleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamilleView.swift; sourceTree = "<group>"; };
 		7ABC5AF22B8BAD9E003BFA94 /* CarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselView.swift; sourceTree = "<group>"; };
@@ -121,7 +119,6 @@
 				7ABE4CEC2B823EA50037E8F5 /* Api */,
 				7ACCBF022B7AA36300D007D0 /* Login */,
 				7ACCBEFD2B7AA32300D007D0 /* Main */,
-				7AAE08042B58254F008EB4B5 /* Chat */,
 				7AD89D702B4ADF0B00A5E334 /* TestAssets */,
 				7AD89D6A2B4ADD0600A5E334 /* Scoreboard */,
 				7A32924A2B3F057A00B8C759 /* Fonts */,
@@ -159,14 +156,6 @@
 				7AC290862BA728240070F711 /* QRCodeView.swift */,
 			);
 			path = Compte;
-			sourceTree = "<group>";
-		};
-		7AAE08042B58254F008EB4B5 /* Chat */ = {
-			isa = PBXGroup;
-			children = (
-				7AAE08052B5826A2008EB4B5 /* ChatView.swift */,
-			);
-			path = Chat;
 			sourceTree = "<group>";
 		};
 		7ABC5AF12B8BAD74003BFA94 /* InfosListe */ = {
@@ -271,8 +260,9 @@
 		7A24000D2B3F01420058F50F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 1240;
-				LastUpgradeCheck = 1240;
+				LastUpgradeCheck = 1500;
 				TargetAttributes = {
 					7A2400142B3F01420058F50F = {
 						CreatedOnToolsVersion = 12.4;
@@ -280,7 +270,7 @@
 				};
 			};
 			buildConfigurationList = 7A2400102B3F01420058F50F /* Build configuration list for PBXProject "Carivederci" */;
-			compatibilityVersion = "Xcode 9.3";
+			compatibilityVersion = "Xcode 15.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -332,7 +322,6 @@
 				7ABC5B002B8BAF84003BFA94 /* TeamsView.swift in Sources */,
 				7A2400192B3F01420058F50F /* CarivederciApp.swift in Sources */,
 				7ABC5AFA2B8BAF4B003BFA94 /* CouleurView.swift in Sources */,
-				7AAE08062B5826A2008EB4B5 /* ChatView.swift in Sources */,
 				7AD89D7B2B4AE28C00A5E334 /* ScoreboardView.swift in Sources */,
 				7ABC5AFD2B8BAF64003BFA94 /* LogoView.swift in Sources */,
 				7ABC5AF32B8BAD9E003BFA94 /* CarouselView.swift in Sources */,
@@ -387,14 +376,15 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COPY_PHASE_STRIP = NO;
+				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = "compiler-default";
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_OPTIMIZATION_LEVEL = s;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -412,6 +402,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -448,11 +439,12 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COPY_PHASE_STRIP = NO;
+				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = "compiler-default";
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
@@ -466,6 +458,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -480,7 +473,7 @@
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Carivederci/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.news";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -505,7 +498,7 @@
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Carivederci/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.news";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

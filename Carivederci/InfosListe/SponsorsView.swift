@@ -14,7 +14,7 @@ struct SponsorsView: View {
             geometry in
             ScrollView{
                 let isEven = sponsors.count % 2 == 0
-                ForEach(0..<sponsors.count/2){index in
+                ForEach(0..<sponsors.count/2,id : \.self){index in
                     HStack{
                         let SponsorLeft = sponsors[2*index]
                         let SponsorRight = sponsors[2*index+1]
