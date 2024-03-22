@@ -7,39 +7,81 @@
 import Foundation
 import SwiftUI
 
-extension URLSession {
-    func fetchData(for url: URL, onCompletion : @escaping ([Famille]) -> ())  {
-        self.dataTask(with: url) { (data, response, error) in
+extension User{
+    static func fetchData(for url: URL?) -> User? {
+        guard let url=url else {
+            return nil
+        }
+        var fetchedData : User?
+        URLSession.shared.dataTask(with: url) { data, response, error in
             guard let data=data else {
                 return
             }
             
-            guard let list = try? JSONDecoder().decode(FamilleList.self, from: data) else {
-                return
+            do {
+                let user = try JSONDecoder().decode(User.self, from: data)
+                DispatchQueue.main.async {
+                    fetchedData = user
+                }
+            }catch {
+                print(error.localizedDescription)
             }
-            onCompletion(list.familles)
         }.resume()
+        return fetchedData
+    }
+    static func postData(to url: URL?,user : User)  {
+        guard let url=url else {
+            return
+        }
+        do {
+            let data = try JSONEncoder().encode(user)
+            var request = URLRequest(url: url)
+            request.httpMethod = "POST"
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.httpBody = data
+            
+            URLSession.shared.dataTask(with: request) {
+                data, response, error in
+                
+                let statusCode = (response as! HTTPURLResponse).statusCode
+                
+                if statusCode == 200 {
+                    print("Success")
+                }
+            }
+        } catch {
+            print(error.localizedDescription)
+        }
+        
+        
     }
 }
-/*
- func getFamilles()  throws -> FamilleList {
- 
- guard let url = URL(string: "url") else {
- throw DataError.URLError
- }
- 
- let (data,response) = try URLSession.shared.data(from: url) // await
- 
- guard let responsecpy = response as? HTTPURLResponse, responsecpy.statusCode == 200 else {
- throw DataError.ResponseError
- }
- 
- do {
- return try JSONDecoder().decode(FamilleList.self, from: data)
- }catch {
- throw DataError.DecodeError
- }
- }*/
+
+
+extension Famille{
+    static func fetchData(for url: URL?) -> Famille? {
+        guard let url=url else {
+            return nil
+        }
+        var fetchedData : Famille?
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            guard let data=data else {
+                return
+            }
+            
+            do {
+                let famille = try JSONDecoder().decode(Famille.self, from: data)
+                DispatchQueue.main.async {
+                    fetchedData = famille
+                }
+            }catch {
+                print(error.localizedDescription)
+            }
+        }.resume()
+        return fetchedData
+    }
+}
+
 
 enum DataError : Error {
     case URLError,ResponseError,DecodeError

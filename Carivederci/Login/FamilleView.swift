@@ -33,7 +33,7 @@ struct FamilleView: View {
                             nomFamilleError = isValidPseudo(nomFamille) ? "" : "Nom de Famille invalide : il doit contenir au moins 6 caractères et pas de caractère spéciaux"
                             passwordError = isValidPassword(password) ? "" : "Mot de passe invalide : il doit contenir au moins 8 caractères, avec une majuscule, une minuscule, un chiffre et un caractère spécial"
                             if nomFamilleError == "" && passwordError == "" {
-                                appUser.user?.famille = Famille(id: "123456", nom: nomFamille, score: 0, profil: "PP3")
+                                appUser.famille = Famille.fetchData(for: URL(string: ""))
                             }
                         } label :{
                             Image(systemName: "arrow.right").resizable().foregroundColor(.white).padding(5)

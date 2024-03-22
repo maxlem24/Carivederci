@@ -9,27 +9,27 @@
 
 import SwiftUI
 
-struct User : Codable, Equatable{
-    let id : String
-    let pseudo : String
-    var score : Int = 0
-    let profil : String
-    var famille : Famille?
-    var isAdmin :Bool = false
-    static func == (left : User, right : User)-> Bool{
-        return left.id == right.id && left.pseudo == right.pseudo && left.score == right.score && left.profil == right.profil
-    }
-    
-}
-
 class AppUser : ObservableObject {
     @Published var user : User?
+    @Published var famille : Famille?
     init(user : User) {
         self.user = user
     }
     init() {
         self.user = nil
+        self.famille = nil
     }
+}
+
+struct User : Codable, Equatable{
+    let id : String
+    let pseudo : String
+    var score : Int = 0
+    let profil : String
+    var isAdmin :Bool = false
+    /*static func == (left : User, right : User)-> Bool{
+        return left.id == right.id && left.pseudo == right.pseudo && left.score == right.score && left.profil == right.profil
+    }*/
 }
 
 struct Famille : Codable{
@@ -37,6 +37,7 @@ struct Famille : Codable{
     let nom : String
     var score : Int
     let profil : String
+    var membre : [User]
 }
 
 struct FamilleList : Codable {

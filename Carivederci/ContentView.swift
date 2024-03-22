@@ -12,7 +12,7 @@ struct ContentView: View {
     @StateObject var appUser = AppUser()
     var body: some View {
         if appUser.user != nil {
-            if appUser.user?.famille != nil  || skipFamille{
+            if appUser.famille != nil  || skipFamille{
                 MainView().environmentObject(appUser)
             }else {
                 FamilleMenuView(skipFamille : $skipFamille)
