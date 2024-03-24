@@ -12,11 +12,10 @@ enum Views {
     case couleur
     case logo
     case teams
-    case sponsors
 }
 
 struct CarouselView: View {
-    let viewsArray : [Views] = [.theme,.couleur,.logo,.teams,.sponsors,.theme]
+    let viewsArray : [Views] = [.theme,.couleur,.logo,.teams]
     let timer = Timer.publish(every: 3.0, on: .main, in: .common).autoconnect()
     
     @State private var selectedView: Int = 0
@@ -28,36 +27,42 @@ struct CarouselView: View {
             ZStack(alignment :.top) {
                 Color("BackgroundColor").ignoresSafeArea()
                 TabView(selection: $selectedView) {
-                    // Step 6: Iterate Through Images
-                    ForEach(0..<viewsArray.count, id: \.self) { index in
+                    Spacer().tag(-1)
+                    ForEach(viewsArray.indices, id: \.self) { index in
                         switch viewsArray[index] {
                         case .theme :
-                            ThemeView()
+                            ThemeView().tag(index)
                         case .couleur :
-                            CouleurView()
+                            CouleurView().tag(index)
                         case .logo :
-                            LogoView()
+                            LogoView().tag(index)
                         case .teams :
-                            TeamsView()
-                        case .sponsors :
-                            SponsorsView()
+                            TeamsView().tag(index)
                         }
                     }
+                    Spacer().tag(viewsArray.count)
                 }
-                .frame(height: geometry.size.height*0.8) // Step 10: Set Carousel Height
-                .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
-            }
-            .onReceive(timer) { _ in
-                // Step 16: Auto-Scrolling Logic
-                withAnimation(.none) {
-                    if (selectedView == viewsArray.count-1){
+                .frame(height: geometry.size.height*0.8)                 .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+                .onTapGesture(){
+                    timer.upstream.connect().cancel()
+                }
+                .onChange(of : selectedView){_ in
+                    if selectedView == viewsArray.count {
                         selectedView = 0
+                    } else if selectedView == -1 {
+                        selectedView = viewsArray.count-1
                     }
                 }
-                withAnimation(.default) {
-                    selectedView = (selectedView + 1) % viewsArray.count
+                .onReceive(timer) { _ in
+                    withAnimation(.none){
+                        if selectedView == viewsArray.count-1 {
+                            selectedView = -1
+                        }
+                    }
+                    withAnimation(.default) {
+                        selectedView = (selectedView + 1)%viewsArray.count
+                    }
                 }
-                
             }
         }
     }
