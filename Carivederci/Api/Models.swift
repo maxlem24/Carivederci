@@ -33,21 +33,20 @@ class AppUser : ObservableObject {
 }
 
 struct Famille : Codable{
-    let id : String
     let nom : String
+    let abbv : String
     var score : Int
-    let profil : String
 }
 
-struct FamilleList : Codable {
-    let familles : [Famille]
-    func getIndex(index : Int) -> Famille?{
-        if index >= familles.count {
-            return nil
-        }else {
-            return familles[index]
-        }
-    }
+extension Famille {
+    static let famillesExemple : [Famille] = [
+        Famille(nom: "Dream Team", abbv: "DRT", score: 1024),
+        Famille(nom: "Les Mineurs du Fond", abbv: "MDF", score: 867),
+        Famille(nom: "Caripotter", abbv: "CPT", score: 624),
+        Famille(nom: "Autre team", abbv: "RDM", score: 444),
+        Famille(nom: "Les Fet'arts", abbv: "ART", score: 367),
+        Famille(nom: "Les Petits", abbv: "PTT", score: 244),
+    ]
 }
 
 struct Sponsor : Codable {

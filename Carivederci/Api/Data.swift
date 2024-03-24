@@ -14,10 +14,10 @@ extension URLSession {
                 return
             }
             
-            guard let list = try? JSONDecoder().decode(FamilleList.self, from: data) else {
+            guard let list = try? JSONDecoder().decode([Famille].self, from: data) else {
                 return
             }
-            onCompletion(list.familles)
+            onCompletion(list)
         }.resume()
     }
 }

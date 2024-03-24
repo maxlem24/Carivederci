@@ -21,7 +21,7 @@ struct MainView: View {
                     case 1:
                         Text("Carivederci c'est :").font(.title).frame(width: geometry.size.width, height: geometry.size.height*0.1).padding(.top,50).background(Rectangle().fill(Color("Header")).cornerRadius(10))
                     case 3:
-                        Text("Chat").font(.title).frame(width: geometry.size.width, height: geometry.size.height*0.1).padding(.top,50).background(Rectangle().fill(Color("Header")).cornerRadius(10))
+                        Text("Nos Partenaires").font(.title).frame(width: geometry.size.width, height: geometry.size.height*0.1).padding(.top,50).background(Rectangle().fill(Color("Header")).cornerRadius(10))
                     case 4:
                         Text("Classement des familles").font(.title).frame(width: geometry.size.width, height: geometry.size.height*0.1).padding(.top,50).background(Rectangle().fill(Color("Header")).cornerRadius(10))
                     default:
@@ -31,7 +31,7 @@ struct MainView: View {
                         CompteView().foregroundColor(Color.red).tabItem { Image(systemName: "person") }.tag(0)
                         CarouselView().tabItem { Image(systemName: "info.circle") }.tag(1)
                         PlanningView().tabItem { Image(systemName: "calendar") }.tag(2)
-                        ChatView().tabItem { Image(systemName: "ellipses.bubble") }.tag(3)
+                        SponsorsView().tabItem { Image(systemName: "checkmark.seal") }.tag(3)
                         ScoreboardView().background(Color.clear).tabItem { Image(systemName: "star") }.tag(4)
                     }.animation(.easeInOut).transition(.slide)//Methode IOS 16 toolbarBackground
                 }.ignoresSafeArea()
