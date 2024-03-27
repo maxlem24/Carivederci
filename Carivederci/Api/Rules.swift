@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import SwiftKeychainWrapper
+//import SwiftKeychainWrapper
 
 
 func isValidPseudo(_ pseudo : String) -> Bool {
@@ -38,7 +38,7 @@ func isValidPassword(_ password : String) -> Bool {
     let passwordPred = NSPredicate(format: "SELF MATCHES %@",passwordRegEx)
     return passwordPred.evaluate(with: password)
 }
-
+/*
 class Auth : ObservableObject {
     
     struct Credentials {
@@ -91,4 +91,4 @@ class Auth : ObservableObject {
         
         loggedIn = false
     }
-}
+}*/

@@ -19,7 +19,7 @@ struct FamilleMenuView: View {
                     VStack {
                         HStack{
                             Spacer()
-                            Image("PP2").resizable().scaledToFill().clipShape(Circle()).frame(width: geometry.size.height*0.4, height: geometry.size.height*0.4).padding(.vertical,20)
+                            Image("Logo").resizable().scaledToFill().frame(width: geometry.size.height*0.4, height: geometry.size.height*0.4).padding(.vertical,20)
                             Spacer()
                         }
                         Text("Bonjour \(appUser.user!.pseudo)").font(.title).bold().foregroundColor(.white).padding(5)

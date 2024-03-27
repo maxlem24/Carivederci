@@ -35,21 +35,21 @@ struct LoginView: View {
                 VStack(alignment : .leading){
                     HStack{
                         Spacer()
-                        Image("PP2").resizable().scaledToFill().clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/).frame(width: geometry.size.height*0.4, height: geometry.size.height*0.4).padding(.vertical,20)
+                        Image("Logo").resizable().scaledToFill().frame(width: geometry.size.height*0.4, height: geometry.size.height*0.4).padding(.vertical,20)
                         Spacer()
                     }
                     if (!showMessage){
                         ScrollView{
                             let width = geometry.size.width*0.9
                             if(newUser){
-                                FieldView(nom:"Nom",field:nom,errorField : nomError, width : width)
-                                FieldView(nom:"Prenom",field:prenom,errorField : prenomError, width : width)
+                                FieldView(nom:"Nom",field:$nom,errorField : $nomError, width : width)
+                                FieldView(nom:"Prenom",field:$prenom,errorField : $prenomError, width : width)
                             }
-                            FieldView(nom:"Pseudo",field:pseudo, errorField : pseudoError, width : width)
+                            FieldView(nom:"Pseudo",field:$pseudo, errorField : $pseudoError, width : width)
                             if(newUser){
-                                FieldView(nom:"Adresse Email",field:mail, errorField : mailError, width : width)
+                                FieldView(nom:"Adresse Email",field:$mail, errorField : $mailError, width : width)
                             }
-                            FieldView(nom: "Mot de passe", field: password, errorField: passwordError, width: width, isSecure: true)
+                            FieldView(nom: "Mot de passe", field: $password, errorField: $passwordError, width: width, isSecure: true)
                         }
                         HStack{
                             Spacer()
