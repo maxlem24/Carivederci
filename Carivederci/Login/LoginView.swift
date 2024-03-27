@@ -25,17 +25,11 @@ struct LoginView: View {
         GeometryReader{ geometry in
             ZStack{
                 Color("Bordeaux").ignoresSafeArea()
-                Button{
-                    appUser.user = User(id: "1234-ABCD", pseudo: pseudo,score: 1024, profil: "PP2")
-                }label :{
-                    Image(systemName: "arrow.right").resizable().foregroundColor(.white).padding(5)
-                }.scaledToFill().frame(width: geometry.size.width*0.1,height : geometry.size.width*0.1).padding(5)
-                .background(Circle().fill(Color.gray))
-                /*
+                
                 VStack(alignment : .leading){
                     HStack{
                         Spacer()
-                        Image("Logo").resizable().scaledToFill().frame(width: geometry.size.height*0.4, height: geometry.size.height*0.4).padding(.vertical,20)
+                        Image("Logo").resizable().scaledToFit().frame(width: geometry.size.height*0.4, height: geometry.size.height*0.4).padding(.vertical,20)
                         Spacer()
                     }
                     if (!showMessage){
@@ -79,7 +73,7 @@ struct LoginView: View {
                 }.padding(.horizontal)
                 if (showMessage) {
                     alertMessage( mail : mail,pseudo : pseudo, geometry : geometry).padding(.horizontal,5).navigationBarBackButtonHidden(true)
-                }*/
+                }
             }
         }
     }

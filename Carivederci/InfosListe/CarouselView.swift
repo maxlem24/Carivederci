@@ -9,17 +9,16 @@ import SwiftUI
 
 enum Views {
     case theme
-    case couleur
-    case logo
+    case youtube
     case teams
 }
 
 struct CarouselView: View {
-    let viewsArray : [Views] = [.theme,.couleur,.logo,.teams]
-    let timer = Timer.publish(every: 3.0, on: .main, in: .common).autoconnect()
+    let viewsArray : [Views] = [.theme,.teams,.youtube]
+    @State var timer = Timer.publish(every: 5.0, on: .main, in: .common).autoconnect()
     
     @State private var selectedView: Int = 0
-    
+    @Binding var header : String
     var body: some View {
         GeometryReader {
             geometry in
@@ -32,12 +31,13 @@ struct CarouselView: View {
                         switch viewsArray[index] {
                         case .theme :
                             ThemeView().tag(index)
-                        case .couleur :
-                            CouleurView().tag(index)
-                        case .logo :
-                            LogoView().tag(index)
+                                .onAppear(perform: {header = "Carivederci c'est :"})
                         case .teams :
                             TeamsView().tag(index)
+                                .onAppear(perform: {header = "Nos poles"})
+                        case .youtube :
+                            YoutubeView().tag(index)
+                                .onAppear(perform: {header = "Notre chaine Youtube"})
                         }
                     }
                     Spacer().tag(viewsArray.count)
@@ -64,12 +64,18 @@ struct CarouselView: View {
                     }
                 }
             }
+            .onAppear(perform : {
+                timer = Timer.publish(every: 5.0, on: .main, in: .common).autoconnect()
+            })
+            .onDisappear(perform: {
+                timer.upstream.connect().cancel()
+            })
         }
     }
 }
 
 struct CarouselView_Previews: PreviewProvider {
     static var previews: some View {
-        CarouselView()
+        CarouselView(header: .constant(""))
     }
 }

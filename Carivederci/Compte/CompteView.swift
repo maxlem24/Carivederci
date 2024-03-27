@@ -8,9 +8,11 @@
 import SwiftUI
 
 struct CompteView: View {
+    @ObservedObject var sharedPoints = SharedPoints.shared
     @AppStorage("notification") var notification : Bool = false
     @EnvironmentObject var appUser : AppUser
     @State var points : Int?
+    @Binding var header : String
     var body: some View {
         GeometryReader {
             geometry in
@@ -33,7 +35,11 @@ struct CompteView: View {
                                 .font(.title3)
                                 .foregroundColor(Color("AccentColor"))
                                 Spacer()
-                            }
+                            }.simultaneousGesture(TapGesture()
+                                                    .onEnded {
+                                                        header = "Mot de passe oublié"
+                                                    }
+                            )
                             
                         }.background(Color.clear)
                         HStack{
@@ -65,15 +71,21 @@ struct CompteView: View {
                                     .padding(.horizontal,5)
                                     .overlay(RoundedRectangle(cornerRadius: 10).stroke())
                                 NavigationLink(destination :
-                                                QRCodeView(points: points ?? 0)
-                                               ,label: {
+                                                QRCodeView()
+                                               ){
                                                 Text("Generer").font(.title3)
                                                     .foregroundColor(Color("AccentColor"))
                                                     .padding(5)
-                                                    .background(RoundedRectangle(cornerRadius: 10).fill(Color("Button")))
-                                               })
+                                                    .background(RoundedRectangle(cornerRadius: 10)
+                                                                    .fill(Color("Button")))
+                                               }
+                                .simultaneousGesture(TapGesture()
+                                                        .onEnded {
+                                                            sharedPoints.updatePoints(points: points ?? 0)
+                                                            header = "QR Code"
+                                                        }
+                                )
                             }
-                            
                         }
                         Spacer()
                         VStack{
@@ -86,10 +98,11 @@ struct CompteView: View {
                                 .onTapGesture {
                                     getRGPD()
                                 }
-                            
                         }
                     }.padding(.horizontal,15)
-                }
+                }.onAppear(perform: {
+                    header = "Compte"
+                })
             }
         }
     }
@@ -97,7 +110,7 @@ struct CompteView: View {
 
 struct CompteView_Previews: PreviewProvider {
     static var previews: some View {
-        CompteView().environmentObject(AppUser(user : User(id: "1234-ABCD", pseudo: "Test",score: 1024, profil: "PP2",isAdmin: true)))
+        CompteView(header:.constant("")).environmentObject(AppUser(user : User(id: "1234-ABCD", pseudo: "Test",score: 1024, profil: "PP2",isAdmin: true)))
         
     }
 }

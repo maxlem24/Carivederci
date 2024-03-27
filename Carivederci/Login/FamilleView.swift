@@ -21,7 +21,7 @@ struct FamilleView: View {
                 VStack(alignment : .leading){
                     HStack{
                         Spacer()
-                        Image("Logo").resizable().scaledToFill().frame(width: geometry.size.height*0.4, height: geometry.size.height*0.4).padding(.vertical,20)
+                        Image("Logo").resizable().scaledToFit().frame(width: geometry.size.height*0.4, height: geometry.size.height*0.4).padding(.vertical,20)
                         Spacer()
                     }
                     FieldView(nom: "Nom de la famille", field: $nomFamille, errorField: $nomFamilleError, width: geometry.size.width*0.9)
