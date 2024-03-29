@@ -14,7 +14,7 @@ struct ChatView: View {
     var body: some View {
         GeometryReader{ geometry in
             ZStack{
-                Color("BackgroundColor").ignoresSafeArea()
+                Color("BlancRosé").ignoresSafeArea()
                 VStack(spacing: 0){
                     ScrollViewReader {
                         scrollViewProxy in
@@ -27,7 +27,7 @@ struct ChatView: View {
                             .animation(.easeOut(duration: 0.16))
                         }.onChange(of: texts.count, perform: { count in
                             scrollViewProxy.scrollTo(texts.last, anchor: .bottom)
-                        }).background(Rectangle().fill(Color("CalendarBackground")))
+                        }).background(Rectangle().fill(Color("Rose")))
                     }
                     
                     ChatInput(geometry: geometry, texts : $texts)}
@@ -87,7 +87,7 @@ struct Message : View, Hashable{
             VStack{
                 Text(content).font(.body).frame(maxWidth : .infinity, alignment : .leading)
                 Text(dateFormatter.string(from: time)).font(.footnote).frame(maxWidth : .infinity, alignment : .trailing)
-            }.padding(7).frame( minHeight:50).background(Rectangle().fill(me == user  ? Color("Button"): Color("ActiviteBackground")).cornerRadius(10))
+            }.padding(7).frame( minHeight:50).background(Rectangle().fill(me == user  ? Color("Taupe"): Color("RoseMedium")).cornerRadius(10))
             
         }.padding(5).fixedSize(horizontal: false, vertical: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
         

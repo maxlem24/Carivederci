@@ -17,12 +17,14 @@ struct PasswordView: View {
             VStack(spacing:0){
                 NavigationView {
                     ZStack(alignment :.topLeading) {
-                        Color("BackgroundColor").ignoresSafeArea()
-                        VStack(alignment:.leading){
-                            Text("Vous serez déconnecté après avoir changé vottre mot de passe.").foregroundColor(Color("AccentColor"))
+                        Color("BlancRosé").ignoresSafeArea()
+                        ScrollView{
+                            Text("Vous serez déconnecté après avoir changé vottre mot de passe.").fixedSize(horizontal: false, vertical: true)
+                                .foregroundColor(Color("Marron"))
                                 .font(.body)
                                 .padding(.vertical,10)
-                            Text("Votre mot de passe doit contenir au moins 8 caractères et doit être une combinaison de chiffres, lettres et caractères spéciaux.").foregroundColor(Color("AccentColor"))
+                            Text("Votre mot de passe doit contenir au moins 8 caractères et doit être une combinaison de chiffres, lettres et caractères spéciaux.").fixedSize(horizontal: false, vertical: true)
+                                .foregroundColor(Color("Marron"))
                                 .font(.body)
                                 .padding(.vertical,10)
                             SecureField(
@@ -37,7 +39,7 @@ struct PasswordView: View {
                             .padding(5)
                             .background(
                                 Rectangle()
-                                    .fill(Color("CalendarBackground"))
+                                    .fill(Color("Rose"))
                                     .cornerRadius(10))
                             .padding(.vertical,10)
                             SecureField(
@@ -52,7 +54,7 @@ struct PasswordView: View {
                             .padding(5)
                             .background(
                                 Rectangle()
-                                    .fill(Color("CalendarBackground"))
+                                    .fill(Color("Rose"))
                                     .cornerRadius(10))
                             .padding(.vertical,10)
                             SecureField(
@@ -67,13 +69,13 @@ struct PasswordView: View {
                             .padding(5)
                             .background(
                                 Rectangle()
-                                    .fill(Color("CalendarBackground"))
+                                    .fill(Color("Rose"))
                                     .cornerRadius(10))
                             .padding(.vertical,10)
                             Spacer()
                             Button{
                             }label :{
-                                Text("Changer le mot de passe").foregroundColor(Color("Header")).padding()
+                                Text("Changer le mot de passe").foregroundColor(Color("RosePale")).padding()
                             }.frame(width: geometry.size.width*0.9).padding(5)
                             .background(Rectangle().fill(Color("Bordeaux")).cornerRadius(10))
                         
@@ -82,11 +84,5 @@ struct PasswordView: View {
                 }
             }
         }
-    }
-}
-
-struct PasswordView_Previews: PreviewProvider {
-    static var previews: some View {
-        PasswordView()
     }
 }

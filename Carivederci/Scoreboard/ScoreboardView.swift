@@ -12,7 +12,7 @@ struct ScoreboardView: View {
     var body: some View {
         GeometryReader{ geometry in
             ZStack{
-                Color("BackgroundColor").ignoresSafeArea()
+                Color("BlancRosé").ignoresSafeArea()
                 Scoreboard(geometry: geometry,familles: familleList)
             }
         }
@@ -33,8 +33,8 @@ struct Scoreboard : View {
                 ScrollView(){
                     ForEach(3..<familles.count){ index in
                         ScoreView(famille : familles[index])
-                            .frame(height: geometry.size.height*0.1)
-                            .background(RoundedRectangle(cornerRadius: 10).fill(Color("Header")))
+                            .frame(width : geometry.size.width*0.9, height: geometry.size.height*0.1)
+                            .background(RoundedRectangle(cornerRadius: 10).fill(Color("Taupe")))
                     }
                 }
             }
@@ -74,7 +74,7 @@ struct Podium : View {
                         .font(.title3).bold()
                         .foregroundColor(Color("Silver")).padding(.horizontal,5)
                 }
-                Rectangle().fill(Color("CalendarBackground"))
+                Rectangle().fill(Color("Rose"))
                     .frame(height: hauteur*2/3)
             }
             VStack{
@@ -88,9 +88,9 @@ struct Podium : View {
                         .padding(.horizontal,5)
                     Text("\(premier!.score)")
                         .font(.title3).bold()
-                        .foregroundColor(.yellow).padding(.horizontal,5)
+                        .foregroundColor(Color("Gold")).padding(.horizontal,5)
                 }
-                Rectangle().fill(Color("Button"))
+                Rectangle().fill(Color("PurpleBrown"))
                     .frame(height: hauteur)
             }
             VStack{
@@ -107,7 +107,7 @@ struct Podium : View {
                         .foregroundColor(Color("Bronze")).padding(.horizontal,5)
                 }
                 Rectangle()
-                    .fill(Color("CalendarBackground")).frame(height: hauteur*2/3)
+                    .fill(Color("Rose")).frame(height: hauteur*2/3)
             }
         }
     }

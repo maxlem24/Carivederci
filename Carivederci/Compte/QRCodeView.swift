@@ -28,11 +28,11 @@ struct QRCodeView: View {
         GeometryReader{
             geometry in
             ZStack {
-                Color("BackgroundColor").ignoresSafeArea()
+                Color("BlancRosé").ignoresSafeArea()
                 LazyVStack{
                     if (image != nil ) {
-                        image!.interpolation(.none).resizable().scaledToFit().overlay(Rectangle().stroke()).frame(width: geometry.size.width*0.9, height: geometry.size.width*0.9)
-                        Text("\(sharedPoints.points) points").font(.title3).foregroundColor(Color("AccentColor")).bold()
+                        image!.interpolation(.none).resizable().scaledToFit().overlay(Rectangle().stroke(Color("Marron"))).frame(width: geometry.size.width*0.9, height: geometry.size.width*0.9)
+                        Text("\(sharedPoints.points) points").font(.title3).foregroundColor(Color("Marron")).bold()
                     }else {
                         Text("Une erreur est survenue")
                     }

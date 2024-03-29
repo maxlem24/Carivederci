@@ -18,14 +18,14 @@ struct CompteView: View {
             geometry in
             NavigationView {
                 ZStack(alignment :.topLeading) {
-                    Color("BackgroundColor").ignoresSafeArea()
+                    Color("BlancRosé").ignoresSafeArea()
                     VStack(spacing : 20){
                         HStack{
                             Spacer()
                             VStack{
                                 Image(appUser.user!.profil).resizable().scaledToFit().clipShape(Circle())
                                 Text(appUser.user!.pseudo).bold().font(.title3)
-                                    .foregroundColor(Color("AccentColor"))
+                                    .foregroundColor(Color("Marron"))
                             }
                             .frame(width: geometry.size.height*0.15, height: geometry.size.height*0.25)
                             Spacer()
@@ -33,7 +33,7 @@ struct CompteView: View {
                         HStack{
                             NavigationLink(destination: PasswordView()) { Label("Changer de mot de passe", systemImage: "lock.shield.fill")
                                 .font(.title3)
-                                .foregroundColor(Color("AccentColor"))
+                                .foregroundColor(Color("Marron"))
                                 Spacer()
                             }.simultaneousGesture(TapGesture()
                                                     .onEnded {
@@ -44,40 +44,40 @@ struct CompteView: View {
                         }.background(Color.clear)
                         HStack{
                             Image(systemName: notification ? "bell":"bell.slash")
-                                .foregroundColor(Color("AccentColor"))
+                                .foregroundColor(Color("Marron"))
                             Toggle("Notifications", isOn: $notification)
                                 .font(.title3)
-                                .foregroundColor(Color("AccentColor"))
+                                .foregroundColor(Color("Marron"))
                         }
                         HStack{
                             Text("Mes points : ")
                                 .font(.title3)
-                                .foregroundColor(Color("AccentColor"))
+                                .foregroundColor(Color("Marron"))
                             Spacer()
                             Text("\(appUser.user!.score) points")
                                 .font(.title3)
-                                .foregroundColor(Color("AccentColor"))
+                                .foregroundColor(Color("Marron"))
                             
                         }
                         if(appUser.user!.isAdmin) {
                             VStack{
                                 Text("Generer un QR-Code")
                                     .font(.title3)
-                                    .foregroundColor(Color("AccentColor"))
+                                    .foregroundColor(Color("Marron"))
                                 TextField("Nombre de points", value: $points, formatter: NumberFormatter())
                                     .keyboardType(.numberPad)
                                     .font(.title3)
-                                    .foregroundColor(Color("AccentColor"))
+                                    .foregroundColor(Color("Marron"))
                                     .padding(.horizontal,5)
-                                    .overlay(RoundedRectangle(cornerRadius: 10).stroke())
+                                    .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color("Marron")))
                                 NavigationLink(destination :
                                                 QRCodeView()
                                                ){
                                                 Text("Generer").font(.title3)
-                                                    .foregroundColor(Color("AccentColor"))
+                                                    .foregroundColor(Color("Marron"))
                                                     .padding(5)
                                                     .background(RoundedRectangle(cornerRadius: 10)
-                                                                    .fill(Color("Button")))
+                                                                    .fill(Color("Taupe")))
                                                }
                                 .simultaneousGesture(TapGesture()
                                                         .onEnded {
@@ -91,10 +91,10 @@ struct CompteView: View {
                         VStack{
                             Text("L'association Carivederci est responsable du traitement des données nécessaires au fonctionnement de l'application")
                                 .font(.footnote)
-                                .foregroundColor(Color("AccentColor"))
+                                .foregroundColor(Color("Marron"))
                             Text("Plus d'informations en cliquant ici").bold()
                                 .font(.footnote)
-                                .foregroundColor(Color("AccentColor"))
+                                .foregroundColor(Color("Marron"))
                                 .onTapGesture {
                                     getRGPD()
                                 }
@@ -103,7 +103,7 @@ struct CompteView: View {
                 }.onAppear(perform: {
                     header = "Compte"
                 })
-            }
+            }.accentColor(Color("Marron"))
         }
     }
 }

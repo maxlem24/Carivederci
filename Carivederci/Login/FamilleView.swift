@@ -24,9 +24,10 @@ struct FamilleView: View {
                         Image("Logo").resizable().scaledToFit().frame(width: geometry.size.height*0.4, height: geometry.size.height*0.4).padding(.vertical,20)
                         Spacer()
                     }
-                    FieldView(nom: "Nom de la famille", field: $nomFamille, errorField: $nomFamilleError, width: geometry.size.width*0.9)
-                    FieldView(nom: "Mot de passe", field: $password, errorField: $passwordError, width: geometry.size.width*0.9, isSecure: true)
-
+                    ScrollView{
+                        FieldView(nom: "Nom de la famille", field: $nomFamille, errorField: $nomFamilleError, width: geometry.size.width*0.9)
+                        FieldView(nom: "Mot de passe", field: $password, errorField: $passwordError, width: geometry.size.width*0.9, isSecure: true)
+                    }
                     HStack{
                         Spacer()
                         Button{

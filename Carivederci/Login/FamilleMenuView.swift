@@ -26,23 +26,23 @@ struct FamilleMenuView: View {
                         NavigationLink(destination :
                                         FamilleView( newFamily : true)
                                        ,label: {
-                                        Text("Créer une Famille").font(.title2).foregroundColor(.white).bold().padding().frame(width: geometry.size.width*0.7, height: geometry.size.height*0.1).background(Rectangle().fill(Color("Button"))) .cornerRadius(10)
+                                        Text("Créer une Famille").font(.title2).foregroundColor(.white).bold().padding().frame(width: geometry.size.width*0.7, height: geometry.size.height*0.1).background(Rectangle().fill(Color("Taupe"))) .cornerRadius(10)
                                        }
                         )
                         NavigationLink(destination :
                                         FamilleView(newFamily : false)
                                        ,label: {
-                                        Text("Rejoindre une famille").font(.title2).bold().foregroundColor(.white).padding().frame(width: geometry.size.width*0.7, height: geometry.size.height*0.1).background(Rectangle().fill(Color("Button"))) .cornerRadius(10)
+                                        Text("Rejoindre une famille").font(.title2).bold().foregroundColor(.white).padding().frame(width: geometry.size.width*0.7, height: geometry.size.height*0.1).background(Rectangle().fill(Color("Taupe"))) .cornerRadius(10)
                                        }
                         )
-                        Text("Accéder à l'application").font(.title2).foregroundColor(.white).bold().padding().frame(width: geometry.size.width*0.7, height: geometry.size.height*0.1).background(Rectangle().fill(Color("Button"))) .cornerRadius(10).onTapGesture {
+                        Text("Accéder à l'application").font(.title2).foregroundColor(.white).bold().padding().frame(width: geometry.size.width*0.7, height: geometry.size.height*0.1).background(Rectangle().fill(Color("Taupe"))) .cornerRadius(10).onTapGesture {
                             skipFamille = true
                         }
                         Spacer()
                     }
                 }
             }
-        }
+        }.accentColor(Color("Marron"))
     }
 }
 

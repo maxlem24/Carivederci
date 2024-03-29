@@ -24,7 +24,7 @@ struct CarouselView: View {
             geometry in
             
             ZStack(alignment :.top) {
-                Color("BackgroundColor").ignoresSafeArea()
+                Color("BlancRosé").ignoresSafeArea()
                 TabView(selection: $selectedView) {
                     Spacer().tag(-1)
                     ForEach(viewsArray.indices, id: \.self) { index in
@@ -42,7 +42,7 @@ struct CarouselView: View {
                     }
                     Spacer().tag(viewsArray.count)
                 }
-                .frame(height: geometry.size.height*0.8)                 .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+                .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
                 .onTapGesture(){
                     timer.upstream.connect().cancel()
                 }

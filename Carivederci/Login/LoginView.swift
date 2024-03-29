@@ -63,7 +63,7 @@ struct LoginView: View {
                                     }
                                 }
                             }label :{
-                                Image(systemName: "arrow.right").resizable().foregroundColor(.white).padding(5)
+                                Image(systemName: "arrow.right").resizable().foregroundColor(Color("RosePale")).padding(5)
                             }.scaledToFill().frame(width: geometry.size.width*0.1,height : geometry.size.width*0.1).padding(5)
                             .background(Circle().fill(Color.gray))
                             Spacer()
@@ -90,7 +90,7 @@ struct alertMessage : View{
             Button{
                 appUser.user = User(id: "1234-ABCD", pseudo: pseudo,score: 1024, profil: "PP2")
             }label :{
-                Text("Ok").bold().foregroundColor(.white).padding(5)
+                Text("Ok").bold().foregroundColor(Color("RosePale")).padding(5)
             }.scaledToFill()
         }.padding().background(Rectangle().fill(Color.gray).cornerRadius(10)).frame(width: geometry.size.width*0.9)
     }

@@ -14,9 +14,9 @@ struct MainView: View {
         GeometryReader {
             geometry in
             ZStack{
-                Color("BackgroundColor").ignoresSafeArea()
+                Color("BlancRosé").ignoresSafeArea()
                 VStack {
-                    Text(header).font(.title).frame(width: geometry.size.width, height: geometry.size.height*0.1).padding(.top,50).background(Rectangle().fill(Color("Header")).cornerRadius(10))
+                    Text(header).font(.title).frame(width: geometry.size.width, height: geometry.size.height*0.1).padding(.top,50).background(Rectangle().fill(Color("Taupe")).cornerRadius(10))
                     TabView(selection : $choice){
                         CompteView(header : $header).foregroundColor(Color.red)
                             .tabItem { Image(systemName: "person") }.tag(0)
