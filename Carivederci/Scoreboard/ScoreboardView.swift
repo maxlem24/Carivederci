@@ -13,7 +13,12 @@ struct ScoreboardView: View {
         GeometryReader{ geometry in
             ZStack{
                 Color("BlancRosé").ignoresSafeArea()
-                Scoreboard(geometry: geometry,familles: familleList)
+                VStack{
+                    Text("Le classement des familles").font(.title).foregroundColor(Color("Marron")).padding()
+                        .frame(width: geometry.size.width, height: geometry.size.height*0.1)
+                        .background(Rectangle().fill(Color("RosePale")).cornerRadius(10))
+                    Scoreboard(geometry: geometry,familles: familleList)
+                }
             }
         }
     }
@@ -34,7 +39,8 @@ struct Scoreboard : View {
                     ForEach(3..<familles.count){ index in
                         ScoreView(famille : familles[index])
                             .frame(width : geometry.size.width*0.9, height: geometry.size.height*0.1)
-                            .background(RoundedRectangle(cornerRadius: 10).fill(Color("Taupe")))
+                            .background(RoundedRectangle(cornerRadius: 10).fill(Color("RosePale")))
+                        Spacer()
                     }
                 }
             }
@@ -47,9 +53,9 @@ struct ScoreView : View {
     @State var famille : Famille
     var body: some View {
         HStack{
-            Text("[\(famille.abbv)] \t \(famille.nom)").bold()
+            Text("[\(famille.abbv)] \t \(famille.nom)").bold().foregroundColor(Color("Marron"))
             Spacer()
-            Text("\(famille.score)")
+            Text("\(famille.score)").foregroundColor(Color("Marron"))
         }.padding(.horizontal)
     }
 }
@@ -74,7 +80,7 @@ struct Podium : View {
                         .font(.title3).bold()
                         .foregroundColor(Color("Silver")).padding(.horizontal,5)
                 }
-                Rectangle().fill(Color("Rose"))
+                Rectangle().fill(Color("RoseMedium"))
                     .frame(height: hauteur*2/3)
             }
             VStack{
@@ -90,7 +96,7 @@ struct Podium : View {
                         .font(.title3).bold()
                         .foregroundColor(Color("Gold")).padding(.horizontal,5)
                 }
-                Rectangle().fill(Color("PurpleBrown"))
+                Rectangle().fill(Color("TaupeClair"))
                     .frame(height: hauteur)
             }
             VStack{
@@ -107,7 +113,7 @@ struct Podium : View {
                         .foregroundColor(Color("Bronze")).padding(.horizontal,5)
                 }
                 Rectangle()
-                    .fill(Color("Rose")).frame(height: hauteur*2/3)
+                    .fill(Color("RoseMedium")).frame(height: hauteur*2/3)
             }
         }
     }

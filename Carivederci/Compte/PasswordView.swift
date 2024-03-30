@@ -75,7 +75,7 @@ struct PasswordView: View {
                             Spacer()
                             Button{
                             }label :{
-                                Text("Changer le mot de passe").foregroundColor(Color("RosePale")).padding()
+                                Text("Changer le mot de passe").foregroundColor(Color("RoseBlanc")).padding()
                             }.frame(width: geometry.size.width*0.9).padding(5)
                             .background(Rectangle().fill(Color("Bordeaux")).cornerRadius(10))
                         

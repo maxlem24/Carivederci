@@ -42,7 +42,7 @@ struct FamilleMenuView: View {
                     }
                 }
             }
-        }.accentColor(Color("Marron"))
+        }.accentColor(Color("RoseBlanc"))
     }
 }
 

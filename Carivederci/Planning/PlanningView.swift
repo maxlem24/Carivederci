@@ -65,7 +65,7 @@ struct JourView : View{
         let actuel = Journee.semaine[jour] ?? Journee()
         
         VStack{
-            Text("\(jour.rawValue)").font(.title3).bold().padding(.vertical,10).foregroundColor(Color("RosePale")).frame(width :geometry.size.width).background(Rectangle().fill(Color("PurpleBrown"))).cornerRadius(15)
+            Text("\(jour.rawValue)").font(.title3).bold().padding(.vertical,10).foregroundColor(Color("RoseBlanc")).frame(width :geometry.size.width).background(Rectangle().fill(Color("PurpleBrown"))).cornerRadius(15)
             ScrollView{
                 ActiviteView(nom : "Allos",activites : actuel.Allo, width : geometry.size.width)
                 ActiviteView(nom : "Matin",activites : actuel.Matin, width : geometry.size.width)

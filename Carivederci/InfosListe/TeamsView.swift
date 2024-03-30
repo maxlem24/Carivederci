@@ -14,21 +14,26 @@ struct TeamsView: View {
             
             ZStack {
                 Color("BackgroundColor").ignoresSafeArea()
-                ScrollView{
-                    Group{
-                        TeamBox(teamName: "Bureau", imageName: "Bureau", teamText: description["Bureau"]!,geometry: geometry)
-                        TeamBox(teamName: "Team BDS", imageName: "BDS", teamText: description["BDS"]!,geometry: geometry)
-                        TeamBox(teamName: "Team BDA", imageName: "BDA", teamText: description["BDA"]!,geometry: geometry)
-                        TeamBox(teamName: "Team Soirée", imageName: "Soirée", teamText: description["Soirée"]!,geometry: geometry)
-                        TeamBox(teamName: "Team Com", imageName: "Com", teamText: description["Com"]!,geometry: geometry)
+                VStack{
+                    Text("Nos pôles").font(.title).foregroundColor(Color("Marron")).padding()
+                        .frame(width: geometry.size.width, height: geometry.size.height*0.1)
+                        .background(Rectangle().fill(Color("RosePale")).cornerRadius(10))
+                    ScrollView{
+                        Group{
+                            TeamBox(teamName: "Bureau", imageName: "Bureau", teamText: description["Bureau"]!,geometry: geometry)
+                            TeamBox(teamName: "Team BDS", imageName: "BDS", teamText: description["BDS"]!,geometry: geometry)
+                            TeamBox(teamName: "Team BDA", imageName: "BDA", teamText: description["BDA"]!,geometry: geometry)
+                            TeamBox(teamName: "Team Soirée", imageName: "Soirée", teamText: description["Soirée"]!,geometry: geometry)
+                            TeamBox(teamName: "Team Com", imageName: "Com", teamText: description["Com"]!,geometry: geometry)
+                        }
+                        TeamBox(teamName: "Team BDI", imageName: "BDI", teamText: description["BDI"]!,geometry: geometry)
+                        TeamBox(teamName: "Team Assos et Club", imageName: "Asso", teamText: description["Asso"]!,geometry: geometry)
+                        TeamBox(teamName: "Team Opé", imageName: "Opé", teamText: description["Opé"]!,geometry: geometry)
+                        TeamBox(teamName: "Team Partenariats", imageName: "Partenariats", teamText: description["Partenariats"]!,geometry: geometry)
+                        TeamBox(teamName: "Team FISA", imageName: "FISA", teamText: description["FISA"]!,geometry: geometry)
+                        TeamBox(teamName: "AEI", imageName: "AEI", teamText: description["AEI"]!,geometry: geometry)
+                        Spacer()
                     }
-                    TeamBox(teamName: "Team BDI", imageName: "BDI", teamText: description["BDI"]!,geometry: geometry)
-                    TeamBox(teamName: "Team Assos et Club", imageName: "Asso", teamText: description["Asso"]!,geometry: geometry)
-                    TeamBox(teamName: "Team Opé", imageName: "Opé", teamText: description["Opé"]!,geometry: geometry)
-                    TeamBox(teamName: "Team Partenariats", imageName: "Partenariats", teamText: description["Partenariats"]!,geometry: geometry)
-                    TeamBox(teamName: "Team FISA", imageName: "FISA", teamText: description["FISA"]!,geometry: geometry)
-                    TeamBox(teamName: "AEI", imageName: "AEI", teamText: description["AEI"]!,geometry: geometry)
-                    Spacer()
                 }
             }
         }

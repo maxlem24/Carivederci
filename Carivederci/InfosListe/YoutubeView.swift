@@ -14,10 +14,16 @@ struct YoutubeView: View {
             ZStack {
                 Color("BlancRosé").ignoresSafeArea()
                 VStack{
-                    Image("Logo").resizable().scaledToFit().frame(height: geometry.size.height*0.4)
-                    Link("Notre chaine youtube", destination: URL(string: "https://www.youtube.com/watch?v=dQw4w9WgXcQ&themeRefresh=1")!).font(.title).accentColor(Color("Marron")).padding()
-                    Image("Youtube").resizable().scaledToFit().frame(height: geometry.size.height*0.2)
-                    
+                    Text("Notre chaine youtube").font(.title).foregroundColor(Color("Marron")).padding()
+                        .frame(width: geometry.size.width, height: geometry.size.height*0.1)
+                        .background(Rectangle().fill(Color("RosePale")).cornerRadius(10))
+                    Spacer()
+                    VStack{
+                        Image("Logo").resizable().scaledToFit().frame(height: geometry.size.height*0.4)
+                        Link("Notre chaine youtube", destination: URL(string: "https://www.youtube.com/watch?v=dQw4w9WgXcQ&themeRefresh=1")!).font(.title).accentColor(Color("Marron")).padding()
+                        Image("Youtube").resizable().scaledToFit().frame(height: geometry.size.height*0.2)
+                    }
+                    Spacer()
                 }
             }
         }

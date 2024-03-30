@@ -39,7 +39,7 @@ struct FamilleView: View {
                         } label :{
                             Image(systemName: "arrow.right").resizable().foregroundColor(.white).padding(5)
                         }.scaledToFill().frame(width: geometry.size.width*0.1,height : geometry.size.width*0.1).padding(5)
-                        .background(Circle().fill(Color.gray))
+                        .background(Circle().fill(Color("Taupe")))
                         Spacer()
                     }
                     Spacer()

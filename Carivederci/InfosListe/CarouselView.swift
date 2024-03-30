@@ -18,7 +18,6 @@ struct CarouselView: View {
     @State var timer = Timer.publish(every: 5.0, on: .main, in: .common).autoconnect()
     
     @State private var selectedView: Int = 0
-    @Binding var header : String
     var body: some View {
         GeometryReader {
             geometry in
@@ -31,13 +30,10 @@ struct CarouselView: View {
                         switch viewsArray[index] {
                         case .theme :
                             ThemeView().tag(index)
-                                .onAppear(perform: {header = "Carivederci c'est :"})
                         case .teams :
                             TeamsView().tag(index)
-                                .onAppear(perform: {header = "Nos poles"})
                         case .youtube :
                             YoutubeView().tag(index)
-                                .onAppear(perform: {header = "Notre chaine Youtube"})
                         }
                     }
                     Spacer().tag(viewsArray.count)
@@ -76,6 +72,6 @@ struct CarouselView: View {
 
 struct CarouselView_Previews: PreviewProvider {
     static var previews: some View {
-        CarouselView(header: .constant(""))
+        CarouselView()
     }
 }

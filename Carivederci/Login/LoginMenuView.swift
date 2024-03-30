@@ -35,7 +35,7 @@ struct LoginMenuView: View {
                     }
                 }
             }
-        }.accentColor(Color("RosePale"))
+        }.accentColor(Color("RoseBlanc"))
     }
 }
 
