@@ -12,6 +12,7 @@ struct CompteView: View {
     @AppStorage("notification") var notification : Bool = false
     @EnvironmentObject var appUser : AppUser
     @State var points : Int?
+    @State var showMessage : Bool = false
     var body: some View {
         GeometryReader {
             geometry in
@@ -21,12 +22,13 @@ struct CompteView: View {
                     Text("Compte").font(.title).foregroundColor(Color("Marron")).padding()
                         .frame(width: geometry.size.width, height: geometry.size.height*0.1)
                         .background(Rectangle().fill(Color("RosePale")).cornerRadius(10))
-                    NavigationView {
+                    NavigationView {ZStack{
+                        Color("BlancRosé").ignoresSafeArea()
                         VStack(spacing : 20){
                             Spacer()
                             HStack{
                                 Spacer()
-                                Text(appUser.user!.pseudo).bold().font(.title3)
+                                Text(appUser.user?.pseudo ?? "Error").bold().font(.title3)
                                     .foregroundColor(Color("Marron"))
                                 Spacer()
                             }
@@ -49,12 +51,22 @@ struct CompteView: View {
                                     .font(.title3)
                                     .foregroundColor(Color("Marron"))
                                 Spacer()
-                                Text("\(appUser.user!.score) points")
+                                Text("\(appUser.user?.score ?? -1) points")
                                     .font(.title3)
                                     .foregroundColor(Color("Marron"))
                                 
                             }
-                            if(appUser.user!.isAdmin) {
+                            if(appUser.user?.famille != nil)
+                            {
+                                Button{
+                                    showMessage = true
+                                }label :{
+                                    Text("Quitter la Famille").font(.title3).bold()
+                                        .foregroundColor(Color("RoseBlanc")).padding(5)
+                                }.frame(width: geometry.size.width*0.9)
+                                .background(Rectangle().fill(Color("Bordeaux")).cornerRadius(10))
+                            }
+                            if(appUser.user?.isAdmin ?? false) {
                                 VStack{
                                     Text("Generer un QR-Code")
                                         .font(.title3)
@@ -69,10 +81,11 @@ struct CompteView: View {
                                                     QRCodeView()
                                     ){
                                         Text("Generer").font(.title3)
-                                            .foregroundColor(Color("Marron"))
+                                            .foregroundColor(Color("BlancRosé"))
                                             .padding(5)
+                                            .frame(width: geometry.size.width*0.9)
                                             .background(RoundedRectangle(cornerRadius: 10)
-                                                            .fill(Color("Taupe")))
+                                                            .fill(Color("Bordeaux")))
                                     }
                                 }
                             }
@@ -90,9 +103,35 @@ struct CompteView: View {
                             }
                             Spacer()
                         }.padding(.horizontal,15)
+                    }
+                    
                     }.accentColor(Color("Marron"))
+                    .allowsHitTesting(!showMessage)
+                    
                 }
-                
+                if (showMessage) {
+                    VStack(alignment : .leading) {
+                        Text("Voulez vous vraiment abandonner votre famille ?")
+                            .foregroundColor(Color("Marron")).padding(5)
+                        Text("Vous allez remis sur l'écran de selection des familles")
+                            .foregroundColor(Color("Marron")).padding(5)
+                        HStack{
+                            Spacer()
+                            Button{
+                                showMessage = false
+                                appUser.user?.famille = nil
+                            }label :{
+                                Text("Oui").bold().foregroundColor(Color("Marron")).padding(5)
+                            }.scaledToFill()
+                            Button{
+                                showMessage = false
+                            }label :{
+                                Text("Non").bold().foregroundColor(Color("Marron")).padding(5)
+                            }.scaledToFill()
+                            Spacer()
+                        }
+                    }.padding().background(Rectangle().fill(Color("Rose")).cornerRadius(10)).frame(width: geometry.size.width*0.9).navigationBarBackButtonHidden(showMessage)
+                }
             }
         }
     }
@@ -101,7 +140,7 @@ struct CompteView: View {
 
 struct CompteView_Previews: PreviewProvider {
     static var previews: some View {
-        CompteView().environmentObject(AppUser(user : User(id: "1234-ABCD", pseudo: "Test",score: 1024, profil: "PP2",isAdmin: true)))
+        CompteView().environmentObject(AppUser(user : User(id: "1234-ABCD", pseudo: "Test",score: 1024, profil: "PP2",famille: Famille(nom: "Famille", abbv: "AAAA", score: 33),isAdmin: true)))
         
     }
 }

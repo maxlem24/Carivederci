@@ -22,20 +22,20 @@ struct FamilleMenuView: View {
                             Image("Logo").resizable().scaledToFit().frame(width: geometry.size.height*0.4, height: geometry.size.height*0.4).padding(.vertical,20)
                             Spacer()
                         }
-                        Text("Bonjour \(appUser.user!.pseudo)").font(.title).bold().foregroundColor(.white).padding(5)
+                        Text("Bonjour \(appUser.user?.pseudo ?? "Error")").font(.title).bold().foregroundColor(Color("RoseBlanc")).padding(5)
                         NavigationLink(destination :
                                         FamilleView( newFamily : true)
                                        ,label: {
-                                        Text("Créer une Famille").font(.title2).foregroundColor(.white).bold().padding().frame(width: geometry.size.width*0.7, height: geometry.size.height*0.1).background(Rectangle().fill(Color("Taupe"))) .cornerRadius(10)
+                                        Text("Créer une Famille").font(.title2).foregroundColor(Color("RoseBlanc")).bold().padding().frame(width: geometry.size.width*0.7, height: geometry.size.height*0.1).background(Rectangle().fill(Color("Taupe"))) .cornerRadius(10)
                                        }
                         )
                         NavigationLink(destination :
                                         FamilleView(newFamily : false)
                                        ,label: {
-                                        Text("Rejoindre une famille").font(.title2).bold().foregroundColor(.white).padding().frame(width: geometry.size.width*0.7, height: geometry.size.height*0.1).background(Rectangle().fill(Color("Taupe"))) .cornerRadius(10)
+                                        Text("Rejoindre une famille").font(.title2).bold().foregroundColor(Color("RoseBlanc")).padding().frame(width: geometry.size.width*0.7, height: geometry.size.height*0.1).background(Rectangle().fill(Color("Taupe"))) .cornerRadius(10)
                                        }
                         )
-                        Text("Accéder à l'application").font(.title2).foregroundColor(.white).bold().padding().frame(width: geometry.size.width*0.7, height: geometry.size.height*0.1).background(Rectangle().fill(Color("Taupe"))) .cornerRadius(10).onTapGesture {
+                        Text("Accéder à l'application").font(.title2).foregroundColor(Color("RoseBlanc")).bold().padding().frame(width: geometry.size.width*0.7, height: geometry.size.height*0.1).background(Rectangle().fill(Color("Taupe"))) .cornerRadius(10).onTapGesture {
                             skipFamille = true
                         }
                         Spacer()

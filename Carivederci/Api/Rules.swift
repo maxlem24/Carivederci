@@ -38,6 +38,12 @@ func isValidPassword(_ password : String) -> Bool {
     let passwordPred = NSPredicate(format: "SELF MATCHES %@",passwordRegEx)
     return passwordPred.evaluate(with: password)
 }
+
+func isValidAbbreviation(_ abbv : String) -> Bool {
+    let abbvRegEx = "[A-Za-z]{3}"
+    let abbvPred = NSPredicate(format: "SELF MATCHES %@",abbvRegEx)
+    return abbvPred.evaluate(with: abbv)
+}
 /*
 class Auth : ObservableObject {
     
