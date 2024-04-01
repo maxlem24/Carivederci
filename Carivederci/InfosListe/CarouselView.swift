@@ -14,10 +14,9 @@ enum Views {
 }
 
 struct CarouselView: View {
-    let viewsArray : [Views] = [.theme,.teams,.youtube]
-    @State var timer = Timer.publish(every: 5.0, on: .main, in: .common).autoconnect()
+    let viewsArray : [Views] = [.youtube,.theme,.teams,.youtube,.theme]
     
-    @State private var selectedView: Int = 0
+    @State private var selectedView: Int = 1
     var body: some View {
         GeometryReader {
             geometry in
@@ -25,47 +24,27 @@ struct CarouselView: View {
             ZStack(alignment :.top) {
                 Color("BlancRosé").ignoresSafeArea()
                 TabView(selection: $selectedView) {
-                    Spacer().tag(-1)
                     ForEach(viewsArray.indices, id: \.self) { index in
                         switch viewsArray[index] {
                         case .theme :
-                            ThemeView().tag(index)
+                            ListeView()
                         case .teams :
-                            TeamsView().tag(index)
+                            TeamsView()
                         case .youtube :
-                            YoutubeView().tag(index)
+                            YoutubeView()
                         }
                     }
-                    Spacer().tag(viewsArray.count)
                 }
                 .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
-                .onTapGesture(){
-                    timer.upstream.connect().cancel()
-                }
                 .onChange(of : selectedView){_ in
-                    if selectedView == viewsArray.count {
-                        selectedView = 0
-                    } else if selectedView == -1 {
-                        selectedView = viewsArray.count-1
-                    }
-                }
-                .onReceive(timer) { _ in
                     withAnimation(.none){
-                        if selectedView == viewsArray.count-1 {
-                            selectedView = -1
-                        }
-                    }
-                    withAnimation(.default) {
-                        selectedView = (selectedView + 1)%viewsArray.count
-                    }
+                    if selectedView == viewsArray.count-1 {
+                        selectedView = 1
+                    } else if selectedView == 0 {
+                        selectedView = viewsArray.count-2
+                    }}
                 }
             }
-            .onAppear(perform : {
-                timer = Timer.publish(every: 5.0, on: .main, in: .common).autoconnect()
-            })
-            .onDisappear(perform: {
-                timer.upstream.connect().cancel()
-            })
         }
     }
 }

@@ -14,7 +14,6 @@ struct LoginMenuView: View {
                 geometry in
                 ZStack{
                     Color("Bordeaux").ignoresSafeArea()
-                    
                     VStack {
                         HStack{
                             Spacer()
