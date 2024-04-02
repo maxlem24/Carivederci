@@ -10,17 +10,28 @@ import SwiftUI
 struct PlanningView: View {
     @State private var jour = Jours.Lundi
     var body: some View {
-        GeometryReader{ geometry in
-            ZStack{
-                Color("BlancRosé").ignoresSafeArea()
-                VStack{
-                    Text("Cari-calendrier").font(.title)
-                    BoutonStack(jour :$jour,geometry: geometry)
-                    JourView(jour: $jour,geometry : geometry)
-                }.padding()
+        NavigationView{
+            GeometryReader{ geometry in
+                ZStack{
+                    Color("BlancRosé").ignoresSafeArea()
+                    VStack{
+                        HStack{
+                            Spacer()
+                            NavigationLink(destination :
+                                            QRScannerView()
+                                           ,label: {
+                                            Image(systemName: "qrcode").resizable().scaledToFit().foregroundColor(Color("BlancRosé")).padding().frame(width: geometry.size.width*0.2, height: geometry.size.width*0.2)
+                                                .background(RoundedRectangle(cornerRadius: 10).fill(Color("Bordeaux")))
+                                           })
+                            Spacer()
+                        }
+                        Text("Cari-calendrier").font(.title)
+                        BoutonStack(jour :$jour,geometry: geometry)
+                        JourView(jour: $jour,geometry : geometry)
+                    }.padding()
+                }
             }
         }
-        
     }
 }
 

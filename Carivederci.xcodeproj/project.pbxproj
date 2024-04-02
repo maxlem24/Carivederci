@@ -50,6 +50,7 @@
 		7ACCBF042B7AA37900D007D0 /* LoginMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ACCBF032B7AA37900D007D0 /* LoginMenuView.swift */; };
 		7ACCBF082B7AA82C00D007D0 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ACCBF072B7AA82C00D007D0 /* LoginView.swift */; };
 		7AD89D7B2B4AE28C00A5E334 /* ScoreboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AD89D7A2B4AE28C00A5E334 /* ScoreboardView.swift */; };
+		7AF9A4E42BBC9B2900439E5C /* QRScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF9A4E32BBC9B2900439E5C /* QRScannerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -98,6 +99,7 @@
 		7ACCBF032B7AA37900D007D0 /* LoginMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginMenuView.swift; sourceTree = "<group>"; };
 		7ACCBF072B7AA82C00D007D0 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		7AD89D7A2B4AE28C00A5E334 /* ScoreboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreboardView.swift; sourceTree = "<group>"; };
+		7AF9A4E32BBC9B2900439E5C /* QRScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRScannerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -235,6 +237,7 @@
 			children = (
 				7A32924F2B3F0C6300B8C759 /* PlanningView.swift */,
 				7A32924B2B3F072D00B8C759 /* PlanningStruct.swift */,
+				7AF9A4E32BBC9B2900439E5C /* QRScannerView.swift */,
 			);
 			path = Planning;
 			sourceTree = "<group>";
@@ -368,6 +371,7 @@
 				7AC6D5082BA0F226007B0B35 /* Rules.swift in Sources */,
 				7A24001B2B3F01420058F50F /* ContentView.swift in Sources */,
 				7ABC5B002B8BAF84003BFA94 /* TeamsView.swift in Sources */,
+				7AF9A4E42BBC9B2900439E5C /* QRScannerView.swift in Sources */,
 				7A2400192B3F01420058F50F /* CarivederciApp.swift in Sources */,
 				7AD89D7B2B4AE28C00A5E334 /* ScoreboardView.swift in Sources */,
 				7ABC5AFD2B8BAF64003BFA94 /* YoutubeView.swift in Sources */,

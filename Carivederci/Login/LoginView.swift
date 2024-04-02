@@ -9,6 +9,7 @@ import SwiftUI
 
 struct LoginView: View {
     @EnvironmentObject var appUser : AppUser
+    @Environment(\.presentationMode) var presentationMode : Binding<PresentationMode>
     @State var pseudo : String = ""
     @State var pseudoError : String = ""
     @State var nom : String = ""
@@ -59,7 +60,7 @@ struct LoginView: View {
                     VStack {
                         Text("Un message a été envoyé a l'adresse mail suivante : \(mail)").foregroundColor(Color("RoseBlanc")).padding(5)
                         Button{
-                            appUser.user = User(id: "1234-ABCD", pseudo: pseudo,score: 1024, profil: "PP2")
+                            self.presentationMode.wrappedValue.dismiss()
                         }label :{
                             Text("Ok").bold().foregroundColor(Color("RoseBlanc")).padding(5)
                         }.scaledToFill()

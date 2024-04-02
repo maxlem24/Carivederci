@@ -22,6 +22,10 @@ struct User : Codable, Equatable{
     
 }
 
+struct Points : Codable {
+    let points : Int
+}
+
 class AppUser : ObservableObject {
     @Published var user : User?
     init(user : User) {

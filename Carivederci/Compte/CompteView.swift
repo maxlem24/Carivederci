@@ -159,6 +159,5 @@ func getRGPD(){
             print("Pdf could not be saved")
         }
     }
-    
 }
 
