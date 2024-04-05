@@ -8,96 +8,139 @@
 import SwiftUI
 
 struct CompteView: View {
+    @ObservedObject var sharedPoints = SharedPoints.shared
     @AppStorage("notification") var notification : Bool = false
     @EnvironmentObject var appUser : AppUser
     @State var points : Int?
+    @State var showMessage : Bool = false
     var body: some View {
         GeometryReader {
             geometry in
-            NavigationView {
-                ZStack(alignment :.topLeading) {
-                    Color("BackgroundColor").ignoresSafeArea()
-                    VStack(spacing : 20){
-                        HStack{
+            ZStack{
+                Color("BlancRosé").ignoresSafeArea()
+                VStack{
+                    Text("Compte").font(.title).foregroundColor(Color("Marron")).padding()
+                        .frame(width: geometry.size.width, height: geometry.size.height*0.1)
+                        .background(Rectangle().fill(Color("RosePale")).cornerRadius(10))
+                    NavigationView {ZStack{
+                        Color("BlancRosé").ignoresSafeArea()
+                        VStack(spacing : 20){
                             Spacer()
-                            VStack{
-                                Image(appUser.user!.profil).resizable().scaledToFit().clipShape(Circle())
-                                Text(appUser.user!.pseudo).bold().font(.title3)
-                                    .foregroundColor(Color("AccentColor"))
-                            }
-                            .frame(width: geometry.size.height*0.15, height: geometry.size.height*0.25)
-                            Spacer()
-                        }
-                        HStack{
-                            NavigationLink(destination: PasswordView()) { Label("Changer de mot de passe", systemImage: "lock.shield.fill")
-                                .font(.title3)
-                                .foregroundColor(Color("AccentColor"))
+                            HStack{
+                                Spacer()
+                                Text(appUser.user?.pseudo ?? "Error").bold().font(.title3)
+                                    .foregroundColor(Color("Marron"))
                                 Spacer()
                             }
-                            
-                        }.background(Color.clear)
-                        HStack{
-                            Image(systemName: notification ? "bell":"bell.slash")
-                                .foregroundColor(Color("AccentColor"))
-                            Toggle("Notifications", isOn: $notification)
-                                .font(.title3)
-                                .foregroundColor(Color("AccentColor"))
-                        }
-                        HStack{
-                            Text("Mes points : ")
-                                .font(.title3)
-                                .foregroundColor(Color("AccentColor"))
-                            Spacer()
-                            Text("\(appUser.user!.score) points")
-                                .font(.title3)
-                                .foregroundColor(Color("AccentColor"))
-                            
-                        }
-                        if(appUser.user!.isAdmin) {
-                            VStack{
-                                Text("Generer un QR-Code")
+                            HStack{
+                                NavigationLink(destination: PasswordView()) { Label("Changer de mot de passe", systemImage: "lock.shield.fill")
                                     .font(.title3)
-                                    .foregroundColor(Color("AccentColor"))
-                                TextField("Nombre de points", value: $points, formatter: NumberFormatter())
-                                    .keyboardType(.numberPad)
-                                    .font(.title3)
-                                    .foregroundColor(Color("AccentColor"))
-                                    .padding(.horizontal,5)
-                                    .overlay(RoundedRectangle(cornerRadius: 10).stroke())
-                                NavigationLink(destination :
-                                                QRCodeView(points: points ?? 0)
-                                               ,label: {
-                                                Text("Generer").font(.title3)
-                                                    .foregroundColor(Color("AccentColor"))
-                                                    .padding(5)
-                                                    .background(RoundedRectangle(cornerRadius: 10).fill(Color("Button")))
-                                               })
-                            }
-                            
-                        }
-                        Spacer()
-                        VStack{
-                            Text("L'association Carivederci est responsable du traitement des données nécessaires au fonctionnement de l'application")
-                                .font(.footnote)
-                                .foregroundColor(Color("AccentColor"))
-                            Text("Plus d'informations en cliquant ici").bold()
-                                .font(.footnote)
-                                .foregroundColor(Color("AccentColor"))
-                                .onTapGesture {
-                                    getRGPD()
+                                    .foregroundColor(Color("Marron"))
+                                    Spacer()
                                 }
-                            
+                            }
+                            HStack{
+                                Image(systemName: notification ? "bell":"bell.slash")
+                                    .foregroundColor(Color("Marron"))
+                                Toggle("Notifications", isOn: $notification)
+                                    .font(.title3)
+                                    .foregroundColor(Color("Marron"))
+                            }
+                            HStack{
+                                Text("Mes points : ")
+                                    .font(.title3)
+                                    .foregroundColor(Color("Marron"))
+                                Spacer()
+                                Text("\(appUser.user?.score ?? -1) points")
+                                    .font(.title3)
+                                    .foregroundColor(Color("Marron"))
+                                
+                            }
+                            if(appUser.user?.famille != nil)
+                            {
+                                Button{
+                                    showMessage = true
+                                }label :{
+                                    Text("Quitter la Famille").font(.title3).bold()
+                                        .foregroundColor(Color("RoseBlanc")).padding(5)
+                                }.frame(width: geometry.size.width*0.9)
+                                .background(Rectangle().fill(Color("Bordeaux")).cornerRadius(10))
+                            }
+                            if(appUser.user?.isAdmin ?? false) {
+                                VStack{
+                                    Text("Generer un QR-Code")
+                                        .font(.title3)
+                                        .foregroundColor(Color("Marron"))
+                                    TextField("Nombre de points", value: $points, formatter: NumberFormatter())
+                                        .keyboardType(.numberPad)
+                                        .font(.title3)
+                                        .foregroundColor(Color("Marron"))
+                                        .padding(.horizontal,5)
+                                        .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color("Marron")))
+                                    NavigationLink(destination :
+                                                    QRCodeView()
+                                    ){
+                                        Text("Generer").font(.title3)
+                                            .foregroundColor(Color("BlancRosé"))
+                                            .padding(5)
+                                            .frame(width: geometry.size.width*0.9)
+                                            .background(RoundedRectangle(cornerRadius: 10)
+                                                            .fill(Color("Bordeaux")))
+                                    }
+                                }
+                            }
+                            Spacer()
+                            VStack{
+                                Text("L'association Carivederci est responsable du traitement des données nécessaires au fonctionnement de l'application")
+                                    .font(.footnote)
+                                    .foregroundColor(Color("Marron"))
+                                Text("Plus d'informations en cliquant ici").bold()
+                                    .font(.footnote)
+                                    .foregroundColor(Color("Marron"))
+                                    .onTapGesture {
+                                        getRGPD()
+                                    }
+                            }
+                            Spacer()
+                        }.padding(.horizontal,15)
+                    }
+                    
+                    }.accentColor(Color("Marron"))
+                    .allowsHitTesting(!showMessage)
+                    
+                }
+                if (showMessage) {
+                    VStack(alignment : .leading) {
+                        Text("Voulez vous vraiment abandonner votre famille ?")
+                            .foregroundColor(Color("Marron")).padding(5)
+                        Text("Vous allez remis sur l'écran de selection des familles")
+                            .foregroundColor(Color("Marron")).padding(5)
+                        HStack{
+                            Spacer()
+                            Button{
+                                showMessage = false
+                                appUser.user?.famille = nil
+                            }label :{
+                                Text("Oui").bold().foregroundColor(Color("Marron")).padding(5)
+                            }.scaledToFill()
+                            Button{
+                                showMessage = false
+                            }label :{
+                                Text("Non").bold().foregroundColor(Color("Marron")).padding(5)
+                            }.scaledToFill()
+                            Spacer()
                         }
-                    }.padding(.horizontal,15)
+                    }.padding().background(Rectangle().fill(Color("Rose")).cornerRadius(10)).frame(width: geometry.size.width*0.9).navigationBarBackButtonHidden(showMessage)
                 }
             }
         }
     }
 }
 
+
 struct CompteView_Previews: PreviewProvider {
     static var previews: some View {
-        CompteView().environmentObject(AppUser(user : User(id: "1234-ABCD", pseudo: "Test",score: 1024, profil: "PP2",isAdmin: true)))
+        CompteView().environmentObject(AppUser(user : User(id: "1234-ABCD", pseudo: "Test",score: 1024, profil: "PP2",famille: Famille(nom: "Famille", abbv: "AAAA", score: 33),isAdmin: true)))
         
     }
 }
@@ -116,6 +159,5 @@ func getRGPD(){
             print("Pdf could not be saved")
         }
     }
-    
 }
 

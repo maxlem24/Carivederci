@@ -4,7 +4,9 @@
 //
 //  Created by Maxime on 12/03/2024.
 //
+
 import SwiftUI
+//import SwiftKeychainWrapper
 
 
 func isValidPseudo(_ pseudo : String) -> Bool {
@@ -32,7 +34,67 @@ func isValidMail(_ email : String) -> Bool {
 }
 
 func isValidPassword(_ password : String) -> Bool {
-    let passwordRegEx = "(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[=@#\\$%\\^&\\*()\\-_+\\.]){8,}"
+    let passwordRegEx = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[@$!?%*&])[A-Za-z\\d@$!%*?&]{8,}"
     let passwordPred = NSPredicate(format: "SELF MATCHES %@",passwordRegEx)
     return passwordPred.evaluate(with: password)
 }
+
+func isValidAbbreviation(_ abbv : String) -> Bool {
+    let abbvRegEx = "[A-Za-z]{3}"
+    let abbvPred = NSPredicate(format: "SELF MATCHES %@",abbvRegEx)
+    return abbvPred.evaluate(with: abbv)
+}
+/*
+class Auth : ObservableObject {
+    
+    struct Credentials {
+        var accessToken : String?
+        var refreshToken : String?
+    }
+    
+    enum KeychainKey : String {
+        case accessToken
+        case refreshToken
+    }
+    
+    static let shared: Auth = Auth()
+    private let keychain : KeychainWrapper = KeychainWrapper.standard
+    
+    @Published var loggedIn : Bool = false
+    
+    private init() {
+        loggedIn = hasAccessToken()
+    }
+    
+    func getCredentials() -> Credentials {
+        return Credentials(
+            accessToken: keychain.string(forKey: KeychainKey.accessToken.rawValue),
+            refreshToken: keychain.string(forKey: KeychainKey.refreshToken.rawValue))
+    }
+    
+    func setCredentials(accessToken : String, refreshToken : String) {
+        keychain.set(accessToken, forKey : KeychainKey.accessToken.rawValue)
+        keychain.set(refreshToken, forKey : KeychainKey.refreshToken.rawValue)
+        
+        loggedIn = true
+    }
+    
+    func hasAccessToken() -> Bool {
+        return getCredentials().accessToken != nil
+    }
+    
+    func getAccessToken() -> String? {
+        return getCredentials().accessToken
+    }
+    
+    func getRefreshToken() -> String? {
+        return getCredentials().refreshToken
+    }
+    
+    func logout(){
+        KeychainWrapper.standard.removeObject(forKey : KeychainKey.accessToken.rawValue)
+        KeychainWrapper.standard.removeObject(forKey : KeychainKey.refreshToken.rawValue)
+        
+        loggedIn = false
+    }
+}*/

@@ -8,21 +8,115 @@
 import SwiftUI
 
 struct ScoreboardView: View {
-    @State private var jour = Jours.Lundi
-    @State private var familleList : FamilleList?
+    @State var familleList : [Famille] = Famille.famillesExemple
     var body: some View {
         GeometryReader{ geometry in
             ZStack{
-                Color("BackgroundColor").ignoresSafeArea()
-                VStack(alignment : .center){
-                    Podium(geometry: geometry,familleList: familleList)
-                    Scoreboard(geometry: geometry)
-                }.frame(width : geometry.size.width)
+                Color("BlancRosé").ignoresSafeArea()
+                VStack{
+                    Text("Le classement des familles").font(.title).foregroundColor(Color("Marron")).padding()
+                        .frame(width: geometry.size.width, height: geometry.size.height*0.1)
+                        .background(Rectangle().fill(Color("RosePale")).cornerRadius(10))
+                    Scoreboard(geometry: geometry,familles: familleList)
+                }
             }
         }
-        
     }
-    
+}
+
+struct Scoreboard : View {
+    var geometry : GeometryProxy
+    @State var familles : [Famille]
+    var body: some View {
+        VStack{
+            Podium(premier: familles.indices.contains(0) ? familles[0] : nil,
+                   deuxieme: familles.indices.contains(1) ? familles[1] : nil,
+                   troisieme: familles.indices.contains(2) ? familles[2] : nil,
+                   hauteur: geometry.size.height*0.3).frame(width: geometry.size.width*0.9)
+            
+            if familles.count > 3 {
+                ScrollView(){
+                    ForEach(3..<familles.count){ index in
+                        ScoreView(famille : familles[index])
+                            .frame(width : geometry.size.width*0.9, height: geometry.size.height*0.1)
+                            .background(RoundedRectangle(cornerRadius: 10).fill(Color("RosePale")))
+                        Spacer()
+                    }
+                }
+            }
+            Spacer()
+        }
+    }
+}
+
+struct ScoreView : View {
+    @State var famille : Famille
+    var body: some View {
+        HStack{
+            Text("[\(famille.abbv)] \t \(famille.nom)").bold().foregroundColor(Color("Marron"))
+            Spacer()
+            Text("\(famille.score)").foregroundColor(Color("Marron"))
+        }.padding(.horizontal)
+    }
+}
+
+struct Podium : View {
+    @State var premier : Famille?
+    @State var deuxieme : Famille?
+    @State var troisieme : Famille?
+    var hauteur : CGFloat
+    var body: some View {
+        HStack(alignment :.bottom ,spacing:0){
+            VStack{
+                if deuxieme != nil {
+                    Text("[\(deuxieme!.abbv)]")
+                        .font(.title3).bold()
+                        .padding(.horizontal,5)
+                    Text("\(deuxieme!.nom)")
+                        .font(.title3).bold()
+                        .multilineTextAlignment(.center)
+                        .padding(.horizontal,5)
+                    Text("\(deuxieme!.score)")
+                        .font(.title3).bold()
+                        .foregroundColor(Color("Silver")).padding(.horizontal,5)
+                }
+                Rectangle().fill(Color("RoseMedium"))
+                    .frame(height: hauteur*2/3)
+            }
+            VStack{
+                if premier != nil {
+                    Text("[\(premier!.abbv)]")
+                        .font(.title3).bold()
+                        .padding(.horizontal,5)
+                    Text("\(premier!.nom)")
+                        .font(.title3).bold()
+                        .multilineTextAlignment(.center)
+                        .padding(.horizontal,5)
+                    Text("\(premier!.score)")
+                        .font(.title3).bold()
+                        .foregroundColor(Color("Gold")).padding(.horizontal,5)
+                }
+                Rectangle().fill(Color("TaupeClair"))
+                    .frame(height: hauteur)
+            }
+            VStack{
+                if troisieme != nil {
+                    Text("[\(troisieme!.abbv)]")
+                        .font(.title3).bold()
+                        .padding(.horizontal,5)
+                    Text("\(troisieme!.nom)")
+                        .font(.title3).bold()
+                        .multilineTextAlignment(.center)
+                        .padding(.horizontal,5)
+                    Text("\(troisieme!.score)")
+                        .font(.title3).bold()
+                        .foregroundColor(Color("Bronze")).padding(.horizontal,5)
+                }
+                Rectangle()
+                    .fill(Color("RoseMedium")).frame(height: hauteur*2/3)
+            }
+        }
+    }
 }
 
 struct ScoreboardView_Previews: PreviewProvider {
@@ -31,68 +125,3 @@ struct ScoreboardView_Previews: PreviewProvider {
     }
 }
 
-
-struct Podium : View {
-    let geometry : GeometryProxy
-    var familleList : FamilleList?
-    var body: some View {
-        let widthPodium = geometry.size.width*0.9
-        HStack(alignment: .bottom,spacing:0){
-            VStack(spacing: -20){
-                Spacer()
-                // AsyncImage(url : URL()) { image in
-                // image.methodeDeco} placeholder : { cas vide}
-                Image("PP2").resizable().scaledToFill().clipShape(Circle()).overlay(Circle().stroke()).frame(width: geometry.size.width/5, height: geometry.size.width/5).zIndex(1.0)
-                VStack(spacing:5){
-                    Text("Teamname").bold()
-                    Text("1892").bold().foregroundColor(Color("Silver"))
-                }.cornerRadius(12).frame(width: widthPodium/3,height: geometry.size.height/8).background(
-                    Rectangle().fill(Color("TitleColor")).cornerRadius(12))
-                
-                
-            }.frame(width: widthPodium/3, height: geometry.size.height/4)
-            VStack(spacing: -20){
-                Spacer()
-                Image("PP1").resizable().scaledToFill().clipShape(Circle()).overlay(Circle().stroke()).frame(width: geometry.size.width/5, height: geometry.size.width/5).zIndex(1.0)
-                VStack(spacing:5){
-                    Text("Teamname").bold()
-                    Text("2435").bold().foregroundColor(.yellow)
-                }.cornerRadius(12).frame(width: widthPodium/3,height: geometry.size.height/6).background(
-                    Rectangle().fill(Color("CalendarBackground")).cornerRadius(12))
-                
-                
-            }.frame(width: widthPodium/3, height: geometry.size.height/4)
-            VStack(spacing: -20){
-                Spacer()
-                Image("PP3").resizable().scaledToFill().clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/).overlay(Circle().stroke()).frame(width: geometry.size.width/5, height: geometry.size.width/5).zIndex(/*@START_MENU_TOKEN@*/1.0/*@END_MENU_TOKEN@*/)
-                VStack(spacing:5){
-                    Text("Teamname").bold()
-                    Text("1515").bold().foregroundColor(Color("Bronze"))
-                }.cornerRadius(12).frame(width: widthPodium/3,height: geometry.size.height/9).background(
-                    Rectangle().fill(Color("TitleColor")).cornerRadius(12))
-                
-            }.frame(width: widthPodium/3, height: geometry.size.height/4)
-        }.padding(.top,20).frame(width: widthPodium)
-    }
-}
-
-struct Scoreboard : View {
-    var geometry : GeometryProxy
-    var body: some View {
-        ScrollView(){
-            ForEach(1..<20){ _ in
-                HStack(){
-                    Image("PP1").resizable().scaledToFill().clipShape(Circle()).overlay(Circle().stroke()).frame(width: geometry.size.width/10, height: geometry.size.width/10)
-                    Spacer()
-                    Text("Teamname").bold()
-                    Spacer()
-                    Text("1413")
-                    
-                    
-                }.padding().frame(width: geometry.size.width*0.9,height: geometry.size.height/10).background(Rectangle().fill(Color("Header")))
-            }
-            
-        }
-        
-    }
-}

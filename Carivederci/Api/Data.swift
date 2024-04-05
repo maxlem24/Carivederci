@@ -18,14 +18,10 @@ extension User{
                 return
             }
             
-            do {
-                let user = try JSONDecoder().decode(User.self, from: data)
-                DispatchQueue.main.async {
-                    fetchedData = user
-                }
-            }catch {
-                print(error.localizedDescription)
+            guard let list = try? JSONDecoder().decode([Famille].self, from: data) else {
+                return
             }
+            onCompletion(list)
         }.resume()
         return fetchedData
     }

@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+let hostName : String = "http://delmoo.fr:5001/molky"
+
 struct ContentView: View {
     @State var skipFamille : Bool = false
     @StateObject var appUser = AppUser()

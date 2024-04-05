@@ -9,6 +9,23 @@
 
 import SwiftUI
 
+struct User : Codable, Equatable{
+    let id : String
+    let pseudo : String
+    var score : Int = 0
+    let profil : String
+    var famille : Famille?
+    var isAdmin :Bool = false
+    static func == (left : User, right : User)-> Bool{
+        return left.id == right.id && left.pseudo == right.pseudo && left.score == right.score && left.profil == right.profil
+    }
+    
+}
+
+struct Points : Codable {
+    let points : Int
+}
+
 class AppUser : ObservableObject {
     @Published var user : User?
     @Published var famille : Famille?
@@ -33,22 +50,20 @@ struct User : Codable, Equatable{
 }
 
 struct Famille : Codable{
-    let id : String
     let nom : String
+    let abbv : String
     var score : Int
-    let profil : String
-    var membre : [User]
 }
 
-struct FamilleList : Codable {
-    let familles : [Famille]
-    func getIndex(index : Int) -> Famille?{
-        if index >= familles.count {
-            return nil
-        }else {
-            return familles[index]
-        }
-    }
+extension Famille {
+    static let famillesExemple : [Famille] = [
+        Famille(nom: "Dream Team", abbv: "DRT", score: 1024),
+        Famille(nom: "Les Mineurs du Fond", abbv: "MDF", score: 867),
+        Famille(nom: "Caripotter", abbv: "CPT", score: 624),
+        Famille(nom: "Autre team", abbv: "RDM", score: 444),
+        Famille(nom: "Les Fet'arts", abbv: "ART", score: 367),
+        Famille(nom: "Les Petits", abbv: "PTT", score: 244),
+    ]
 }
 
 struct Sponsor : Codable {

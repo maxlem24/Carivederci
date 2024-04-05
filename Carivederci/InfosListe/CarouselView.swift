@@ -9,52 +9,41 @@ import SwiftUI
 
 enum Views {
     case theme
-    case couleur
-    case logo
+    case youtube
     case teams
 }
 
 struct CarouselView: View {
-    let viewsArray : [Views] = [.theme,.couleur,.logo,.teams,.theme]
-    let timer = Timer.publish(every: 3.0, on: .main, in: .common).autoconnect()
+    let viewsArray : [Views] = [.youtube,.theme,.teams,.youtube,.theme]
     
-    @State private var selectedView: Int = 0
-    
+    @State private var selectedView: Int = 1
     var body: some View {
         GeometryReader {
             geometry in
             
             ZStack(alignment :.top) {
-                Color("BackgroundColor").ignoresSafeArea()
+                Color("BlancRosé").ignoresSafeArea()
                 TabView(selection: $selectedView) {
-                    // Step 6: Iterate Through Images
-                    ForEach(0..<viewsArray.count, id: \.self) { index in
+                    ForEach(viewsArray.indices, id: \.self) { index in
                         switch viewsArray[index] {
                         case .theme :
-                            ThemeView()
-                        case .couleur :
-                            CouleurView()
-                        case .logo :
-                            LogoView()
+                            ListeView()
                         case .teams :
                             TeamsView()
+                        case .youtube :
+                            YoutubeView()
                         }
                     }
                 }
-                .frame(height: geometry.size.height*0.8) // Step 10: Set Carousel Height
                 .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
-            }
-            .onReceive(timer) { _ in
-                // Step 16: Auto-Scrolling Logic
-                withAnimation(.none) {
-                    if (selectedView == viewsArray.count-1){
-                        selectedView = 0
-                    }
+                .onChange(of : selectedView){_ in
+                    withAnimation(.none){
+                    if selectedView == viewsArray.count-1 {
+                        selectedView = 1
+                    } else if selectedView == 0 {
+                        selectedView = viewsArray.count-2
+                    }}
                 }
-                withAnimation(.default) {
-                    selectedView = (selectedView + 1) % viewsArray.count
-                }
-                
             }
         }
     }
