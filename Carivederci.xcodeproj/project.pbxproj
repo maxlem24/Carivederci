@@ -40,17 +40,31 @@
 		7AC08A342BB76128006A5DFA /* Logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AC08A332BB76128006A5DFA /* Logo.png */; };
 		7AC08A392BB76848006A5DFA /* Présentation_AEI.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AC08A382BB76848006A5DFA /* Présentation_AEI.png */; };
 		7AC290872BA728240070F711 /* QRCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AC290862BA728240070F711 /* QRCodeView.swift */; };
-		7AC6D5022BA0EF70007B0B35 /* Karos.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 7AC6D4FF2BA0EF70007B0B35 /* Karos.jpeg */; };
-		7AC6D5032BA0EF70007B0B35 /* briquesrouges.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AC6D5002BA0EF70007B0B35 /* briquesrouges.png */; };
-		7AC6D5042BA0EF70007B0B35 /* osakatoys.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 7AC6D5012BA0EF70007B0B35 /* osakatoys.jpeg */; };
 		7AC6D5082BA0F226007B0B35 /* Rules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AC6D5072BA0F226007B0B35 /* Rules.swift */; };
-		7AC6E9642B9BB1B100CFD0B2 /* Lydia.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AC6E9622B9BB1B100CFD0B2 /* Lydia.png */; };
-		7AC6E9652B9BB1B100CFD0B2 /* redbull.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AC6E9632B9BB1B100CFD0B2 /* redbull.png */; };
 		7ACCBEFF2B7AA33A00D007D0 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ACCBEFE2B7AA33A00D007D0 /* MainView.swift */; };
 		7ACCBF042B7AA37900D007D0 /* LoginMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ACCBF032B7AA37900D007D0 /* LoginMenuView.swift */; };
 		7ACCBF082B7AA82C00D007D0 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ACCBF072B7AA82C00D007D0 /* LoginView.swift */; };
 		7AD89D7B2B4AE28C00A5E334 /* ScoreboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AD89D7A2B4AE28C00A5E334 /* ScoreboardView.swift */; };
 		7AF9A4E42BBC9B2900439E5C /* QRScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF9A4E32BBC9B2900439E5C /* QRScannerView.swift */; };
+		B3482F5C2BC0645A001F2CF3 /* CodeScanner in Frameworks */ = {isa = PBXBuildFile; productRef = B3482F5B2BC0645A001F2CF3 /* CodeScanner */; };
+		B3482F712BC06CFF001F2CF3 /* intersport-aulnoy-lez-valenciennes.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B3482F612BC06CFC001F2CF3 /* intersport-aulnoy-lez-valenciennes.jpg */; };
+		B3482F722BC06CFF001F2CF3 /* VNB arsenal M.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = B3482F622BC06CFC001F2CF3 /* VNB arsenal M.jpeg */; };
+		B3482F732BC06CFF001F2CF3 /* lasergame R.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = B3482F632BC06CFC001F2CF3 /* lasergame R.jpeg */; };
+		B3482F742BC06CFF001F2CF3 /* LYDIA E.png in Resources */ = {isa = PBXBuildFile; fileRef = B3482F642BC06CFC001F2CF3 /* LYDIA E.png */; };
+		B3482F752BC06CFF001F2CF3 /* PIXELBAR R.png in Resources */ = {isa = PBXBuildFile; fileRef = B3482F652BC06CFC001F2CF3 /* PIXELBAR R.png */; };
+		B3482F762BC06CFF001F2CF3 /* osaka toys M.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = B3482F662BC06CFD001F2CF3 /* osaka toys M.jpeg */; };
+		B3482F772BC06CFF001F2CF3 /* murder france E.png in Resources */ = {isa = PBXBuildFile; fileRef = B3482F672BC06CFD001F2CF3 /* murder france E.png */; };
+		B3482F782BC06CFF001F2CF3 /* lache prise R.png in Resources */ = {isa = PBXBuildFile; fileRef = B3482F682BC06CFD001F2CF3 /* lache prise R.png */; };
+		B3482F792BC06CFF001F2CF3 /* VnB Aulnoye.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B3482F692BC06CFD001F2CF3 /* VnB Aulnoye.jpg */; };
+		B3482F7A2BC06CFF001F2CF3 /* reload gaming bar M.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = B3482F6A2BC06CFE001F2CF3 /* reload gaming bar M.jpeg */; };
+		B3482F7B2BC06CFF001F2CF3 /* bar l_inontournable R.png in Resources */ = {isa = PBXBuildFile; fileRef = B3482F6B2BC06CFE001F2CF3 /* bar l_inontournable R.png */; };
+		B3482F7C2BC06CFF001F2CF3 /* Redbull E.png in Resources */ = {isa = PBXBuildFile; fileRef = B3482F6C2BC06CFE001F2CF3 /* Redbull E.png */; };
+		B3482F7D2BC06CFF001F2CF3 /* logo-via-ristorante-restaurant.png in Resources */ = {isa = PBXBuildFile; fileRef = B3482F6D2BC06CFE001F2CF3 /* logo-via-ristorante-restaurant.png */; };
+		B3482F7E2BC06CFF001F2CF3 /* léon R.png in Resources */ = {isa = PBXBuildFile; fileRef = B3482F6E2BC06CFE001F2CF3 /* léon R.png */; };
+		B3482F7F2BC06CFF001F2CF3 /* Festival les briques rouges E.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = B3482F6F2BC06CFE001F2CF3 /* Festival les briques rouges E.jpeg */; };
+		B3482F802BC06CFF001F2CF3 /* karos R.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = B3482F702BC06CFF001F2CF3 /* karos R.jpeg */; };
+		B3482F832BC071D5001F2CF3 /* SwiftKeychainWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = B3482F822BC071D5001F2CF3 /* SwiftKeychainWrapper */; };
+		B3482F852BC071E4001F2CF3 /* SwiftKeychainWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = B3482F842BC071E4001F2CF3 /* SwiftKeychainWrapper */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -89,17 +103,29 @@
 		7AC08A332BB76128006A5DFA /* Logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Logo.png; sourceTree = "<group>"; };
 		7AC08A382BB76848006A5DFA /* Présentation_AEI.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Présentation_AEI.png"; sourceTree = "<group>"; };
 		7AC290862BA728240070F711 /* QRCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeView.swift; sourceTree = "<group>"; };
-		7AC6D4FF2BA0EF70007B0B35 /* Karos.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = Karos.jpeg; path = Carivederci/Assets/Karos.jpeg; sourceTree = SOURCE_ROOT; };
-		7AC6D5002BA0EF70007B0B35 /* briquesrouges.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = briquesrouges.png; path = Carivederci/Assets/briquesrouges.png; sourceTree = SOURCE_ROOT; };
-		7AC6D5012BA0EF70007B0B35 /* osakatoys.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = osakatoys.jpeg; path = Carivederci/Assets/osakatoys.jpeg; sourceTree = SOURCE_ROOT; };
 		7AC6D5072BA0F226007B0B35 /* Rules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rules.swift; sourceTree = "<group>"; };
-		7AC6E9622B9BB1B100CFD0B2 /* Lydia.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Lydia.png; sourceTree = "<group>"; };
-		7AC6E9632B9BB1B100CFD0B2 /* redbull.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = redbull.png; sourceTree = "<group>"; };
 		7ACCBEFE2B7AA33A00D007D0 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		7ACCBF032B7AA37900D007D0 /* LoginMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginMenuView.swift; sourceTree = "<group>"; };
 		7ACCBF072B7AA82C00D007D0 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		7AD89D7A2B4AE28C00A5E334 /* ScoreboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreboardView.swift; sourceTree = "<group>"; };
 		7AF9A4E32BBC9B2900439E5C /* QRScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRScannerView.swift; sourceTree = "<group>"; };
+		B3482F5E2BC06C14001F2CF3 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		B3482F612BC06CFC001F2CF3 /* intersport-aulnoy-lez-valenciennes.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "intersport-aulnoy-lez-valenciennes.jpg"; sourceTree = "<group>"; };
+		B3482F622BC06CFC001F2CF3 /* VNB arsenal M.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "VNB arsenal M.jpeg"; sourceTree = "<group>"; };
+		B3482F632BC06CFC001F2CF3 /* lasergame R.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "lasergame R.jpeg"; sourceTree = "<group>"; };
+		B3482F642BC06CFC001F2CF3 /* LYDIA E.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LYDIA E.png"; sourceTree = "<group>"; };
+		B3482F652BC06CFC001F2CF3 /* PIXELBAR R.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PIXELBAR R.png"; sourceTree = "<group>"; };
+		B3482F662BC06CFD001F2CF3 /* osaka toys M.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "osaka toys M.jpeg"; sourceTree = "<group>"; };
+		B3482F672BC06CFD001F2CF3 /* murder france E.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "murder france E.png"; sourceTree = "<group>"; };
+		B3482F682BC06CFD001F2CF3 /* lache prise R.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lache prise R.png"; sourceTree = "<group>"; };
+		B3482F692BC06CFD001F2CF3 /* VnB Aulnoye.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "VnB Aulnoye.jpg"; sourceTree = "<group>"; };
+		B3482F6A2BC06CFE001F2CF3 /* reload gaming bar M.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "reload gaming bar M.jpeg"; sourceTree = "<group>"; };
+		B3482F6B2BC06CFE001F2CF3 /* bar l_inontournable R.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bar l_inontournable R.png"; sourceTree = "<group>"; };
+		B3482F6C2BC06CFE001F2CF3 /* Redbull E.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Redbull E.png"; sourceTree = "<group>"; };
+		B3482F6D2BC06CFE001F2CF3 /* logo-via-ristorante-restaurant.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo-via-ristorante-restaurant.png"; sourceTree = "<group>"; };
+		B3482F6E2BC06CFE001F2CF3 /* léon R.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "léon R.png"; sourceTree = "<group>"; };
+		B3482F6F2BC06CFE001F2CF3 /* Festival les briques rouges E.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Festival les briques rouges E.jpeg"; sourceTree = "<group>"; };
+		B3482F702BC06CFF001F2CF3 /* karos R.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "karos R.jpeg"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +133,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B3482F832BC071D5001F2CF3 /* SwiftKeychainWrapper in Frameworks */,
+				B3482F5C2BC0645A001F2CF3 /* CodeScanner in Frameworks */,
+				B3482F852BC071E4001F2CF3 /* SwiftKeychainWrapper in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -118,6 +147,7 @@
 			children = (
 				7A2400172B3F01420058F50F /* Carivederci */,
 				7A2400162B3F01420058F50F /* Products */,
+				B3482F5D2BC06C13001F2CF3 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -220,12 +250,8 @@
 		7AC3B9822BB494E300F7AE50 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				B3482F602BC06CC9001F2CF3 /* Partenaires */,
 				7AC08A1D2BB760DF006A5DFA /* Teams */,
-				7AC6D5002BA0EF70007B0B35 /* briquesrouges.png */,
-				7AC6D5012BA0EF70007B0B35 /* osakatoys.jpeg */,
-				7AC6D4FF2BA0EF70007B0B35 /* Karos.jpeg */,
-				7AC6E9632B9BB1B100CFD0B2 /* redbull.png */,
-				7AC6E9622B9BB1B100CFD0B2 /* Lydia.png */,
 				7A2671E02BB4BDA000EDC250 /* Youtube.png */,
 				7AC08A332BB76128006A5DFA /* Logo.png */,
 			);
@@ -277,6 +303,37 @@
 			path = TestAssets;
 			sourceTree = "<group>";
 		};
+		B3482F5D2BC06C13001F2CF3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B3482F5E2BC06C14001F2CF3 /* Security.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B3482F602BC06CC9001F2CF3 /* Partenaires */ = {
+			isa = PBXGroup;
+			children = (
+				B3482F6B2BC06CFE001F2CF3 /* bar l_inontournable R.png */,
+				B3482F6F2BC06CFE001F2CF3 /* Festival les briques rouges E.jpeg */,
+				B3482F612BC06CFC001F2CF3 /* intersport-aulnoy-lez-valenciennes.jpg */,
+				B3482F702BC06CFF001F2CF3 /* karos R.jpeg */,
+				B3482F682BC06CFD001F2CF3 /* lache prise R.png */,
+				B3482F632BC06CFC001F2CF3 /* lasergame R.jpeg */,
+				B3482F6E2BC06CFE001F2CF3 /* léon R.png */,
+				B3482F6D2BC06CFE001F2CF3 /* logo-via-ristorante-restaurant.png */,
+				B3482F642BC06CFC001F2CF3 /* LYDIA E.png */,
+				B3482F672BC06CFD001F2CF3 /* murder france E.png */,
+				B3482F662BC06CFD001F2CF3 /* osaka toys M.jpeg */,
+				B3482F652BC06CFC001F2CF3 /* PIXELBAR R.png */,
+				B3482F6C2BC06CFE001F2CF3 /* Redbull E.png */,
+				B3482F6A2BC06CFE001F2CF3 /* reload gaming bar M.jpeg */,
+				B3482F622BC06CFC001F2CF3 /* VNB arsenal M.jpeg */,
+				B3482F692BC06CFD001F2CF3 /* VnB Aulnoye.jpg */,
+			);
+			path = Partenaires;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -293,6 +350,11 @@
 			dependencies = (
 			);
 			name = Carivederci;
+			packageProductDependencies = (
+				B3482F5B2BC0645A001F2CF3 /* CodeScanner */,
+				B3482F822BC071D5001F2CF3 /* SwiftKeychainWrapper */,
+				B3482F842BC071E4001F2CF3 /* SwiftKeychainWrapper */,
+			);
 			productName = Carivederci;
 			productReference = 7A2400152B3F01420058F50F /* Carivederci.app */;
 			productType = "com.apple.product-type.application";
@@ -321,6 +383,10 @@
 				Base,
 			);
 			mainGroup = 7A24000C2B3F01420058F50F;
+			packageReferences = (
+				B3482F5A2BC0645A001F2CF3 /* XCRemoteSwiftPackageReference "CodeScanner" */,
+				B3482F812BC071D5001F2CF3 /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */,
+			);
 			productRefGroup = 7A2400162B3F01420058F50F /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -335,24 +401,35 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7AC6D5042BA0EF70007B0B35 /* osakatoys.jpeg in Resources */,
-				7AC6E9652B9BB1B100CFD0B2 /* redbull.png in Resources */,
 				7AC08A2B2BB7610E006A5DFA /* Présentation_Com.png in Resources */,
 				7AC08A302BB7610E006A5DFA /* Présentation_FISA.png in Resources */,
+				B3482F7A2BC06CFF001F2CF3 /* reload gaming bar M.jpeg in Resources */,
 				7AC08A2E2BB7610E006A5DFA /* Présentation_Asso.png in Resources */,
+				B3482F7D2BC06CFF001F2CF3 /* logo-via-ristorante-restaurant.png in Resources */,
 				7A2400202B3F01440058F50F /* Preview Assets.xcassets in Resources */,
+				B3482F7B2BC06CFF001F2CF3 /* bar l_inontournable R.png in Resources */,
+				B3482F7F2BC06CFF001F2CF3 /* Festival les briques rouges E.jpeg in Resources */,
 				7A3292482B3F057400B8C759 /* Montaga-Regular.ttf in Resources */,
+				B3482F722BC06CFF001F2CF3 /* VNB arsenal M.jpeg in Resources */,
+				B3482F782BC06CFF001F2CF3 /* lache prise R.png in Resources */,
+				B3482F712BC06CFF001F2CF3 /* intersport-aulnoy-lez-valenciennes.jpg in Resources */,
+				B3482F772BC06CFF001F2CF3 /* murder france E.png in Resources */,
+				B3482F7C2BC06CFF001F2CF3 /* Redbull E.png in Resources */,
 				7AC08A392BB76848006A5DFA /* Présentation_AEI.png in Resources */,
-				7AC6E9642B9BB1B100CFD0B2 /* Lydia.png in Resources */,
+				B3482F752BC06CFF001F2CF3 /* PIXELBAR R.png in Resources */,
 				7AC08A282BB7610E006A5DFA /* Présentation_Soirée.png in Resources */,
 				7AC08A2D2BB7610E006A5DFA /* Présentation_BDS.png in Resources */,
+				B3482F802BC06CFF001F2CF3 /* karos R.jpeg in Resources */,
+				B3482F742BC06CFF001F2CF3 /* LYDIA E.png in Resources */,
 				7AC08A2A2BB7610E006A5DFA /* Présentation_BDI.png in Resources */,
 				7AC08A342BB76128006A5DFA /* Logo.png in Resources */,
-				7AC6D5022BA0EF70007B0B35 /* Karos.jpeg in Resources */,
 				7AC08A292BB7610E006A5DFA /* Présentation_Opé.png in Resources */,
 				7AC08A2F2BB7610E006A5DFA /* Présentation_Partenariats.png in Resources */,
+				B3482F762BC06CFF001F2CF3 /* osaka toys M.jpeg in Resources */,
+				B3482F7E2BC06CFF001F2CF3 /* léon R.png in Resources */,
+				B3482F792BC06CFF001F2CF3 /* VnB Aulnoye.jpg in Resources */,
+				B3482F732BC06CFF001F2CF3 /* lasergame R.jpeg in Resources */,
 				7AC08A2C2BB7610E006A5DFA /* Présentation_BDA.png in Resources */,
-				7AC6D5032BA0EF70007B0B35 /* briquesrouges.png in Resources */,
 				7AC08A312BB7610E006A5DFA /* Présentation_Bureau.png in Resources */,
 				7A24001D2B3F01440058F50F /* Assets.xcassets in Resources */,
 				7A2671E12BB4BDA000EDC250 /* Youtube.png in Resources */,
@@ -524,8 +601,9 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Carivederci/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Carivederci/Info.plist;
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.news";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				INFOPLIST_KEY_CFBundleDisplayName = Cariverderci;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.games";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -549,8 +627,9 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Carivederci/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Carivederci/Info.plist;
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.news";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				INFOPLIST_KEY_CFBundleDisplayName = Cariverderci;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.games";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -587,6 +666,43 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		B3482F5A2BC0645A001F2CF3 /* XCRemoteSwiftPackageReference "CodeScanner" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/twostraws/CodeScanner";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.4.0;
+			};
+		};
+		B3482F812BC071D5001F2CF3 /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/jrendel/SwiftKeychainWrapper";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		B3482F5B2BC0645A001F2CF3 /* CodeScanner */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B3482F5A2BC0645A001F2CF3 /* XCRemoteSwiftPackageReference "CodeScanner" */;
+			productName = CodeScanner;
+		};
+		B3482F822BC071D5001F2CF3 /* SwiftKeychainWrapper */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B3482F812BC071D5001F2CF3 /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */;
+			productName = SwiftKeychainWrapper;
+		};
+		B3482F842BC071E4001F2CF3 /* SwiftKeychainWrapper */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B3482F812BC071D5001F2CF3 /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */;
+			productName = SwiftKeychainWrapper;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 7A24000D2B3F01420058F50F /* Project object */;
 }

@@ -81,7 +81,7 @@ struct LoginView: View {
             if newUser {
                 showMessage = true
             }else {
-                appUser.user = User(id: "1234-ABCD", pseudo: pseudo,score: 1024, profil: "PP2")
+                appUser.user = User(id: "1234-ABCD", pseudo: pseudo,score: 1024)
             }
         }
     }

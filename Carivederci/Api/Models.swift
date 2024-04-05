@@ -9,22 +9,6 @@
 
 import SwiftUI
 
-struct User : Codable, Equatable{
-    let id : String
-    let pseudo : String
-    var score : Int = 0
-    let profil : String
-    var famille : Famille?
-    var isAdmin :Bool = false
-    static func == (left : User, right : User)-> Bool{
-        return left.id == right.id && left.pseudo == right.pseudo && left.score == right.score && left.profil == right.profil
-    }
-    
-}
-
-struct Points : Codable {
-    let points : Int
-}
 
 class AppUser : ObservableObject {
     @Published var user : User?
@@ -42,11 +26,7 @@ struct User : Codable, Equatable{
     let id : String
     let pseudo : String
     var score : Int = 0
-    let profil : String
-    var isAdmin :Bool = false
-    /*static func == (left : User, right : User)-> Bool{
-        return left.id == right.id && left.pseudo == right.pseudo && left.score == right.score && left.profil == right.profil
-    }*/
+    var isAdmin : Bool = false
 }
 
 struct Famille : Codable{
@@ -66,7 +46,7 @@ extension Famille {
     ]
 }
 
-struct Sponsor : Codable {
+struct Sponsor  {
     let imageName : String
     let marqueName : String
 }
@@ -75,8 +55,31 @@ extension Sponsor {
     static let listeSponsor : [Sponsor] = [
         Sponsor(imageName: "Redbull", marqueName: "Redbull"),
         Sponsor(imageName: "Lydia", marqueName: "Lydia"),
-        Sponsor(imageName: "osakatoys", marqueName: "Osakatoys"),
-        Sponsor(imageName: "briquesrouges", marqueName: "Festival les briques rouges"),
-        Sponsor(imageName: "Karos", marqueName: "Karos")
+        Sponsor(imageName: "Osakatoys", marqueName: "Osakatoys"),
+        Sponsor(imageName: "Briques Rouges", marqueName: "Festival les briques rouges"),
+        Sponsor(imageName: "Karos", marqueName: "Karos"),
+        Sponsor(imageName: "Hache Prise", marqueName: "L'Hache Prise"),
+        Sponsor(imageName: "Incontournable", marqueName: "L'incontournable"),
+        Sponsor(imageName: "Intersport", marqueName: "Intersport"),
+        Sponsor(imageName: "Lasergame", marqueName: "Lasergame Evolution"),
+        Sponsor(imageName: "Leon", marqueName: "Léon de Bruxelles"),
+        Sponsor(imageName: "Murder", marqueName: "France Murder"),
+        Sponsor(imageName: "Pixelbar", marqueName: "Pixelbar"),
+        Sponsor(imageName: "Reload", marqueName: "Reload"),
+        Sponsor(imageName: "Via Ristorante", marqueName: "Via Ristorante"),
+        Sponsor(imageName: "VNB Arsenal", marqueName: "V&B Arsenal"),
+        Sponsor(imageName: "VNB Aulnoy", marqueName: "V&B Aulnoy-lez-Valenciennes"),
     ]
+}
+
+struct Message : Codable {
+    let message : String
+}
+
+struct Score : Codable {
+    let score : Int
+}
+
+struct QrCode : Codable {
+    let qrcode : String
 }

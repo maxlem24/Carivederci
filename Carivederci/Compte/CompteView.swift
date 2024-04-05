@@ -56,7 +56,7 @@ struct CompteView: View {
                                     .foregroundColor(Color("Marron"))
                                 
                             }
-                            if(appUser.user?.famille != nil)
+                            if(appUser.famille != nil)
                             {
                                 Button{
                                     showMessage = true
@@ -119,7 +119,7 @@ struct CompteView: View {
                             Spacer()
                             Button{
                                 showMessage = false
-                                appUser.user?.famille = nil
+                                appUser.famille = nil
                             }label :{
                                 Text("Oui").bold().foregroundColor(Color("Marron")).padding(5)
                             }.scaledToFill()
@@ -140,7 +140,7 @@ struct CompteView: View {
 
 struct CompteView_Previews: PreviewProvider {
     static var previews: some View {
-        CompteView().environmentObject(AppUser(user : User(id: "1234-ABCD", pseudo: "Test",score: 1024, profil: "PP2",famille: Famille(nom: "Famille", abbv: "AAAA", score: 33),isAdmin: true)))
+        CompteView().environmentObject(AppUser(user : User(id: "1234-ABCD", pseudo: "Test",score: 1024,isAdmin: true)))
         
     }
 }

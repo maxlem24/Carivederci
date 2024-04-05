@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-//import SwiftKeychainWrapper
+import SwiftKeychainWrapper
 
 
 func isValidPseudo(_ pseudo : String) -> Bool {
@@ -44,17 +44,15 @@ func isValidAbbreviation(_ abbv : String) -> Bool {
     let abbvPred = NSPredicate(format: "SELF MATCHES %@",abbvRegEx)
     return abbvPred.evaluate(with: abbv)
 }
-/*
+
 class Auth : ObservableObject {
     
     struct Credentials {
         var accessToken : String?
-        var refreshToken : String?
     }
     
     enum KeychainKey : String {
         case accessToken
-        case refreshToken
     }
     
     static let shared: Auth = Auth()
@@ -68,14 +66,12 @@ class Auth : ObservableObject {
     
     func getCredentials() -> Credentials {
         return Credentials(
-            accessToken: keychain.string(forKey: KeychainKey.accessToken.rawValue),
-            refreshToken: keychain.string(forKey: KeychainKey.refreshToken.rawValue))
+            accessToken: keychain.string(forKey: KeychainKey.accessToken.rawValue)
+        )
     }
     
-    func setCredentials(accessToken : String, refreshToken : String) {
+    func setCredentials(accessToken : String) {
         keychain.set(accessToken, forKey : KeychainKey.accessToken.rawValue)
-        keychain.set(refreshToken, forKey : KeychainKey.refreshToken.rawValue)
-        
         loggedIn = true
     }
     
@@ -87,14 +83,9 @@ class Auth : ObservableObject {
         return getCredentials().accessToken
     }
     
-    func getRefreshToken() -> String? {
-        return getCredentials().refreshToken
-    }
-    
     func logout(){
         KeychainWrapper.standard.removeObject(forKey : KeychainKey.accessToken.rawValue)
-        KeychainWrapper.standard.removeObject(forKey : KeychainKey.refreshToken.rawValue)
         
         loggedIn = false
     }
-}*/
+}
