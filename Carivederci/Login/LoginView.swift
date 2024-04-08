@@ -20,6 +20,8 @@ struct LoginView: View {
     @State var mailError : String = ""
     @State var password : String = ""
     @State var passwordError : String = ""
+    @State var passwordCopy : String = ""
+    @State var passwordCopyError : String = ""
     let newUser : Bool
     @State var showMessage = false
     var body: some View {
@@ -43,6 +45,9 @@ struct LoginView: View {
                             FieldView(nom:"Adresse Email",field:$mail, errorField : $mailError, width : width)
                         }
                         FieldView(nom: "Mot de passe", field: $password, errorField: $passwordError, width: width, isSecure: true)
+                        if(newUser){
+                            FieldView(nom:"Retapez le mot de passe",field:$passwordCopy, errorField : $passwordCopyError, width : width, isSecure : true)
+                        }
                     }
                     HStack{
                         Spacer()
@@ -75,12 +80,14 @@ struct LoginView: View {
             nomError = isValidNom(nom) ? "" : "Nom invalide : il doit contenir uniquement des lettres et au moins 2 lettres"
             prenomError = isValidPrenom(prenom) ? "" : "Prenom invalide : il doit contenir uniquement des lettres et au moins 2 lettres"
             mailError = isValidMail(mail) ? "" : "Adresse Mail invalide : le format ne correspond pas"
+            passwordCopyError = isValidPassword(passwordCopy) ? "" : "Mot de passe invalide : il doit contenir au moins 8 caractères, avec une majuscule, une minuscule, un chiffre et un caractère spécial" 
         }
         passwordError = isValidPassword(password) ? "" : "Mot de passe invalide : il doit contenir au moins 8 caractères, avec une majuscule, une minuscule, un chiffre et un caractère spécial"
-        if pseudoError == "" && nomError == "" && prenomError == "" && mailError == "" && passwordError == "" {
-            if newUser {
-                showMessage = true
-            }else {
+        if pseudoError == "" && nomError == "" && prenomError == "" && mailError == "" && passwordError == "" && passwordCopyError == ""{
+            if password != passwordCopy && newUser{
+                passwordError = "Le mot de passe saisie n'est pas identique"
+                passwordCopyError = "Le mot de passe saisie n'est pas identique"            }else {
+                    // TODO
                 appUser.user = User(id: "1234-ABCD", pseudo: pseudo,score: 1024)
             }
         }

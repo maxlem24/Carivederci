@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SwiftKeychainWrapper
+import CryptoKit
 
 
 func isValidPseudo(_ pseudo : String) -> Bool {
@@ -43,6 +44,17 @@ func isValidAbbreviation(_ abbv : String) -> Bool {
     let abbvRegEx = "[A-Za-z]{3}"
     let abbvPred = NSPredicate(format: "SELF MATCHES %@",abbvRegEx)
     return abbvPred.evaluate(with: abbv)
+}
+
+func hash(password : String) -> String? {
+    guard let data = password.data(using: .utf8) else {
+        return nil
+    }
+    let digest = SHA256.hash(data: data)
+    let hashString = digest
+        .compactMap { String(format: "%02x", $0) }
+        .joined()
+    return hashString
 }
 
 class Auth : ObservableObject {

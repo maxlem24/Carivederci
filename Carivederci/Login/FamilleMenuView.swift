@@ -11,7 +11,7 @@ struct FamilleMenuView: View {
     @Binding var skipFamille : Bool
     @EnvironmentObject var appUser : AppUser
     var body: some View {
-        NavigationStack{
+        NavigationView{
             GeometryReader{
                 geometry in
                 ZStack{

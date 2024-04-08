@@ -29,10 +29,10 @@ struct User : Codable, Equatable{
     var isAdmin : Bool = false
 }
 
-struct Famille : Codable{
+struct Famille{
     let nom : String
     let abbv : String
-    var score : Int
+    var score : Int = 0
 }
 
 extension Famille {
@@ -82,4 +82,11 @@ struct Score : Codable {
 
 struct QrCode : Codable {
     let qrcode : String
+}
+
+struct FamilleAPI : Codable {
+    let nom : String
+    let abbv : String?
+    let password : String
+    let passwordCopy : String?
 }

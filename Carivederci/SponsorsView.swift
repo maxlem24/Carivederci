@@ -20,7 +20,7 @@ struct SponsorsView: View {
                         .background(Rectangle().fill(Color("RosePale")).cornerRadius(10))
                     ScrollView{
                         let isEven = sponsors.count % 2 == 0
-                        ForEach(0..<sponsors.count/2){index in
+                        ForEach(0..<sponsors.count/2, id : .\self){index in
                             HStack{
                                 let SponsorLeft = sponsors[2*index]
                                 let SponsorRight = sponsors[2*index+1]
@@ -35,12 +35,6 @@ struct SponsorsView: View {
                     }
                 }}
         }
-    }
-}
-
-struct SponsorsView_Previews: PreviewProvider {
-    static var previews: some View {
-        SponsorsView()
     }
 }
 
