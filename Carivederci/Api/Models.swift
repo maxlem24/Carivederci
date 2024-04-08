@@ -23,7 +23,6 @@ class AppUser : ObservableObject {
 }
 
 struct User : Codable, Equatable{
-    let id : String
     let pseudo : String
     var score : Int = 0
     var isAdmin : Bool = false
@@ -87,6 +86,15 @@ struct QrCode : Codable {
 struct FamilleAPI : Codable {
     let nom : String
     let abbv : String?
+    let password : String
+    let passwordCopy : String?
+}
+
+struct UserAPI : Codable {
+    let pseudo : String
+    let nom : String?
+    let prenom : String?
+    let mail : String?
     let password : String
     let passwordCopy : String?
 }

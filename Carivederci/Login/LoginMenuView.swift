@@ -9,7 +9,7 @@ import SwiftUI
 
 struct LoginMenuView: View {
     var body: some View {
-        NavigationView{ // NavigationStack IOS 16 + toolBarBackground
+        NavigationView{
             GeometryReader{
                 geometry in
                 ZStack{
@@ -34,7 +34,8 @@ struct LoginMenuView: View {
                     }
                 }
             }
-        }.accentColor(Color("RoseBlanc"))
-    }
+        }
+        .accentColor(Color("RoseBlanc"))
+        .edgesIgnoringSafeArea([.top, .bottom])    }
 }
 

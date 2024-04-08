@@ -39,6 +39,7 @@ struct FamilleView: View {
                             FieldView(nom: "Retapez le mot de passe", field: $passwordCopy, errorField: $passwordCopyError, width: geometry.size.width*0.9, isSecure: true)
                         }
                     }
+                    Text(errorText).font(.callout).foregroundColor(.red).padding(5)
                     HStack{
                         Spacer()
                         Button{

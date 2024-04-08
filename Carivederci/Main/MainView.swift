@@ -25,7 +25,7 @@ struct MainView: View {
                             .tabItem { Image(systemName: "checkmark.seal") }.tag(3)
                         ScoreboardView()
                             .tabItem { Image(systemName: "star") }.tag(4)
-                    }.accentColor(Color("Bordeaux")).foregroundColor(Color("Marron")).animation(.easeInOut).transition(.slide)//Methode IOS 16 toolbarBackground
+                    }.accentColor(Color("Bordeaux")).foregroundColor(Color("Marron")).transition(.slide)//Methode IOS 16 toolbarBackground
             }
         }
     }
@@ -33,6 +33,6 @@ struct MainView: View {
 
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
-        MainView().environmentObject(AppUser(user : User(id: "1234-ABCD", pseudo: "Test",score: 1024, profil: "PP2",isAdmin: true)))
+        MainView().environmentObject(AppUser(user : User(pseudo: "Test",score: 1024, isAdmin: true)))
     }
 }

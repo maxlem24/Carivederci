@@ -22,6 +22,7 @@ struct LoginView: View {
     @State var passwordError : String = ""
     @State var passwordCopy : String = ""
     @State var passwordCopyError : String = ""
+    @State var errorText : String = ""
     let newUser : Bool
     @State var showMessage = false
     var body: some View {
@@ -49,6 +50,7 @@ struct LoginView: View {
                             FieldView(nom:"Retapez le mot de passe",field:$passwordCopy, errorField : $passwordCopyError, width : width, isSecure : true)
                         }
                     }
+                    Text(errorText).font(.callout).foregroundColor(.red).padding(5)
                     HStack{
                         Spacer()
                         Button{
@@ -56,7 +58,7 @@ struct LoginView: View {
                         }label :{
                             Image(systemName: "arrow.right").resizable().foregroundColor(Color("RoseBlanc")).padding(5)
                         }.scaledToFill().frame(width: geometry.size.width*0.1,height : geometry.size.width*0.1).padding(5)
-                        .background(Circle().fill(Color("Taupe")))
+                            .background(Circle().fill(Color("Taupe")))
                         Spacer()
                     }
                     Spacer()
@@ -80,19 +82,81 @@ struct LoginView: View {
             nomError = isValidNom(nom) ? "" : "Nom invalide : il doit contenir uniquement des lettres et au moins 2 lettres"
             prenomError = isValidPrenom(prenom) ? "" : "Prenom invalide : il doit contenir uniquement des lettres et au moins 2 lettres"
             mailError = isValidMail(mail) ? "" : "Adresse Mail invalide : le format ne correspond pas"
-            passwordCopyError = isValidPassword(passwordCopy) ? "" : "Mot de passe invalide : il doit contenir au moins 8 caractères, avec une majuscule, une minuscule, un chiffre et un caractère spécial" 
+            passwordCopyError = isValidPassword(passwordCopy) ? "" : "Mot de passe invalide : il doit contenir au moins 8 caractères, avec une majuscule, une minuscule, un chiffre et un caractère spécial"
         }
         passwordError = isValidPassword(password) ? "" : "Mot de passe invalide : il doit contenir au moins 8 caractères, avec une majuscule, une minuscule, un chiffre et un caractère spécial"
         if pseudoError == "" && nomError == "" && prenomError == "" && mailError == "" && passwordError == "" && passwordCopyError == ""{
             if password != passwordCopy && newUser{
                 passwordError = "Le mot de passe saisie n'est pas identique"
                 passwordCopyError = "Le mot de passe saisie n'est pas identique"            }else {
-                    // TODO
-                appUser.user = User(id: "1234-ABCD", pseudo: pseudo,score: 1024)
-            }
+                    Task {
+                        if newUser {
+                            await register()
+                        }
+                    }
+                }
         }
     }
-}
+    func register() async {
+        guard let url = URL(string : hostName+"/register") else {
+            errorText = "Une erreur est survenue, veuillez réessayer"
+            return
+        }
+        do{
+            guard let passwordHash = hash(password: password),
+                  let passwordCopyHash = hash(password: passwordCopy),
+                  let encoded = try? JSONEncoder().encode(UserAPI(pseudo: pseudo, nom: nom, prenom: prenom, mail: mail, password: passwordHash, passwordCopy: passwordCopyHash))
+            else {
+                errorText = "Une erreur est survenue, veuillez réessayer"
+                return
+            }
+            var request = URLRequest(url : url)
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            
+            let (data,response) = try await URLSession.shared.upload(for : request, from: encoded)
+            let httpResponse = response as? HTTPURLResponse
+            if httpResponse?.statusCode != 201 {
+                if let decodedResponse = try? JSONDecoder().decode(Message.self, from: data) {
+                    errorText = decodedResponse.message
+                }
+            } else {
+                showMessage = true
+            }
+        } catch {
+            errorText = error.localizedDescription
+        }
+    }
+    func login() async {
+        guard let url = URL(string : hostName+"/login") else {
+            errorText = "Une erreur est survenue, veuillez réessayer"
+            return
+        }
+        do{
+            guard let passwordHash = hash(password: password),
+                  let encoded = try? JSONEncoder().encode(UserAPI(pseudo: pseudo, nom: nil, prenom: nil, mail: nil, password: passwordHash, passwordCopy: nil))
+            else {
+                errorText = "Une erreur est survenue, veuillez réessayer"
+                return
+            }
+            var request = URLRequest(url : url)
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            
+            let (data,response) = try await URLSession.shared.upload(for : request, from: encoded)
+            let httpResponse = response as? HTTPURLResponse
+            if httpResponse?.statusCode == 201 {
+                if let decodedResponse = try? JSONDecoder().decode(String.self, from: data) {
+                    Auth.shared.setCredentials(accessToken: decodedResponse)
+                    appUser.user = User(pseudo: pseudo)
+                }
+            } else {
+                if let decodedResponse = try? JSONDecoder().decode(Message.self, from: data) {
+                    errorText = decodedResponse.message
+                }
+            }
+        } catch {
+            errorText = error.localizedDescription
+        }
+    }}
 
 
 
@@ -111,15 +175,15 @@ struct FieldView : View {
                 nom,
                 text : $field
             ).foregroundColor(textColor).accentColor(textColor)
-            .autocapitalization(.none).disableAutocorrection(true)
-            .frame(width: width).padding(5).background(RoundedRectangle(cornerRadius: 10).fill(bgColor))
+                .autocapitalization(.none).disableAutocorrection(true)
+                .frame(width: width).padding(5).background(RoundedRectangle(cornerRadius: 10).fill(bgColor))
         }else {
             TextField(
                 nom,
                 text : $field
             ).foregroundColor(textColor).accentColor(textColor)
-            .autocapitalization(.none).disableAutocorrection(true)
-            .frame(width: width).padding(5).background(RoundedRectangle(cornerRadius: 10).fill(bgColor))
+                .autocapitalization(.none).disableAutocorrection(true)
+                .frame(width: width).padding(5).background(RoundedRectangle(cornerRadius: 10).fill(bgColor))
         }
         Text(errorField).font(.footnote).foregroundColor(.red).padding(5)
     }

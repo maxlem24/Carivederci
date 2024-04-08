@@ -20,9 +20,9 @@ struct PlanningView: View {
                             NavigationLink(destination :
                                             QRScannerView()
                                            ,label: {
-                                            Image(systemName: "qrcode").resizable().scaledToFit().foregroundColor(Color("BlancRosé")).padding().frame(width: geometry.size.width*0.2, height: geometry.size.width*0.2)
-                                                .background(RoundedRectangle(cornerRadius: 10).fill(Color("Bordeaux")))
-                                           })
+                                Image(systemName: "qrcode").resizable().scaledToFit().foregroundColor(Color("BlancRosé")).padding().frame(width: geometry.size.width*0.2, height: geometry.size.width*0.2)
+                                    .background(RoundedRectangle(cornerRadius: 10).fill(Color("Bordeaux")))
+                            })
                             Spacer()
                         }
                         Text("Cari-calendrier").font(.title)
@@ -31,7 +31,7 @@ struct PlanningView: View {
                     }.padding()
                 }
             }
-        }
+        }.edgesIgnoringSafeArea([.top, .bottom])
     }
 }
 

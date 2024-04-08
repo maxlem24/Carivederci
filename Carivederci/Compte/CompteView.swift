@@ -13,6 +13,7 @@ struct CompteView: View {
     @EnvironmentObject var appUser : AppUser
     @State var points : Int?
     @State var showMessage : Bool = false
+    @State var errorText : String = ""
     var body: some View {
         GeometryReader {
             geometry in
@@ -34,8 +35,8 @@ struct CompteView: View {
                             }
                             HStack{
                                 NavigationLink(destination: PasswordView()) { Label("Changer de mot de passe", systemImage: "lock.shield.fill")
-                                    .font(.title3)
-                                    .foregroundColor(Color("Marron"))
+                                        .font(.title3)
+                                        .foregroundColor(Color("Marron"))
                                     Spacer()
                                 }
                             }
@@ -64,7 +65,7 @@ struct CompteView: View {
                                     Text("Quitter la Famille").font(.title3).bold()
                                         .foregroundColor(Color("RoseBlanc")).padding(5)
                                 }.frame(width: geometry.size.width*0.9)
-                                .background(Rectangle().fill(Color("Bordeaux")).cornerRadius(10))
+                                    .background(Rectangle().fill(Color("Bordeaux")).cornerRadius(10))
                             }
                             if(appUser.user?.isAdmin ?? false) {
                                 VStack{
@@ -85,7 +86,7 @@ struct CompteView: View {
                                             .padding(5)
                                             .frame(width: geometry.size.width*0.9)
                                             .background(RoundedRectangle(cornerRadius: 10)
-                                                            .fill(Color("Bordeaux")))
+                                                .fill(Color("Bordeaux")))
                                     }
                                 }
                             }
@@ -104,10 +105,9 @@ struct CompteView: View {
                             Spacer()
                         }.padding(.horizontal,15)
                     }
-                    
                     }.accentColor(Color("Marron"))
-                    .allowsHitTesting(!showMessage)
-                    
+                        .allowsHitTesting(!showMessage)
+                        .edgesIgnoringSafeArea([.top, .bottom])
                 }
                 if (showMessage) {
                     VStack(alignment : .leading) {
@@ -115,11 +115,13 @@ struct CompteView: View {
                             .foregroundColor(Color("Marron")).padding(5)
                         Text("Vous allez remis sur l'écran de selection des familles")
                             .foregroundColor(Color("Marron")).padding(5)
+                        Text(errorText).font(.callout).foregroundColor(.red).padding(5)
                         HStack{
                             Spacer()
                             Button{
-                                showMessage = false
-                                appUser.famille = nil
+                                Task{
+                                    await leave()
+                                }
                             }label :{
                                 Text("Oui").bold().foregroundColor(Color("Marron")).padding(5)
                             }.scaledToFill()
@@ -135,12 +137,39 @@ struct CompteView: View {
             }
         }
     }
+    func leave() async {
+        guard let url = URL(string : hostName+"/leave") else {
+            errorText = "Une erreur est survenue, veuillez réessayer"
+            return
+        }
+        guard let token = Auth.shared.getAccessToken() else {
+            errorText = "Une erreur est survenue, veuillez réessayer"
+            return
+        }
+        do{
+            var request = URLRequest(url : url)
+            request.setValue(token, forHTTPHeaderField: "authorization")
+            
+            let (data,response) = try await URLSession.shared.data(for : request)
+            let httpResponse = response as? HTTPURLResponse
+            if httpResponse?.statusCode != 201 {
+                if let decodedResponse = try? JSONDecoder().decode(Message.self, from: data) {
+                    errorText = decodedResponse.message
+                }
+            } else {
+                showMessage = false
+                appUser.famille = nil
+            }
+        } catch {
+            errorText = error.localizedDescription
+        }
+    }
 }
 
 
 struct CompteView_Previews: PreviewProvider {
     static var previews: some View {
-        CompteView().environmentObject(AppUser(user : User(id: "1234-ABCD", pseudo: "Test",score: 1024,isAdmin: true)))
+        CompteView().environmentObject(AppUser(user : User( pseudo: "Test",score: 1024,isAdmin: true)))
         
     }
 }
