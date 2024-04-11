@@ -36,7 +36,7 @@ struct Scoreboard : View {
             
             if familles.count > 3 {
                 ScrollView(){
-                    ForEach(3..<familles.count){ index in
+                    ForEach(familles.indices, id : \.self){ index in
                         ScoreView(famille : familles[index])
                             .frame(width : geometry.size.width*0.9, height: geometry.size.height*0.1)
                             .background(RoundedRectangle(cornerRadius: 10).fill(Color("RosePale")))

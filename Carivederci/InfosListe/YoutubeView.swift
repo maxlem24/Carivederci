@@ -20,7 +20,7 @@ struct YoutubeView: View {
                     Spacer()
                     VStack{
                         Image("Logo").resizable().scaledToFit().frame(height: geometry.size.height*0.4)
-                        Link("Notre chaine youtube", destination: URL(string: "https://www.youtube.com/watch?v=dQw4w9WgXcQ&themeRefresh=1")!).font(.title).accentColor(Color("Marron")).padding()
+                        Link("Notre chaine youtube", destination: URL(string: "https://www.youtube.com/channel/UCVmZCP-YVv5rGx4Iieq-QHg")!).font(.title).accentColor(Color("Marron")).padding()
                         Image("Youtube").resizable().scaledToFit().frame(height: geometry.size.height*0.2)
                     }
                     Spacer()

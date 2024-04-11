@@ -41,13 +41,6 @@ struct CompteView: View {
                                 }
                             }
                             HStack{
-                                Image(systemName: notification ? "bell":"bell.slash")
-                                    .foregroundColor(Color("Marron"))
-                                Toggle("Notifications", isOn: $notification)
-                                    .font(.title3)
-                                    .foregroundColor(Color("Marron"))
-                            }
-                            HStack{
                                 Text("Mes points : ")
                                     .font(.title3)
                                     .foregroundColor(Color("Marron"))

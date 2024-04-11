@@ -36,7 +36,7 @@ struct CarouselView: View {
                     }
                 }
                 .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
-                .onChange(of : selectedView){_ in
+                .onChange(of : selectedView){
                     withAnimation(.none){
                     if selectedView == viewsArray.count-1 {
                         selectedView = 1
