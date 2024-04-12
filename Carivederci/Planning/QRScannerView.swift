@@ -34,6 +34,7 @@ struct QRScannerView: View {
     }
     
     func getPoints(token scan : String) async {
+        print(scan)
         guard var getRequest = URLComponents(string: hostName+"/scan-qrcode") else {
             errorText = "Une erreur est survenue, veuillez réessayer"
             return

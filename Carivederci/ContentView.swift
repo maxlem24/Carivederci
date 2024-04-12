@@ -11,15 +11,18 @@ let hostName : String = "http://delmoo.fr:5001/molky"
 
 struct ContentView: View {
     @State var skipFamille : Bool = false
+    @ObservedObject var appUser : AppUser = AppUser.shared
     var body: some View {
-        if AppUser.shared.getUser() != nil {
-            if AppUser.shared.getFamille() != nil  || skipFamille{
+        if appUser.user != nil {
+            if appUser.famille != nil  || skipFamille{
                 MainView()
             }else {
                 FamilleMenuView(skipFamille : $skipFamille)
             }
         } else {
-            LoginMenuView()
+            LoginMenuView().onAppear(){
+                skipFamille = false
+            }
         }
     }
 }

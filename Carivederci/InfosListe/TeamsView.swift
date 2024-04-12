@@ -13,7 +13,7 @@ struct TeamsView: View {
             geometry in
             
             ZStack {
-                Color("BackgroundColor").ignoresSafeArea()
+                Color("BlancRosé").ignoresSafeArea()
                 VStack{
                     Text("Nos pôles").font(.title).foregroundColor(Color("Marron")).padding()
                         .frame(width: geometry.size.width, height: geometry.size.height*0.1)
@@ -27,7 +27,7 @@ struct TeamsView: View {
                             TeamBox(teamName: "Team Com", imageName: "Com", teamText: description["Com"]!,geometry: geometry)
                         }
                         TeamBox(teamName: "Team BDI", imageName: "BDI", teamText: description["BDI"]!,geometry: geometry)
-                        TeamBox(teamName: "Team Assos et Club", imageName: "Asso", teamText: description["Asso"]!,geometry: geometry)
+                        TeamBox(teamName: "Team Assos et Club", imageName: "Assos", teamText: description["Asso"]!,geometry: geometry)
                         TeamBox(teamName: "Team Opé", imageName: "Opé", teamText: description["Opé"]!,geometry: geometry)
                         TeamBox(teamName: "Team Partenariats", imageName: "Partenariats", teamText: description["Partenariats"]!,geometry: geometry)
                         TeamBox(teamName: "Team FISA", imageName: "FISA", teamText: description["FISA"]!,geometry: geometry)
@@ -79,7 +79,7 @@ let description : [String : String] = [
         "Redoutable et redouté, le bureau règne sur Valenciennes et protège la famille Cari à n’importe quel prix.",
     
     "BDI":
-        "Ils codent plus qu’ils ne parlent italien, la team BDI vous montrera que la campagne est aussi numérique.",
+        "Il code plus qu’il ne parle italien, la team BDI vous montrera que la campagne est aussi numérique.",
     
     "Soirée":
         "Cari ciao ! Ils règnent sur la noche de Valenciennes en organisant les fêtes les plus déjantées. Leurs clients VIP sont les Insaiens qu’ils régalent jusqu’au petit matin.",

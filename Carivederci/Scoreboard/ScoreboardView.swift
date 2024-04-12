@@ -18,7 +18,7 @@ struct ScoreboardView: View {
                     Text("Le classement des familles").font(.title).foregroundColor(Color("Marron")).padding()
                         .frame(width: geometry.size.width, height: geometry.size.height*0.1)
                         .background(Rectangle().fill(Color("RosePale")).cornerRadius(10))
-                    Text(errorText).font(.callout).foregroundColor(.red).padding(5)
+                    //Text(errorText).font(.callout).foregroundColor(.red).padding(5)
                     Scoreboard(geometry: geometry,familles: familleList)
                 }
             }
@@ -63,7 +63,7 @@ struct Scoreboard : View {
             
             if familles.count > 3 {
                 ScrollView(){
-                    ForEach(familles.indices, id : \.self){ index in
+                    ForEach(familles[3...].indices, id : \.self){ index in
                         ScoreView(famille : familles[index])
                             .frame(width : geometry.size.width*0.9, height: geometry.size.height*0.1)
                             .background(RoundedRectangle(cornerRadius: 10).fill(Color("RosePale")))

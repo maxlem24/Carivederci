@@ -13,8 +13,8 @@ import SwiftUI
 class AppUser : ObservableObject {
     static let shared : AppUser = AppUser()
     
-    private var user : User? = nil
-    private var famille : Famille? = nil
+    @Published var user : User? = nil
+    @Published var famille : Famille? = nil
     
     private init() {
     }
@@ -80,6 +80,9 @@ extension Sponsor {
         Sponsor(imageName: "Via Ristorante", marqueName: "Via Ristorante"),
         Sponsor(imageName: "VNB Arsenal", marqueName: "V&B Arsenal"),
         Sponsor(imageName: "VNB Aulnoy", marqueName: "V&B Aulnoy-lez-Valenciennes"),
+        Sponsor(imageName: "le HI", marqueName: "Le Hi"),
+        Sponsor(imageName: "Les 3 brasseurs", marqueName: "Les 3 Brasseurs"),
+        Sponsor(imageName: "Reve d'O", marqueName: "Le RÊVE D'Ô"),
     ]
 }
 

@@ -54,6 +54,9 @@ struct LoginView: View {
                         Spacer()
                         Button{
                             checkFields()
+                            AppUser.shared.setUser(user: User(pseudo: "Cartagrafica"))
+                            AppUser.shared.setFamille(famille: Famille(nom: "test", abbv: "AVG"))
+
                         }label :{
                             Image(systemName: "arrow.right").resizable().foregroundColor(Color("RoseBlanc")).padding(5)
                         }.scaledToFill().frame(width: geometry.size.width*0.1,height : geometry.size.width*0.1).padding(5)

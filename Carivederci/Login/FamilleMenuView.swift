@@ -47,3 +47,7 @@ struct FamilleMenuView: View {
     }
 }
 
+struct FamillePreview: PreviewProvider {
+    static var previews: some View {
+        FamilleMenuView(skipFamille: .constant(false))   }
+}
