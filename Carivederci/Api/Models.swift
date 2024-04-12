@@ -11,24 +11,38 @@ import SwiftUI
 
 
 class AppUser : ObservableObject {
-    @Published var user : User?
-    @Published var famille : Famille?
-    init(user : User) {
+    static let shared : AppUser = AppUser()
+    
+    private var user : User? = nil
+    private var famille : Famille? = nil
+    
+    private init() {
+    }
+    
+    func getUser() -> User? {
+        return user
+    }
+    
+    func getFamille() -> Famille? {
+        return famille
+    }
+    
+    func setUser(user : User?) {
         self.user = user
     }
-    init() {
-        self.user = nil
-        self.famille = nil
+    
+    func setFamille(famille : Famille?) {
+        self.famille = famille
     }
 }
 
-struct User : Codable, Equatable{
+struct User : Codable {
     let pseudo : String
     var score : Int = 0
     var isAdmin : Bool = false
 }
 
-struct Famille{
+struct Famille : Codable{
     let nom : String
     let abbv : String
     var score : Int = 0
@@ -36,6 +50,7 @@ struct Famille{
 
 extension Famille {
     static let famillesExemple : [Famille] = [
+        Famille(nom: "Carivederci", abbv: "CVD", score: 2024),
         Famille(nom: "Dream Team", abbv: "DRT", score: 1024),
         Famille(nom: "Les Mineurs du Fond", abbv: "MDF", score: 867),
         Famille(nom: "Caripotter", abbv: "CPT", score: 624),
@@ -81,17 +96,22 @@ struct QrCode : Codable {
 }
 
 struct FamilleAPI : Codable {
-    let nom : String
-    let abbv : String?
+    let name : String
+    let logo : String?
     let password : String
-    let passwordCopy : String?
+    let repeatPassword : String?
 }
 
 struct UserAPI : Codable {
-    let pseudo : String
+    let username : String
     let nom : String?
     let prenom : String?
-    let mail : String?
+    let email : String?
     let password : String
-    let passwordCopy : String?
+    let repeatPassword : String?
+}
+
+struct APIConnect : Codable {
+    let user : User
+    let token : String
 }

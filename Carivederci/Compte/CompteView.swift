@@ -10,7 +10,6 @@ import SwiftUI
 struct CompteView: View {
     @ObservedObject var sharedPoints = SharedPoints.shared
     @AppStorage("notification") var notification : Bool = false
-    @EnvironmentObject var appUser : AppUser
     @State var points : Int?
     @State var showMessage : Bool = false
     @State var errorText : String = ""
@@ -29,7 +28,7 @@ struct CompteView: View {
                             Spacer()
                             HStack{
                                 Spacer()
-                                Text(appUser.user?.pseudo ?? "Error").bold().font(.title3)
+                                Text(AppUser.shared.getUser()?.pseudo ?? "Error").bold().font(.title3)
                                     .foregroundColor(Color("Marron"))
                                 Spacer()
                             }
@@ -45,12 +44,12 @@ struct CompteView: View {
                                     .font(.title3)
                                     .foregroundColor(Color("Marron"))
                                 Spacer()
-                                Text("\(appUser.user?.score ?? -1) points")
+                                Text("\(AppUser.shared.getUser()?.score ?? -1) points")
                                     .font(.title3)
                                     .foregroundColor(Color("Marron"))
                                 
                             }
-                            if(appUser.famille != nil)
+                            if(AppUser.shared.getFamille() != nil)
                             {
                                 Button{
                                     showMessage = true
@@ -60,7 +59,7 @@ struct CompteView: View {
                                 }.frame(width: geometry.size.width*0.9)
                                     .background(Rectangle().fill(Color("Bordeaux")).cornerRadius(10))
                             }
-                            if(appUser.user?.isAdmin ?? false) {
+                            if(AppUser.shared.getUser()?.isAdmin ?? false) {
                                 VStack{
                                     Text("Generer un QR-Code")
                                         .font(.title3)
@@ -151,7 +150,7 @@ struct CompteView: View {
                 }
             } else {
                 showMessage = false
-                appUser.famille = nil
+                AppUser.shared.setFamille(famille: nil)
             }
         } catch {
             errorText = error.localizedDescription
@@ -162,7 +161,7 @@ struct CompteView: View {
 
 struct CompteView_Previews: PreviewProvider {
     static var previews: some View {
-        CompteView().environmentObject(AppUser(user : User( pseudo: "Test",score: 1024,isAdmin: true)))
+        CompteView()
         
     }
 }
@@ -176,7 +175,7 @@ func getRGPD(){
         let actualPath = resourceDocPath.appendingPathComponent(pdfNameFromUrl)
         do {
             try pdfData?.write(to: actualPath, options: .atomic)
-            print("pdf successfully saved!")
+            print("Pdf successfully saved!")
         } catch {
             print("Pdf could not be saved")
         }

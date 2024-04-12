@@ -33,6 +33,6 @@ struct MainView: View {
 
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
-        MainView().environmentObject(AppUser(user : User(pseudo: "Test",score: 1024, isAdmin: true)))
+        MainView()
     }
 }

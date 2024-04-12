@@ -9,7 +9,6 @@ import SwiftUI
 
 struct FamilleMenuView: View {
     @Binding var skipFamille : Bool
-    @EnvironmentObject var appUser : AppUser
     var body: some View {
         NavigationView{
             GeometryReader{
@@ -22,7 +21,7 @@ struct FamilleMenuView: View {
                             Image("Logo").resizable().scaledToFit().frame(width: geometry.size.height*0.4, height: geometry.size.height*0.4).padding(.vertical,20)
                             Spacer()
                         }
-                        Text("Bonjour \(appUser.user?.pseudo ?? "Error")").font(.title).bold().foregroundColor(Color("RoseBlanc")).padding(5)
+                        Text("Bonjour \(AppUser.shared.getUser()?.pseudo ?? "Error")").font(.title).bold().foregroundColor(Color("RoseBlanc")).padding(5)
                         NavigationLink(destination :
                                         FamilleView( newFamily : true)
                                        ,label: {

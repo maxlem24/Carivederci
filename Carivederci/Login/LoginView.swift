@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct LoginView: View {
-    @EnvironmentObject var appUser : AppUser
     @Environment(\.presentationMode) var presentationMode : Binding<PresentationMode>
     @State var pseudo : String = ""
     @State var pseudoError : String = ""
@@ -105,7 +104,7 @@ struct LoginView: View {
         do{
             guard let passwordHash = hash(password: password),
                   let passwordCopyHash = hash(password: passwordCopy),
-                  let encoded = try? JSONEncoder().encode(UserAPI(pseudo: pseudo, nom: nom, prenom: prenom, mail: mail, password: passwordHash, passwordCopy: passwordCopyHash))
+                  let encoded = try? JSONEncoder().encode(UserAPI(username: pseudo, nom: nom, prenom: prenom, email: mail, password: passwordHash, repeatPassword: passwordCopyHash))
             else {
                 errorText = "Une erreur est survenue, veuillez réessayer"
                 return
@@ -133,7 +132,7 @@ struct LoginView: View {
         }
         do{
             guard let passwordHash = hash(password: password),
-                  let encoded = try? JSONEncoder().encode(UserAPI(pseudo: pseudo, nom: nil, prenom: nil, mail: nil, password: passwordHash, passwordCopy: nil))
+                  let encoded = try? JSONEncoder().encode(UserAPI(username: pseudo, nom: nil, prenom: nil, email: nil, password: passwordHash, repeatPassword: nil))
             else {
                 errorText = "Une erreur est survenue, veuillez réessayer"
                 return
@@ -144,9 +143,9 @@ struct LoginView: View {
             let (data,response) = try await URLSession.shared.upload(for : request, from: encoded)
             let httpResponse = response as? HTTPURLResponse
             if httpResponse?.statusCode == 201 {
-                if let decodedResponse = try? JSONDecoder().decode(String.self, from: data) {
-                    Auth.shared.setCredentials(accessToken: decodedResponse)
-                    appUser.user = User(pseudo: pseudo)
+                if let decodedResponse = try? JSONDecoder().decode(APIConnect.self, from: data) {
+                    Auth.shared.setCredentials(accessToken: decodedResponse.token)
+                    AppUser.shared.setUser(user: decodedResponse.user)
                 }
             } else {
                 if let decodedResponse = try? JSONDecoder().decode(Message.self, from: data) {

@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct FamilleView: View {
-    @EnvironmentObject var appUser : AppUser
     @State var abbvFamille : String = ""
     @State var abbvFamilleError : String = ""
     @State var nomFamille : String = ""
@@ -89,7 +88,7 @@ struct FamilleView: View {
         }
         do{
             guard let passwordHash = hash(password: password), 
-                    let encoded = try? JSONEncoder().encode(FamilleAPI(nom: nomFamille,abbv: nil, password: passwordHash, passwordCopy: nil))
+                    let encoded = try? JSONEncoder().encode(FamilleAPI(name: nomFamille, logo: nil, password: passwordHash, repeatPassword: nil))
             else {
                 errorText = "Une erreur est survenue, veuillez réessayer"
                 return
@@ -101,12 +100,14 @@ struct FamilleView: View {
             
             let (data,response) = try await URLSession.shared.upload(for : request, from: encoded)
             let httpResponse = response as? HTTPURLResponse
-            if httpResponse?.statusCode != 201 {
+            if httpResponse?.statusCode == 201 {
+                if let decodedResponse = try? JSONDecoder().decode(Famille.self, from: data) {
+                    AppUser.shared.setFamille(famille: decodedResponse)
+                }
+            } else {
                 if let decodedResponse = try? JSONDecoder().decode(Message.self, from: data) {
                     errorText = decodedResponse.message
                 }
-            } else {
-                appUser.famille = Famille(nom: nomFamille, abbv: abbvFamille)
             }
         } catch {
             errorText = error.localizedDescription
@@ -124,7 +125,7 @@ struct FamilleView: View {
         do{
             guard let passwordHash = hash(password: password), 
                     let passwordCopyHash = hash(password: passwordCopy),
-                    let encoded = try? JSONEncoder().encode(FamilleAPI(nom: nomFamille, abbv: abbvFamille, password: passwordHash, passwordCopy: passwordCopyHash)) 
+                    let encoded = try? JSONEncoder().encode(FamilleAPI(name: nomFamille, logo: abbvFamille, password: passwordHash, repeatPassword: passwordCopyHash))
             else {
                 errorText = "Une erreur est survenue, veuillez réessayer"
                 return
@@ -136,12 +137,14 @@ struct FamilleView: View {
             
             let (data,response) = try await URLSession.shared.upload(for : request, from: encoded)
             let httpResponse = response as? HTTPURLResponse
-            if httpResponse?.statusCode != 201 {
+            if httpResponse?.statusCode == 201 {
+                if let decodedResponse = try? JSONDecoder().decode(Famille.self, from: data) {
+                    AppUser.shared.setFamille(famille: decodedResponse)
+                }
+            } else {
                 if let decodedResponse = try? JSONDecoder().decode(Message.self, from: data) {
                     errorText = decodedResponse.message
                 }
-            } else {
-                appUser.famille = Famille(nom: nomFamille, abbv: abbvFamille)
             }
         } catch {
             errorText = error.localizedDescription

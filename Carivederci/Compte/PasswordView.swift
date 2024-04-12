@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct PasswordView: View {
-    @EnvironmentObject var appUser : AppUser
     @State var oldPasswd = ""
     @State var oldPasswdError = ""
     @State var newPasswd = ""
@@ -51,7 +50,7 @@ struct PasswordView: View {
                                 HStack{
                                     Button{
                                         showMessage = false
-                                        appUser.user = nil
+                                        AppUser.shared.setUser(user: nil)
                                     }label :{
                                         Text("Oui").bold().foregroundColor(Color("Marron")).padding(5)
                                     }.scaledToFill()

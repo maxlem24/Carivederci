@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ScoreboardView: View {
     @State var familleList : [Famille] = Famille.famillesExemple
+    @State var errorText : String = ""
     var body: some View {
         GeometryReader{ geometry in
             ZStack{
@@ -17,9 +18,35 @@ struct ScoreboardView: View {
                     Text("Le classement des familles").font(.title).foregroundColor(Color("Marron")).padding()
                         .frame(width: geometry.size.width, height: geometry.size.height*0.1)
                         .background(Rectangle().fill(Color("RosePale")).cornerRadius(10))
+                    Text(errorText).font(.callout).foregroundColor(.red).padding(5)
                     Scoreboard(geometry: geometry,familles: familleList)
                 }
             }
+        }.onAppear(){
+            Task{
+                await getFamilleList()
+            }
+        }
+    }
+    func getFamilleList() async {
+        guard let url = URL(string : hostName+"/getFamille") else {
+            errorText = "Une erreur est survenue, veuillez réessayer"
+            return
+        }
+        do{
+            let (data,response) = try await URLSession.shared.data(from: url)
+            let httpResponse = response as? HTTPURLResponse
+            if httpResponse?.statusCode == 201 {
+                if let decodedResponse = try? JSONDecoder().decode([Famille].self, from: data) {
+                    familleList = decodedResponse
+                }
+            } else {
+                if let decodedResponse = try? JSONDecoder().decode(Message.self, from: data) {
+                    errorText = decodedResponse.message
+                }
+            }
+        } catch {
+            errorText = error.localizedDescription
         }
     }
 }

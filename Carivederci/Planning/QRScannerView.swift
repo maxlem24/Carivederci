@@ -9,7 +9,6 @@ import SwiftUI
 import CodeScanner
 
 struct QRScannerView: View {
-    @EnvironmentObject var appUser : AppUser
     @Environment(\.presentationMode) var presentationMode : Binding<PresentationMode>
     @State var errorText : String = ""
     var resultScan : String = ""
@@ -58,13 +57,12 @@ struct QRScannerView: View {
             let (data,response) = try await URLSession.shared.data(for : request)
             let httpResponse = response as? HTTPURLResponse
             if httpResponse?.statusCode == 201 {
-                if let decodedResponse = try? JSONDecoder().decode(Message.self, from: data) {
-                    print(decodedResponse.message)
-                }
+                self.presentationMode.wrappedValue.dismiss()
             }else {
                 if let decodedError = try? JSONDecoder().decode(Message.self, from: data) {
                     errorText = decodedError.message
-                }            }
+                }
+            }
         } catch {
             errorText = error.localizedDescription
         }
