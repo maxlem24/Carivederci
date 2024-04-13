@@ -144,6 +144,7 @@ struct CompteView: View {
         do{
             var request = URLRequest(url : url)
             request.setValue(token, forHTTPHeaderField: "authorization")
+            request.httpMethod = "GET"
             
             let (data,response) = try await URLSession.shared.data(for : request)
             let httpResponse = response as? HTTPURLResponse

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct PlanningView: View {
-    @State private var jour = Jours.Lundi
+    @State var jour : Jours = Jours.Lundi
     var body: some View {
         NavigationView{
             GeometryReader{ geometry in
@@ -31,7 +31,24 @@ struct PlanningView: View {
                     }.padding()
                 }
             }
-        }.edgesIgnoringSafeArea([.top, .bottom])
+        }.edgesIgnoringSafeArea([.top, .bottom]).onAppear(){
+            jour = getDay()
+        }
+    }
+    func getDay() -> Jours {
+        let jour = Date().formatted(Date.FormatStyle().weekday(.oneDigit))
+        switch jour {
+        case "1","2":
+            return .Lundi
+        case "3":
+            return .Mardi
+        case "4":
+            return .Mercredi
+        case "5" :
+            return .Jeudi
+        default :
+            return .Vendredi
+        }
     }
 }
 

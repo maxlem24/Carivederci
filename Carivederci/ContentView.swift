@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-let hostName : String = "http://delmoo.fr:5001/molky"
+let hostName : String = "http://5.180.182.163:5000/molky"
 
 struct ContentView: View {
     @State var skipFamille : Bool = false

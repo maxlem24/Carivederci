@@ -24,7 +24,6 @@
 		7ABC5B002B8BAF84003BFA94 /* TeamsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABC5AFF2B8BAF84003BFA94 /* TeamsView.swift */; };
 		7ABC5B032B8BAF96003BFA94 /* SponsorsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABC5B022B8BAF96003BFA94 /* SponsorsView.swift */; };
 		7ABE4CEE2B823EBF0037E8F5 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABE4CED2B823EBF0037E8F5 /* Models.swift */; };
-		7ABE4CFB2B824E010037E8F5 /* TestAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABE4CFA2B824E010037E8F5 /* TestAPI.swift */; };
 		7AC08A282BB7610E006A5DFA /* Présentation_Soirée.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AC08A1E2BB7610D006A5DFA /* Présentation_Soirée.png */; };
 		7AC08A292BB7610E006A5DFA /* Présentation_Opé.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AC08A1F2BB7610D006A5DFA /* Présentation_Opé.png */; };
 		7AC08A2A2BB7610E006A5DFA /* Présentation_BDI.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AC08A202BB7610D006A5DFA /* Présentation_BDI.png */; };
@@ -85,7 +84,6 @@
 		7ABC5AFF2B8BAF84003BFA94 /* TeamsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamsView.swift; sourceTree = "<group>"; };
 		7ABC5B022B8BAF96003BFA94 /* SponsorsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SponsorsView.swift; sourceTree = "<group>"; };
 		7ABE4CED2B823EBF0037E8F5 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
-		7ABE4CFA2B824E010037E8F5 /* TestAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestAPI.swift; sourceTree = "<group>"; };
 		7AC08A1E2BB7610D006A5DFA /* Présentation_Soirée.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Présentation_Soirée.png"; sourceTree = "<group>"; };
 		7AC08A1F2BB7610D006A5DFA /* Présentation_Opé.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Présentation_Opé.png"; sourceTree = "<group>"; };
 		7AC08A202BB7610D006A5DFA /* Présentation_BDI.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Présentation_BDI.png"; sourceTree = "<group>"; };
@@ -165,7 +163,6 @@
 				7ABE4CEC2B823EA50037E8F5 /* Api */,
 				7ACCBF022B7AA36300D007D0 /* Login */,
 				7ACCBEFD2B7AA32300D007D0 /* Main */,
-				7AD89D702B4ADF0B00A5E334 /* TestAssets */,
 				7AD89D6A2B4ADD0600A5E334 /* Scoreboard */,
 				7A2400182B3F01420058F50F /* CarivederciApp.swift */,
 				7A24001A2B3F01420058F50F /* ContentView.swift */,
@@ -281,14 +278,6 @@
 			path = Scoreboard;
 			sourceTree = "<group>";
 		};
-		7AD89D702B4ADF0B00A5E334 /* TestAssets */ = {
-			isa = PBXGroup;
-			children = (
-				7ABE4CFA2B824E010037E8F5 /* TestAPI.swift */,
-			);
-			path = TestAssets;
-			sourceTree = "<group>";
-		};
 		B3482F5D2BC06C13001F2CF3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -362,11 +351,10 @@
 			};
 			buildConfigurationList = 7A2400102B3F01420058F50F /* Build configuration list for PBXProject "Carivederci" */;
 			compatibilityVersion = "Xcode 15.0";
-			developmentRegion = en;
+			developmentRegion = fr;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				en,
-				Base,
+				fr,
 			);
 			mainGroup = 7A24000C2B3F01420058F50F;
 			packageReferences = (
@@ -442,7 +430,6 @@
 				7AC290872BA728240070F711 /* QRCodeView.swift in Sources */,
 				7AAE3DFF2B7D2EA200852F8C /* FamilleMenuView.swift in Sources */,
 				7ABC5AF72B8BAF3D003BFA94 /* ListeView.swift in Sources */,
-				7ABE4CFB2B824E010037E8F5 /* TestAPI.swift in Sources */,
 				7ACCBF082B7AA82C00D007D0 /* LoginView.swift in Sources */,
 				7ABC411D2B81577E00A3B0DB /* FamilleView.swift in Sources */,
 				7ACCBF042B7AA37900D007D0 /* LoginMenuView.swift in Sources */,

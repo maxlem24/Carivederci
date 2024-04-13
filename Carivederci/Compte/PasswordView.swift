@@ -51,6 +51,7 @@ struct PasswordView: View {
                                     Button{
                                         showMessage = false
                                         AppUser.shared.setUser(user: nil)
+                                        Auth.shared.logout()
                                     }label :{
                                         Text("Oui").bold().foregroundColor(Color("Marron")).padding(5)
                                     }.scaledToFill()

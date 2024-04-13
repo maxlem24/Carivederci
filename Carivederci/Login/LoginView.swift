@@ -55,8 +55,6 @@ struct LoginView: View {
                         Button{
                             checkFields()
                             AppUser.shared.setUser(user: User(pseudo: "Cartagrafica"))
-                            AppUser.shared.setFamille(famille: Famille(nom: "test", abbv: "AVG"))
-
                         }label :{
                             Image(systemName: "arrow.right").resizable().foregroundColor(Color("RoseBlanc")).padding(5)
                         }.scaledToFill().frame(width: geometry.size.width*0.1,height : geometry.size.width*0.1).padding(5)
@@ -114,6 +112,7 @@ struct LoginView: View {
             }
             var request = URLRequest(url : url)
             request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.httpMethod = "POST"
             
             let (data,response) = try await URLSession.shared.upload(for : request, from: encoded)
             let httpResponse = response as? HTTPURLResponse
@@ -142,6 +141,7 @@ struct LoginView: View {
             }
             var request = URLRequest(url : url)
             request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.httpMethod = "POST"
             
             let (data,response) = try await URLSession.shared.upload(for : request, from: encoded)
             let httpResponse = response as? HTTPURLResponse

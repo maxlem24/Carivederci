@@ -18,8 +18,8 @@ struct ScoreboardView: View {
                     Text("Le classement des familles").font(.title).foregroundColor(Color("Marron")).padding()
                         .frame(width: geometry.size.width, height: geometry.size.height*0.1)
                         .background(Rectangle().fill(Color("RosePale")).cornerRadius(10))
-                    //Text(errorText).font(.callout).foregroundColor(.red).padding(5)
-                    Scoreboard(geometry: geometry,familles: familleList)
+                    Text(errorText).font(.callout).foregroundColor(.red).padding(5)
+                    Scoreboard(geometry: geometry,familles: $familleList)
                 }
             }
         }.onAppear(){
@@ -33,12 +33,14 @@ struct ScoreboardView: View {
             errorText = "Une erreur est survenue, veuillez réessayer"
             return
         }
+        var request = URLRequest(url : url)
+        request.httpMethod = "GET"
         do{
-            let (data,response) = try await URLSession.shared.data(from: url)
+            let (data,response) = try await URLSession.shared.data(for: request)
             let httpResponse = response as? HTTPURLResponse
             if httpResponse?.statusCode == 201 {
-                if let decodedResponse = try? JSONDecoder().decode([Famille].self, from: data) {
-                    familleList = decodedResponse
+                if let decodedResponse = try? JSONDecoder().decode(FamilleList.self, from: data) {
+                    familleList = decodedResponse.famille
                 }
             } else {
                 if let decodedResponse = try? JSONDecoder().decode(Message.self, from: data) {
@@ -53,18 +55,69 @@ struct ScoreboardView: View {
 
 struct Scoreboard : View {
     var geometry : GeometryProxy
-    @State var familles : [Famille]
+    @Binding var familles : [Famille]
     var body: some View {
         VStack{
-            Podium(premier: familles.indices.contains(0) ? familles[0] : nil,
-                   deuxieme: familles.indices.contains(1) ? familles[1] : nil,
-                   troisieme: familles.indices.contains(2) ? familles[2] : nil,
-                   hauteur: geometry.size.height*0.3).frame(width: geometry.size.width*0.9)
+            HStack(alignment :.bottom ,spacing:0){
+                let hauteur = geometry.size.height*0.3
+                VStack{
+                    if familles.indices.contains(1)  {
+                        let deuxieme = familles[1]
+                        Text("[\(deuxieme.logo)]")
+                            .font(.title3).bold()
+                            .padding(.horizontal,5)
+                        Text("\(deuxieme.nom)")
+                            .font(.title3).bold()
+                            .multilineTextAlignment(.center)
+                            .padding(.horizontal,5)
+                        Text("\(deuxieme.score)")
+                            .font(.title3).bold()
+                            .foregroundColor(Color("Silver")).padding(.horizontal,5)
+                    }
+                    Rectangle().fill(Color("RoseMedium"))
+                        .frame(height: hauteur*2/3)
+                }
+                VStack{
+                    if familles.indices.contains(0)  {
+                        let premier = familles[0]
+                        Text("[\(premier.logo)]")
+                            .font(.title3).bold()
+                            .padding(.horizontal,5)
+                        Text("\(premier.nom)")
+                            .font(.title3).bold()
+                            .multilineTextAlignment(.center)
+                            .padding(.horizontal,5)
+                        Text("\(premier.score)")
+                            .font(.title3).bold()
+                            .foregroundColor(Color("Gold")).padding(.horizontal,5)
+                    }
+                    Rectangle().fill(Color("TaupeClair"))
+                        .frame(height: hauteur)
+                }
+                VStack{
+                    if familles.indices.contains(2)  {
+                        let troisieme = familles[2]
+                        Text("[\(troisieme.logo)]")
+                            .font(.title3).bold()
+                            .padding(.horizontal,5)
+                        Text("\(troisieme.nom)")
+                            .font(.title3).bold()
+                            .multilineTextAlignment(.center)
+                            .padding(.horizontal,5)
+                        Text("\(troisieme.score)")
+                            .font(.title3).bold()
+                            .foregroundColor(Color("Bronze")).padding(.horizontal,5)
+                    }
+                    Rectangle()
+                        .fill(Color("RoseMedium")).frame(height: hauteur*2/3)
+                }
+            }
+            .frame(width: geometry.size.width*0.9)
             
             if familles.count > 3 {
                 ScrollView(){
                     ForEach(familles[3...].indices, id : \.self){ index in
-                        ScoreView(famille : familles[index])
+                        ScoreView(famille : $familles[index])
                             .frame(width : geometry.size.width*0.9, height: geometry.size.height*0.1)
                             .background(RoundedRectangle(cornerRadius: 10).fill(Color("RosePale")))
                         Spacer()
@@ -77,72 +130,13 @@ struct Scoreboard : View {
 }
 
 struct ScoreView : View {
-    @State var famille : Famille
+    @Binding var famille : Famille
     var body: some View {
         HStack{
-            Text("[\(famille.abbv)] \t \(famille.nom)").bold().foregroundColor(Color("Marron"))
+            Text("[\(famille.logo)] \t \(famille.nom)").bold().foregroundColor(Color("Marron"))
             Spacer()
             Text("\(famille.score)").foregroundColor(Color("Marron"))
         }.padding(.horizontal)
-    }
-}
-
-struct Podium : View {
-    @State var premier : Famille?
-    @State var deuxieme : Famille?
-    @State var troisieme : Famille?
-    var hauteur : CGFloat
-    var body: some View {
-        HStack(alignment :.bottom ,spacing:0){
-            VStack{
-                if deuxieme != nil {
-                    Text("[\(deuxieme!.abbv)]")
-                        .font(.title3).bold()
-                        .padding(.horizontal,5)
-                    Text("\(deuxieme!.nom)")
-                        .font(.title3).bold()
-                        .multilineTextAlignment(.center)
-                        .padding(.horizontal,5)
-                    Text("\(deuxieme!.score)")
-                        .font(.title3).bold()
-                        .foregroundColor(Color("Silver")).padding(.horizontal,5)
-                }
-                Rectangle().fill(Color("RoseMedium"))
-                    .frame(height: hauteur*2/3)
-            }
-            VStack{
-                if premier != nil {
-                    Text("[\(premier!.abbv)]")
-                        .font(.title3).bold()
-                        .padding(.horizontal,5)
-                    Text("\(premier!.nom)")
-                        .font(.title3).bold()
-                        .multilineTextAlignment(.center)
-                        .padding(.horizontal,5)
-                    Text("\(premier!.score)")
-                        .font(.title3).bold()
-                        .foregroundColor(Color("Gold")).padding(.horizontal,5)
-                }
-                Rectangle().fill(Color("TaupeClair"))
-                    .frame(height: hauteur)
-            }
-            VStack{
-                if troisieme != nil {
-                    Text("[\(troisieme!.abbv)]")
-                        .font(.title3).bold()
-                        .padding(.horizontal,5)
-                    Text("\(troisieme!.nom)")
-                        .font(.title3).bold()
-                        .multilineTextAlignment(.center)
-                        .padding(.horizontal,5)
-                    Text("\(troisieme!.score)")
-                        .font(.title3).bold()
-                        .foregroundColor(Color("Bronze")).padding(.horizontal,5)
-                }
-                Rectangle()
-                    .fill(Color("RoseMedium")).frame(height: hauteur*2/3)
-            }
-        }
     }
 }
 

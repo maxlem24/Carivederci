@@ -44,19 +44,19 @@ struct User : Codable {
 
 struct Famille : Codable{
     let nom : String
-    let abbv : String
+    let logo : String
     var score : Int = 0
 }
 
 extension Famille {
     static let famillesExemple : [Famille] = [
-        Famille(nom: "Carivederci", abbv: "CVD", score: 2024),
-        Famille(nom: "Dream Team", abbv: "DRT", score: 1024),
-        Famille(nom: "Les Mineurs du Fond", abbv: "MDF", score: 867),
-        Famille(nom: "Caripotter", abbv: "CPT", score: 624),
-        Famille(nom: "Autre team", abbv: "RDM", score: 444),
-        Famille(nom: "Les Fet'arts", abbv: "ART", score: 367),
-        Famille(nom: "Les Petits", abbv: "PTT", score: 244),
+        Famille(nom: "Carivederci", logo: "CVD", score: 2024),
+        Famille(nom: "Dream Team", logo: "DRT", score: 1024),
+        Famille(nom: "Les Mineurs du Fond", logo: "MDF", score: 867),
+        Famille(nom: "Caripotter", logo: "CPT", score: 624),
+        Famille(nom: "Autre team", logo: "RDM", score: 444),
+        Famille(nom: "Les Fet'arts", logo: "ART", score: 367),
+        Famille(nom: "Les Petits", logo: "PTT", score: 244),
     ]
 }
 
@@ -117,4 +117,8 @@ struct UserAPI : Codable {
 struct APIConnect : Codable {
     let user : User
     let token : String
+}
+
+struct FamilleList : Codable {
+    let famille : [Famille]
 }
