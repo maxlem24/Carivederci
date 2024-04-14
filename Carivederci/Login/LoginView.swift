@@ -54,7 +54,6 @@ struct LoginView: View {
                         Spacer()
                         Button{
                             checkFields()
-                            AppUser.shared.setUser(user: User(pseudo: "Cartagrafica"))
                         }label :{
                             Image(systemName: "arrow.right").resizable().foregroundColor(Color("RoseBlanc")).padding(5)
                         }.scaledToFill().frame(width: geometry.size.width*0.1,height : geometry.size.width*0.1).padding(5)
@@ -88,10 +87,13 @@ struct LoginView: View {
         if pseudoError == "" && nomError == "" && prenomError == "" && mailError == "" && passwordError == "" && passwordCopyError == ""{
             if password != passwordCopy && newUser{
                 passwordError = "Le mot de passe saisie n'est pas identique"
-                passwordCopyError = "Le mot de passe saisie n'est pas identique"            }else {
+                passwordCopyError = "Le mot de passe saisie n'est pas identique"
+            }else {
                     Task {
                         if newUser {
                             await register()
+                        }else {
+                            await login()
                         }
                     }
                 }
@@ -103,9 +105,7 @@ struct LoginView: View {
             return
         }
         do{
-            guard let passwordHash = hash(password: password),
-                  let passwordCopyHash = hash(password: passwordCopy),
-                  let encoded = try? JSONEncoder().encode(UserAPI(username: pseudo, nom: nom, prenom: prenom, email: mail, password: passwordHash, repeatPassword: passwordCopyHash))
+            guard let encoded = try? JSONEncoder().encode(UserAPI(username: pseudo, nom: nom, prenom: prenom, email: mail, password: password, repeatPassword: passwordCopy))
             else {
                 errorText = "Une erreur est survenue, veuillez réessayer"
                 return
@@ -133,8 +133,7 @@ struct LoginView: View {
             return
         }
         do{
-            guard let passwordHash = hash(password: password),
-                  let encoded = try? JSONEncoder().encode(UserAPI(username: pseudo, nom: nil, prenom: nil, email: nil, password: passwordHash, repeatPassword: nil))
+            guard let encoded = try? JSONEncoder().encode(UserAPI(username: pseudo, nom: nil, prenom: nil, email: nil, password: password, repeatPassword: nil))
             else {
                 errorText = "Une erreur est survenue, veuillez réessayer"
                 return
@@ -147,8 +146,12 @@ struct LoginView: View {
             let httpResponse = response as? HTTPURLResponse
             if httpResponse?.statusCode == 201 {
                 if let decodedResponse = try? JSONDecoder().decode(APIConnect.self, from: data) {
-                    Auth.shared.setCredentials(accessToken: decodedResponse.token)
-                    AppUser.shared.setUser(user: decodedResponse.user)
+                    if decodedResponse.user.count != 1 {
+                        errorText = "Une erreur est survenue, veuillez réessayer"
+                    }else {
+                        Auth.shared.setCredentials(accessToken: decodedResponse.token)
+                        AppUser.shared.setUser(user: ResponseToApp(res: decodedResponse.user[0]))
+                    }
                 }
             } else {
                 if let decodedResponse = try? JSONDecoder().decode(Message.self, from: data) {

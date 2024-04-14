@@ -87,14 +87,13 @@ struct FamilleView: View {
             return
         }
         do{
-            guard let passwordHash = hash(password: password), 
-                    let encoded = try? JSONEncoder().encode(FamilleAPI(name: nomFamille, logo: nil, password: passwordHash, repeatPassword: nil))
+            guard let encoded = try? JSONEncoder().encode(FamilleAPI(name: nomFamille, logo: nil, password: password, repeatPassword: nil))
             else {
                 errorText = "Une erreur est survenue, veuillez réessayer"
                 return
             }
             var request = URLRequest(url : url)
-            request.setValue(token, forHTTPHeaderField: "authorization")
+            request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
             request.setValue("application/json", forHTTPHeaderField: "Content-Type")
             request.httpMethod = "POST"
             
@@ -119,19 +118,18 @@ struct FamilleView: View {
             return
         }
         guard let token = Auth.shared.getAccessToken() else {
-            errorText = "Une erreur est survenue, veuillez réessayer"
+            errorText = "Une erreur est survenue avec le token, veuillez réessayer"
             return
         }
+        print(token)
         do{
-            guard let passwordHash = hash(password: password), 
-                    let passwordCopyHash = hash(password: passwordCopy),
-                    let encoded = try? JSONEncoder().encode(FamilleAPI(name: nomFamille, logo: abbvFamille, password: passwordHash, repeatPassword: passwordCopyHash))
+            guard let encoded = try? JSONEncoder().encode(FamilleAPI(name: nomFamille, logo: abbvFamille, password: password, repeatPassword: passwordCopy))
             else {
                 errorText = "Une erreur est survenue, veuillez réessayer"
                 return
             }
             var request = URLRequest(url : url)
-            request.setValue(token, forHTTPHeaderField: "authorization")
+            request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
             request.setValue("application/json", forHTTPHeaderField: "Content-Type")
             request.httpMethod = "POST"
             

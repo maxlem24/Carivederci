@@ -115,10 +115,28 @@ struct UserAPI : Codable {
 }
 
 struct APIConnect : Codable {
-    let user : User
+    let user : [UserResponse]
     let token : String
+}
+
+struct UserResponse : Codable {
+    let id: Int
+    let username : String
+    let password : String
+    let role : Int
+    let famille : Int?
+    let score : Int
+}
+func ResponseToApp(res : UserResponse) -> User?{
+    return User(pseudo: res.username, score: res.score, isAdmin: res.role == 1)
 }
 
 struct FamilleList : Codable {
     let famille : [Famille]
+}
+
+struct PasswordChange :Codable {
+    let password :String
+    let newPassword : String
+    let repeatNewPassword : String
 }

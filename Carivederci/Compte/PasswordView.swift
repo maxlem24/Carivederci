@@ -14,6 +14,7 @@ struct PasswordView: View {
     @State var newPasswdCopy = ""
     @State var newPasswdError = ""
     @State var newPasswdCopyError = ""
+    @State var errorText = ""
     @State var showMessage : Bool = false
     var body: some View {
         GeometryReader {
@@ -47,11 +48,12 @@ struct PasswordView: View {
                                     .foregroundColor(Color("Marron")).padding(5)
                                 Text("Vous allez être déconnecté")
                                     .foregroundColor(Color("Marron")).padding(5)
+                                Text(errorText).font(.callout).foregroundColor(.red).padding(5)
                                 HStack{
                                     Button{
-                                        showMessage = false
-                                        AppUser.shared.setUser(user: nil)
-                                        Auth.shared.logout()
+                                        Task{
+                                            await resetPassword()
+                                        }
                                     }label :{
                                         Text("Oui").bold().foregroundColor(Color("Marron")).padding(5)
                                     }.scaledToFill()
@@ -80,4 +82,41 @@ struct PasswordView: View {
             }
         }
     }
+    func resetPassword() async {
+        guard let url = URL(string : hostName+"/change/password") else {
+            errorText = "Une erreur est survenue, veuillez vous reconnecter"
+            return
+        }
+        guard let token = Auth.shared.getAccessToken() else {
+            errorText = "Une erreur est survenue, veuillez vous reconnecter"
+            return
+        }
+        do{
+            guard let encoded = try? JSONEncoder().encode(PasswordChange(password: oldPasswd, newPassword: newPasswd, repeatNewPassword: newPasswdCopy))
+            else {
+                errorText = "Une erreur est survenue, veuillez réessayer"
+                return
+            }
+            var request = URLRequest(url : url)
+            request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+            request.httpMethod = "POST"
+            
+            let (data,response) = try await URLSession.shared.upload(for : request, from: encoded)
+            let httpResponse = response as? HTTPURLResponse
+            if httpResponse?.statusCode != 201 {
+                if let decodedResponse = try? JSONDecoder().decode(Message.self, from: data) {
+                    errorText = decodedResponse.message
+                }else {
+                    errorText = "error"
+                }
+            } else {
+                showMessage = false
+                AppUser.shared.setUser(user: nil)
+                Auth.shared.logout()
+            }
+        } catch {
+            errorText = error.localizedDescription
+        }
+    }
+
 }
