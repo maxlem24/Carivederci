@@ -67,19 +67,14 @@ struct Sponsor  {
 
 extension Sponsor {
     static let listeSponsor : [Sponsor] = [
-        Sponsor(imageName: "Redbull", marqueName: "Redbull"),
-        Sponsor(imageName: "Lydia", marqueName: "Lydia"),
         Sponsor(imageName: "Osakatoys", marqueName: "Osakatoys"),
         Sponsor(imageName: "Briques Rouges", marqueName: "Festival les briques rouges"),
-        Sponsor(imageName: "Karos", marqueName: "Karos"),
-        Sponsor(imageName: "Intersport", marqueName: "Intersport"),
         Sponsor(imageName: "Leon", marqueName: "Léon de Bruxelles"),
         Sponsor(imageName: "Murder", marqueName: "France Murder"),
         Sponsor(imageName: "Pixelbar", marqueName: "Pixelbar"),
         Sponsor(imageName: "Reload", marqueName: "Reload"),
         Sponsor(imageName: "Via Ristorante", marqueName: "Via Ristorante"),
-        Sponsor(imageName: "VNB Arsenal", marqueName: "V&B Arsenal"),
-        Sponsor(imageName: "VNB Aulnoy", marqueName: "V&B Aulnoy-lez-Valenciennes"),
+        Sponsor(imageName: "VNB", marqueName: "V&B"),
         Sponsor(imageName: "le HI", marqueName: "Le Hi"),
         Sponsor(imageName: "Les 3 brasseurs", marqueName: "Les 3 Brasseurs"),
         Sponsor(imageName: "Reve d'O", marqueName: "Le RÊVE D'Ô"),
@@ -120,12 +115,9 @@ struct APIConnect : Codable {
 }
 
 struct UserResponse : Codable {
-    let id: Int
     let username : String
-    let password : String
-    let role : Int
-    let famille : Int?
     let score : Int
+    let role : Int
 }
 func ResponseToApp(res : UserResponse) -> User?{
     return User(pseudo: res.username, score: res.score, isAdmin: res.role == 1)

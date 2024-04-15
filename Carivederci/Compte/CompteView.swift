@@ -92,7 +92,7 @@ struct CompteView: View {
                                     Text("L'association Carivederci est responsable du traitement des données nécessaires au fonctionnement de l'application")
                                         .font(.footnote)
                                         .foregroundColor(Color("Marron"))
-                                    Link("Plus d'informations en cliquant ici", destination: URL(string: "https://fr.wikipedia.org/wiki/Wikip%C3%A9dia:Accueil_principal")!).bold()
+                                    Link("Plus d'informations en cliquant ici", destination: URL(string: "https://carivederci.site/rgpd")!).bold()
                                         .font(.footnote)
                                         .foregroundColor(Color("Marron"))
                                 }
@@ -163,12 +163,6 @@ struct CompteView: View {
 }
 
 
-struct CompteView_Previews: PreviewProvider {
-    static var previews: some View {
-        CompteView()
-        
-    }
-}
 
 
 

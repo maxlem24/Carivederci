@@ -31,7 +31,8 @@ struct PlanningView: View {
                     }.padding()
                 }
             }
-        }.edgesIgnoringSafeArea([.top, .bottom]).onAppear(){
+        }.edgesIgnoringSafeArea([.top, .bottom])
+            .onAppear(){
             jour = getDay()
         }
     }

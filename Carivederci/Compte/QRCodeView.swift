@@ -32,10 +32,8 @@ struct QRCodeView: View {
                     }
                     Text(errorText).font(.callout).foregroundColor(.red).padding(5)
                 }
-            }.onAppear(){
-                Task{
+            }.task{
                     await getQRCode()
-                }
             }
         }
         

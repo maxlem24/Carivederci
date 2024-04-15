@@ -22,10 +22,8 @@ struct ScoreboardView: View {
                     Scoreboard(geometry: geometry,familles: $familleList)
                 }
             }
-        }.onAppear(){
-            Task{
+        }.task{
                 await getFamilleList()
-            }
         }
     }
     func getFamilleList() async {

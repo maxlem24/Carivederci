@@ -39,11 +39,9 @@ struct LoginMenuView: View {
         }
         .accentColor(Color("RoseBlanc"))
         .edgesIgnoringSafeArea([.top, .bottom])
-        .onAppear(){
+        .task{
             if Auth.shared.hasAccessToken() {
-                Task{
                     await getUser()
-                }
             }
         }
     }
@@ -64,8 +62,9 @@ struct LoginMenuView: View {
             let (data,response) = try await URLSession.shared.data(for : request)
             let httpResponse = response as? HTTPURLResponse
             if httpResponse?.statusCode == 201 {
-                if let decodedResponse = try? JSONDecoder().decode(User.self, from: data) {
-                    AppUser.shared.setUser(user: decodedResponse)
+                if let decodedResponse = try? JSONDecoder().decode(UserResponse.self, from: data) {
+                    AppUser.shared.setUser(user: ResponseToApp(res: decodedResponse))
+                    await getFamille()
                 }
             } else {
                 if let decodedResponse = try? JSONDecoder().decode(Message.self, from: data) {
