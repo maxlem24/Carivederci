@@ -64,7 +64,7 @@ struct Scoreboard : View {
                         Text("[\(deuxieme.logo)]")
                             .font(.title3).bold()
                             .padding(.horizontal,5)
-                        Text("\(deuxieme.nom)")
+                        Text("\(deuxieme.name)")
                             .font(.title3).bold()
                             .multilineTextAlignment(.center)
                             .padding(.horizontal,5)
@@ -81,7 +81,7 @@ struct Scoreboard : View {
                         Text("[\(premier.logo)]")
                             .font(.title3).bold()
                             .padding(.horizontal,5)
-                        Text("\(premier.nom)")
+                        Text("\(premier.name)")
                             .font(.title3).bold()
                             .multilineTextAlignment(.center)
                             .padding(.horizontal,5)
@@ -98,7 +98,7 @@ struct Scoreboard : View {
                         Text("[\(troisieme.logo)]")
                             .font(.title3).bold()
                             .padding(.horizontal,5)
-                        Text("\(troisieme.nom)")
+                        Text("\(troisieme.name)")
                             .font(.title3).bold()
                             .multilineTextAlignment(.center)
                             .padding(.horizontal,5)
@@ -131,7 +131,7 @@ struct ScoreView : View {
     @Binding var famille : Famille
     var body: some View {
         HStack{
-            Text("[\(famille.logo)] \t \(famille.nom)").bold().foregroundColor(Color("Marron"))
+            Text("[\(famille.logo)] \t \(famille.name)").bold().foregroundColor(Color("Marron"))
             Spacer()
             Text("\(famille.score)").foregroundColor(Color("Marron"))
         }.padding(.horizontal)

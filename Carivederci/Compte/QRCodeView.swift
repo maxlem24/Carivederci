@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CoreImage.CIFilterBuiltins
 
 class SharedPoints: ObservableObject {
     static let shared = SharedPoints()
@@ -18,6 +19,8 @@ class SharedPoints: ObservableObject {
 
 struct QRCodeView: View {
     @ObservedObject var sharedPoints = SharedPoints.shared
+    let context = CIContext()
+    let filter = CIFilter.qrCodeGenerator()
     @State var image : Image?
     @State var errorText : String = ""
     var body: some View {
@@ -62,11 +65,9 @@ struct QRCodeView: View {
             let httpResponse = response as? HTTPURLResponse
             if httpResponse?.statusCode == 201 {
                 if let decodedResponse = try? JSONDecoder().decode(QrCode.self, from: data) {
-                    if let imageData = Data(base64Encoded: decodedResponse.qrcode), let uiImage = UIImage(data: imageData) {
-                        image = Image(uiImage: uiImage)
-                    }else {
-                        errorText = "Une erreur est survenue, veuillez réessayer"
-                        return
+                    filter.message = Data(decodedResponse.qrToken.utf8)
+                    if let outputImage = filter.outputImage , let cgImage = context.createCGImage(outputImage, from: outputImage.extent){
+                        image = Image(uiImage: UIImage(cgImage: cgImage))
                     }
                 }
             }else {
@@ -78,11 +79,5 @@ struct QRCodeView: View {
         } catch {
             errorText = error.localizedDescription
         }
-    }
-}
-
-struct QRCodeView_Previews: PreviewProvider {
-    static var previews: some View {
-        QRCodeView()
     }
 }

@@ -100,8 +100,10 @@ struct FamilleView: View {
             let (data,response) = try await URLSession.shared.upload(for : request, from: encoded)
             let httpResponse = response as? HTTPURLResponse
             if httpResponse?.statusCode == 201 {
-                if let decodedResponse = try? JSONDecoder().decode(Famille.self, from: data) {
-                    AppUser.shared.setFamille(famille: decodedResponse)
+                if let decodedResponse = try? JSONDecoder().decode([Famille].self, from: data) {
+                    await MainActor.run{
+                        AppUser.shared.setFamille(famille: decodedResponse[0])
+                    }
                 }
             } else {
                 if let decodedResponse = try? JSONDecoder().decode(Message.self, from: data) {
@@ -121,7 +123,6 @@ struct FamilleView: View {
             errorText = "Une erreur est survenue avec le token, veuillez réessayer"
             return
         }
-        print(token)
         do{
             guard let encoded = try? JSONEncoder().encode(FamilleAPI(name: nomFamille, logo: abbvFamille, password: password, repeatPassword: passwordCopy))
             else {
@@ -137,7 +138,9 @@ struct FamilleView: View {
             let httpResponse = response as? HTTPURLResponse
             if httpResponse?.statusCode == 201 {
                 if let decodedResponse = try? JSONDecoder().decode(Famille.self, from: data) {
-                    AppUser.shared.setFamille(famille: decodedResponse)
+                    await MainActor.run{
+                        AppUser.shared.setFamille(famille: decodedResponse)
+                    }
                 }
             } else {
                 if let decodedResponse = try? JSONDecoder().decode(Message.self, from: data) {

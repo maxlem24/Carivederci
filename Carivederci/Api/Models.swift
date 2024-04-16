@@ -43,20 +43,20 @@ struct User : Codable {
 }
 
 struct Famille : Codable{
-    let nom : String
+    let name : String
     let logo : String
-    var score : Int = 0
+    var score : Int 
 }
 
 extension Famille {
     static let famillesExemple : [Famille] = [
-        Famille(nom: "Carivederci", logo: "CVD", score: 2024),
-        Famille(nom: "Dream Team", logo: "DRT", score: 1024),
-        Famille(nom: "Les Mineurs du Fond", logo: "MDF", score: 867),
-        Famille(nom: "Caripotter", logo: "CPT", score: 624),
-        Famille(nom: "Autre team", logo: "RDM", score: 444),
-        Famille(nom: "Les Fet'arts", logo: "ART", score: 367),
-        Famille(nom: "Les Petits", logo: "PTT", score: 244),
+        Famille(name: "Carivederci", logo: "CVD", score: 2024),
+        Famille(name: "Dream Team", logo: "DRT", score: 1024),
+        Famille(name: "Les Mineurs du Fond", logo: "MDF", score: 867),
+        Famille(name: "Caripotter", logo: "CPT", score: 624),
+        Famille(name: "Autre team", logo: "RDM", score: 444),
+        Famille(name: "Les Fet'arts", logo: "ART", score: 367),
+        Famille(name: "Les Petits", logo: "PTT", score: 244),
     ]
 }
 
@@ -90,7 +90,7 @@ struct Score : Codable {
 }
 
 struct QrCode : Codable {
-    let qrcode : String
+    let qrToken : String
 }
 
 struct FamilleAPI : Codable {

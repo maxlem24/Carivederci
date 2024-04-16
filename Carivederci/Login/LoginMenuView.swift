@@ -63,7 +63,9 @@ struct LoginMenuView: View {
             let httpResponse = response as? HTTPURLResponse
             if httpResponse?.statusCode == 201 {
                 if let decodedResponse = try? JSONDecoder().decode(UserResponse.self, from: data) {
-                    AppUser.shared.setUser(user: ResponseToApp(res: decodedResponse))
+                    await MainActor.run{
+                        AppUser.shared.setUser(user: ResponseToApp(res: decodedResponse))
+                    }
                     await getFamille()
                 }
             } else {
@@ -93,7 +95,9 @@ struct LoginMenuView: View {
             let httpResponse = response as? HTTPURLResponse
             if httpResponse?.statusCode == 201 {
                 if let decodedResponse = try? JSONDecoder().decode(Famille.self, from: data) {
-                    AppUser.shared.setFamille(famille: decodedResponse)
+                    await MainActor.run{
+                        AppUser.shared.setFamille(famille: decodedResponse)
+                    }
                 }
             } else {
                 if let decodedResponse = try? JSONDecoder().decode(Message.self, from: data) {

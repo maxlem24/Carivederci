@@ -150,7 +150,9 @@ struct LoginView: View {
                         errorText = "Une erreur est survenue, veuillez réessayer"
                     }else {
                         Auth.shared.setCredentials(accessToken: decodedResponse.token)
-                        AppUser.shared.setUser(user: ResponseToApp(res: decodedResponse.user[0]))
+                        await MainActor.run{
+                            AppUser.shared.setUser(user: ResponseToApp(res: decodedResponse.user[0]))
+                        }
                     }
                 }
             } else {

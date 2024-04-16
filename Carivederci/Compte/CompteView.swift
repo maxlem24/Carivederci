@@ -154,7 +154,9 @@ struct CompteView: View {
                 }
             } else {
                 showMessage = false
-                AppUser.shared.setFamille(famille: nil)
+                await MainActor.run{
+                    AppUser.shared.setFamille(famille: nil)
+                }
             }
         } catch {
             errorText = error.localizedDescription

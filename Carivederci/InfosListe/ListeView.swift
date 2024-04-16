@@ -14,7 +14,7 @@ struct ListeView: View {
                 ZStack{
                     Color("BlancRosé").ignoresSafeArea()
                     VStack {
-                        Text("Cariverderci c'est")
+                        Text("Cariverderci")
                             .font(.title).foregroundColor(Color("Marron")).padding()
                             .frame(width: geometry.size.width, height: geometry.size.height*0.1)
                             .background(Rectangle().fill(Color("RosePale")).cornerRadius(10))
@@ -25,10 +25,10 @@ struct ListeView: View {
                             Spacer()
                         }
                         ScrollView{
-                            Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla iaculis tortor ut nisl pharetra, at porttitor est semper. Sed a pharetra nulla, et mattis felis. Nunc porta magna vitae interdum luctus. Cras pharetra magna in velit condimentum mattis. Nunc consectetur neque nec ex convallis, sodales bibendum dui ullamcorper. Donec consectetur ligula ac orci cursus malesuada. Nunc in feugiat sem, eget sollicitudin magna. Proin et ligula id quam volutpat cursus. In consectetur porta risus, cursus pretium odio faucibus et. Sed iaculis arcu enim, efficitur aliquet ligula tempor et. Integer sodales commodo mi sed condimentum. Donec ut interdum massa, sit amet cursus ligula. Vivamus malesuada suscipit lorem, vel sollicitudin lacus facilisis ac. Nulla augue tellus, condimentum sit amet consectetur eget, tempus in nisl.")
+                            Text("Bienvenue chez les Carivederci !\n\nLa famille mafieuse tout en gucci, qui va vous faire vivre une semaine de folie ! Au programme du fun, des soirées, des défis et des pastas.\n\nPassez la semaine avec les Carivederci, et qui sait, peut-être que vous finirez par faire partie de la famille.")
                                 .font(.body).foregroundColor(Color("Marron")).multilineTextAlignment(/*@START_MENU_TOKEN@*/.leading/*@END_MENU_TOKEN@*/).frame(width : geometry.size.width*0.9)
                             Spacer()
-                        Text("\"Slogan qui claque\"").italic().font(.title3).multilineTextAlignment(.center).frame(width : geometry.size.width*0.9)
+                        Text("À vos marques, prêts, partez !").italic().font(.title3).multilineTextAlignment(.center).frame(width : geometry.size.width*0.9)
                             Spacer()
                         }
                     }

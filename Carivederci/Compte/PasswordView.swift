@@ -84,11 +84,11 @@ struct PasswordView: View {
     }
     func resetPassword() async {
         guard let url = URL(string : hostName+"/change/password") else {
-            errorText = "Une erreur est survenue, veuillez vous reconnecter"
+            errorText = "Une erreur est survenue, veuillez réessayer"
             return
         }
         guard let token = Auth.shared.getAccessToken() else {
-            errorText = "Une erreur est survenue, veuillez vous reconnecter"
+            errorText = "Une erreur est survenue, veuillez réessayer"
             return
         }
         do{
@@ -97,21 +97,24 @@ struct PasswordView: View {
                 errorText = "Une erreur est survenue, veuillez réessayer"
                 return
             }
+            
+            print(String(decoding: encoded, as: UTF8.self))
             var request = URLRequest(url : url)
             request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
             request.httpMethod = "POST"
             
             let (data,response) = try await URLSession.shared.upload(for : request, from: encoded)
             let httpResponse = response as? HTTPURLResponse
+            print(String(decoding: data, as: UTF8.self))
             if httpResponse?.statusCode != 201 {
                 if let decodedResponse = try? JSONDecoder().decode(Message.self, from: data) {
                     errorText = decodedResponse.message
-                }else {
-                    errorText = "error"
                 }
             } else {
                 showMessage = false
-                AppUser.shared.setUser(user: nil)
+                await MainActor.run{
+                    AppUser.shared.setUser(user:nil)
+                }
                 Auth.shared.logout()
             }
         } catch {
