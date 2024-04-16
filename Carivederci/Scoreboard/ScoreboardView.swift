@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ScoreboardView: View {
-    @State var familleList : [Famille] = Famille.famillesExemple
+    @State var familleList : [Famille] = [ ]
     @State var errorText : String = ""
     var body: some View {
         GeometryReader{ geometry in

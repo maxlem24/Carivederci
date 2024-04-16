@@ -34,13 +34,11 @@ struct QRScannerView: View {
     }
     
     func getPoints(token scan : String) async {
-        guard var getRequest = URLComponents(string: hostName+"/scan-qrcode") else {
+        guard let getRequest = URLComponents(string: hostName+"/scan-qrcode/\(scan)") else {
             errorText = "Une erreur est survenue, veuillez réessayer"
             return
         }
-        getRequest.queryItems = [
-            URLQueryItem(name: "token", value: scan)
-        ]
+        
         
         guard let url = getRequest.url else {
             errorText = "Une erreur est survenue, veuillez réessayer"
@@ -58,6 +56,9 @@ struct QRScannerView: View {
             let (data,response) = try await URLSession.shared.data(for : request)
             let httpResponse = response as? HTTPURLResponse
             if httpResponse?.statusCode == 201 {
+                if let decodedError = try? JSONDecoder().decode([Score].self, from: data) {
+                    AppUser.shared.user?.score += decodedError[0].score
+                }
                 self.presentationMode.wrappedValue.dismiss()
             }else {
                 if let decodedError = try? JSONDecoder().decode(Message.self, from: data) {

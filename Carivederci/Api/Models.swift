@@ -47,7 +47,7 @@ struct Famille : Codable{
     let logo : String
     var score : Int 
 }
-
+/*
 extension Famille {
     static let famillesExemple : [Famille] = [
         Famille(name: "Carivederci", logo: "CVD", score: 2024),
@@ -58,7 +58,7 @@ extension Famille {
         Famille(name: "Les Fet'arts", logo: "ART", score: 367),
         Famille(name: "Les Petits", logo: "PTT", score: 244),
     ]
-}
+}*/
 
 struct Sponsor  {
     let imageName : String

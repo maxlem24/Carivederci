@@ -100,9 +100,9 @@ struct FamilleView: View {
             let (data,response) = try await URLSession.shared.upload(for : request, from: encoded)
             let httpResponse = response as? HTTPURLResponse
             if httpResponse?.statusCode == 201 {
-                if let decodedResponse = try? JSONDecoder().decode([Famille].self, from: data) {
+                if let decodedResponse = try? JSONDecoder().decode(Famille.self, from: data) {
                     await MainActor.run{
-                        AppUser.shared.setFamille(famille: decodedResponse[0])
+                        AppUser.shared.setFamille(famille: decodedResponse)
                     }
                 }
             } else {

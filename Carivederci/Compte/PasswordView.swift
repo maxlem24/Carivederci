@@ -99,6 +99,7 @@ struct PasswordView: View {
             }
             
             print(String(decoding: encoded, as: UTF8.self))
+            print(url.description)
             var request = URLRequest(url : url)
             request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
             request.httpMethod = "POST"

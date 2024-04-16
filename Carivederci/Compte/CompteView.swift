@@ -24,79 +24,82 @@ struct CompteView: View {
                     NavigationView {
                         ZStack{
                             Color("BlancRosé").ignoresSafeArea()
-                            VStack(spacing : 15){
-                                HStack{
-                                    Spacer()
-                                    Image("Logo").resizable().scaledToFit().frame(width: geometry.size.height*0.3, height: geometry.size.height*0.3)
-                                    Spacer()
-                                }
-                                HStack{
-                                    Spacer()
-                                    Text(AppUser.shared.getUser()?.pseudo ?? "Error").bold().font(.title3)
-                                        .foregroundColor(Color("Marron"))
-                                    Spacer()
-                                }
-                                Spacer()
-                                HStack{
-                                    NavigationLink(destination: PasswordView()) { Label("Changer de mot de passe", systemImage: "lock.shield.fill")
-                                            .font(.title3)
+                            VStack{
+                                ScrollView{
+                                    HStack{
+                                        Spacer()
+                                        Image("Logo").resizable().scaledToFit().frame(width: geometry.size.height*0.3, height: geometry.size.height*0.3)
+                                        Spacer()
+                                    }
+                                    HStack{
+                                        Spacer()
+                                        Text(AppUser.shared.getUser()?.pseudo ?? "Error").bold().font(.title3)
                                             .foregroundColor(Color("Marron"))
                                         Spacer()
                                     }
-                                }
-                                HStack{
-                                    Text("Mes points : ")
-                                        .font(.title3)
-                                        .foregroundColor(Color("Marron"))
                                     Spacer()
-                                    Text("\(AppUser.shared.getUser()?.score ?? -1) points")
-                                        .font(.title3)
-                                        .foregroundColor(Color("Marron"))
-                                    
-                                }
-                                if(AppUser.shared.getFamille() != nil)
-                                {
-                                    Button{
-                                        showMessage = true
-                                    }label :{
-                                        Text("Quitter la Famille").font(.title3).bold()
-                                            .foregroundColor(Color("RoseBlanc")).padding(5)
-                                    }.frame(width: geometry.size.width*0.9)
-                                        .background(Rectangle().fill(Color("Bordeaux")).cornerRadius(10))
-                                }
-                                if(AppUser.shared.getUser()?.isAdmin ?? false) {
-                                    VStack{
-                                        Text("Generer un QR-Code")
-                                            .font(.title3)
-                                            .foregroundColor(Color("Marron"))
-                                        TextField("Nombre de points", value: $points, formatter: NumberFormatter())
-                                            .keyboardType(.numberPad)
-                                            .font(.title3)
-                                            .foregroundColor(Color("Marron"))
-                                            .padding(.horizontal,5)
-                                            .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color("Marron")))
-                                        NavigationLink(destination :
-                                                        QRCodeView()
-                                        ){
-                                            Text("Generer").font(.title3)
-                                                .foregroundColor(Color("BlancRosé"))
-                                                .padding(5)
-                                                .frame(width: geometry.size.width*0.9)
-                                                .background(RoundedRectangle(cornerRadius: 10)
-                                                    .fill(Color("Bordeaux")))
+                                    HStack{
+                                        NavigationLink(destination: PasswordView()) { Label("Changer de mot de passe", systemImage: "lock.shield.fill")
+                                                .font(.title3)
+                                                .foregroundColor(Color("Marron"))
+                                            Spacer()
                                         }
                                     }
-                                }
+                                    HStack{
+                                        Text("Mes points : ")
+                                            .font(.title3)
+                                            .foregroundColor(Color("Marron"))
+                                        Spacer()
+                                        Text("\(AppUser.shared.getUser()?.score ?? -1) points")
+                                            .font(.title3)
+                                            .foregroundColor(Color("Marron"))
+                                        
+                                    }
+                                    if(AppUser.shared.getFamille() != nil)
+                                    {
+                                        Button{
+                                            showMessage = true
+                                        }label :{
+                                            Text("Quitter la Famille").font(.title3).bold()
+                                                .foregroundColor(Color("RoseBlanc")).padding(5)
+                                        }.frame(width: geometry.size.width*0.9)
+                                            .background(Rectangle().fill(Color("Bordeaux")).cornerRadius(10))
+                                    }
+                                    if(AppUser.shared.getUser()?.isAdmin ?? false) {
+                                        VStack{
+                                            Text("Generer un QR-Code")
+                                                .font(.title3)
+                                                .foregroundColor(Color("Marron"))
+                                            TextField("Nombre de points", value: $points, formatter: NumberFormatter())
+                                                .keyboardType(.numberPad)
+                                                .font(.title3)
+                                                .foregroundColor(Color("Marron"))
+                                                .padding(.horizontal,5)
+                                                .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color("Marron")))
+                                            NavigationLink(destination :
+                                                            QRCodeView()
+                                            ){
+                                                Text("Generer").font(.title3)
+                                                    .foregroundColor(Color("BlancRosé"))
+                                                    .padding(5)
+                                                    .frame(width: geometry.size.width*0.9)
+                                                    .background(RoundedRectangle(cornerRadius: 10)
+                                                        .fill(Color("Bordeaux")))
+                                            }
+                                        }
+                                    }
+                                    
+                                }.padding(.horizontal,15)
                                 Spacer()
                                 VStack{
                                     Text("L'association Carivederci est responsable du traitement des données nécessaires au fonctionnement de l'application")
                                         .font(.footnote)
                                         .foregroundColor(Color("Marron"))
-                                    Link("Plus d'informations en cliquant ici", destination: URL(string: "https://carivederci.site/rgpd")!).bold()
+                                    Link("Plus d'informations en cliquant ici", destination: URL(string: "https://carivederci.site/rgpd")!)
                                         .font(.footnote)
                                         .foregroundColor(Color("Marron"))
                                 }
-                            }.padding(.horizontal,15)
+                            }
                         }
                     }.accentColor(Color("Marron"))
                         .allowsHitTesting(!showMessage)
