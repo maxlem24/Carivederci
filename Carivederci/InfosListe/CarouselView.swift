@@ -21,7 +21,7 @@ struct CarouselView: View {
         GeometryReader {
             geometry in
             
-            ZStack(alignment :.top) {
+            ZStack(alignment :.bottom) {
                 Color("BlancRosé").ignoresSafeArea()
                 TabView(selection: $selectedView) {
                     ForEach(viewsArray.indices, id: \.self) { index in
@@ -44,6 +44,24 @@ struct CarouselView: View {
                         selectedView = viewsArray.count-2
                     }}
                 }
+                HStack {
+                    Capsule().fill(Color.white.opacity(0.33))
+                        .frame(width: geometry.size.width*0.25,height: 8)
+                        .onTapGesture {
+                            withAnimation(.default){
+                                selectedView = selectedView - 1
+                            }
+                        }
+                    Capsule().fill(Color.white)
+                        .frame(width: geometry.size.width*0.25,height: 8)
+                    Capsule().fill(Color.white.opacity(0.33))
+                        .frame(width: geometry.size.width*0.25,height: 8)
+                        .onTapGesture {
+                            withAnimation(.default){
+                                selectedView = selectedView + 1
+                            }
+                        }
+                }.padding(EdgeInsets(top: 0, leading: 0, bottom: 20, trailing: 0))
             }
         }
     }

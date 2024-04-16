@@ -128,7 +128,7 @@ struct FamilleList : Codable {
 }
 
 struct PasswordChange :Codable {
-    let password :String
+    let password : String
     let newPassword : String
     let repeatNewPassword : String
 }

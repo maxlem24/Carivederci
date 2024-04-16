@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct LoginView: View {
-    @Environment(\.presentationMode) var presentationMode : Binding<PresentationMode>
+    @Environment(\.dismiss) private var dismiss
     @State var pseudo : String = ""
     @State var pseudoError : String = ""
     @State var nom : String = ""
@@ -61,12 +61,12 @@ struct LoginView: View {
                         Spacer()
                     }
                     Spacer()
-                }.padding(.horizontal)
+                }.padding(.horizontal).allowsHitTesting(!showMessage)
                 if (showMessage) {
                     VStack {
                         Text("Un message a été envoyé a l'adresse mail suivante : \(mail)").foregroundColor(Color("RoseBlanc")).padding(5)
                         Button{
-                            self.presentationMode.wrappedValue.dismiss()
+                            dismiss()
                         }label :{
                             Text("Ok").bold().foregroundColor(Color("RoseBlanc")).padding(5)
                         }.scaledToFill()

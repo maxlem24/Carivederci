@@ -8,8 +8,7 @@
 import SwiftUI
 
 struct CompteView: View {
-    @ObservedObject var sharedPoints = SharedPoints.shared
-    @State var points : Int?
+    @State var points : String = ""
     @State var showMessage : Bool = false
     @State var errorText : String = ""
     var body: some View {
@@ -70,14 +69,14 @@ struct CompteView: View {
                                             Text("Generer un QR-Code")
                                                 .font(.title3)
                                                 .foregroundColor(Color("Marron"))
-                                            TextField("Nombre de points", value: $points, formatter: NumberFormatter())
+                                            TextField("Nombre de points", text: $points)
                                                 .keyboardType(.numberPad)
                                                 .font(.title3)
                                                 .foregroundColor(Color("Marron"))
                                                 .padding(.horizontal,5)
                                                 .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color("Marron")))
                                             NavigationLink(destination :
-                                                            QRCodeView()
+                                                            QRCodeView(points: .constant (Int(points) ?? 0))
                                             ){
                                                 Text("Generer").font(.title3)
                                                     .foregroundColor(Color("BlancRosé"))

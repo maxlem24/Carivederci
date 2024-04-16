@@ -8,17 +8,9 @@
 import SwiftUI
 import CoreImage.CIFilterBuiltins
 
-class SharedPoints: ObservableObject {
-    static let shared = SharedPoints()
-    @Published var points : Int = 0
-    
-    func updatePoints(points: Int){
-        self.points = points
-    }
-}
 
 struct QRCodeView: View {
-    @ObservedObject var sharedPoints = SharedPoints.shared
+    @Binding var points : Int
     let context = CIContext()
     let filter = CIFilter.qrCodeGenerator()
     @State var image : Image?
@@ -31,7 +23,7 @@ struct QRCodeView: View {
                 VStack{
                     if (image != nil ) {
                         image!.resizable().scaledToFit().overlay(Rectangle().stroke(Color("Marron"))).frame(width: geometry.size.width*0.9, height: geometry.size.width*0.9)
-                        Text("\(sharedPoints.points) points").font(.title3).foregroundColor(Color("Marron")).bold()
+                        Text("\(points) points").font(.title3).foregroundColor(Color("Marron")).bold()
                     }
                     Text(errorText).font(.callout).foregroundColor(.red).padding(5)
                 }
@@ -39,8 +31,6 @@ struct QRCodeView: View {
                     await getQRCode()
             }
         }
-        
-        
     }
     func getQRCode() async {
         guard let url = URL(string : hostName+"/generate")else {
@@ -52,7 +42,7 @@ struct QRCodeView: View {
             return
         }
         do{
-            guard let encoded = try? JSONEncoder().encode(Score(score: sharedPoints.points)) else {
+            guard let encoded = try? JSONEncoder().encode(Score(score: points)) else {
                 errorText = "Une erreur est survenue, veuillez réessayer"
                 return
             }

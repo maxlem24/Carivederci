@@ -25,14 +25,14 @@ struct PlanningView: View {
                             })
                             Spacer()
                         }
-                        Text("Cari-calendrier").font(.title)
+                        Link("Le standard",destination: URL(string: "tel:+33783765157")!).font(.title)
                         BoutonStack(jour :$jour,geometry: geometry)
                         JourView(jour: $jour,geometry : geometry)
                     }.padding()
                 }
             }
         }.edgesIgnoringSafeArea([.top, .bottom])
-            .onAppear(){
+            .task{
             jour = getDay()
         }
     }
