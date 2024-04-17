@@ -25,7 +25,10 @@ struct PlanningView: View {
                             })
                             Spacer()
                         }
-                        Link("Le standard",destination: URL(string: "tel:+33783765157")!).font(.title)
+                        Link("Le standard",destination: URL(string: "tel:+33366596050")!).font(.title)
+                            .padding(5).background(RoundedRectangle(cornerRadius: 8)
+                                .fill( Color("Taupe")) )
+                            .frame(width: geometry.size.width*0.5)                       
                         BoutonStack(jour :$jour,geometry: geometry)
                         JourView(jour: $jour,geometry : geometry)
                     }.padding()

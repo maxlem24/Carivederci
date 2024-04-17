@@ -59,7 +59,6 @@ struct QRScannerView: View {
                 if let decodedError = try? JSONDecoder().decode([Score].self, from: data) {
                     AppUser.shared.user?.score = decodedError[0].score
                 }
-                dismiss()
             }else {
                 if let decodedError = try? JSONDecoder().decode(Message.self, from: data) {
                     errorText = decodedError.message
@@ -68,12 +67,5 @@ struct QRScannerView: View {
         } catch {
             errorText = error.localizedDescription
         }
-    }
-    
-}
-
-struct QRScannerView_Previews: PreviewProvider {
-    static var previews: some View {
-        QRScannerView()
     }
 }

@@ -46,6 +46,11 @@ func isValidAbbreviation(_ abbv : String) -> Bool {
     return abbvPred.evaluate(with: abbv)
 }
 
+func isValidNomFamille(_ nom : String) -> Bool {
+    let nomRegEx = "[A-Za-z ]{2,}"
+    let nomPred = NSPredicate(format: "SELF MATCHES %@",nomRegEx)
+    return nomPred.evaluate(with: nom)
+}
 func hash(password : String) -> String? {
     guard let data = password.data(using: .utf8) else {
         return nil

@@ -24,19 +24,26 @@ struct CompteView: View {
                         ZStack{
                             Color("BlancRosé").ignoresSafeArea()
                             VStack{
-                                ScrollView{
+                                HStack{
+                                    Spacer()
+                                    Image("Logo").resizable().scaledToFit().frame(width: geometry.size.height*0.3, height: geometry.size.height*0.3)
+                                    Spacer()
+                                }
+                                HStack{
+                                    Spacer()
+                                    Text(AppUser.shared.getUser()?.pseudo ?? "Error").bold().font(.title3)
+                                        .foregroundColor(Color("Marron"))
+                                    Spacer()
+                                }
+                                if (AppUser.shared.getFamille() != nil){
                                     HStack{
                                         Spacer()
-                                        Image("Logo").resizable().scaledToFit().frame(width: geometry.size.height*0.3, height: geometry.size.height*0.3)
-                                        Spacer()
-                                    }
-                                    HStack{
-                                        Spacer()
-                                        Text(AppUser.shared.getUser()?.pseudo ?? "Error").bold().font(.title3)
+                                        Text(AppUser.shared.getFamille()?.name ?? "Error").bold().font(.title3)
                                             .foregroundColor(Color("Marron"))
                                         Spacer()
                                     }
-                                    Spacer()
+                                }
+                                ScrollView{
                                     HStack{
                                         NavigationLink(destination: PasswordView()) { Label("Changer de mot de passe", systemImage: "lock.shield.fill")
                                                 .font(.title3)
@@ -54,7 +61,7 @@ struct CompteView: View {
                                             .foregroundColor(Color("Marron"))
                                         
                                     }
-                                    if(AppUser.shared.getFamille() != nil)
+                                    if(AppUser.shared.getFamille() != nil && !showMessage)
                                     {
                                         Button{
                                             showMessage = true
@@ -108,7 +115,7 @@ struct CompteView: View {
                     VStack(alignment : .leading) {
                         Text("Voulez vous vraiment abandonner votre famille ?")
                             .foregroundColor(Color("Marron")).padding(5)
-                        Text("Vous allez remis sur l'écran de selection des familles")
+                        Text("Vous allez être remis sur l'écran de selection des familles")
                             .foregroundColor(Color("Marron")).padding(5)
                         Text(errorText).font(.callout).foregroundColor(.red).padding(5)
                         HStack{

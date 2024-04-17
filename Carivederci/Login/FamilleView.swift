@@ -59,7 +59,7 @@ struct FamilleView: View {
         if newFamily {
             abbvFamilleError = isValidAbbreviation(abbvFamille) ? "" : "L'abbréviation doit être uniquement composée de 3 lettres"
             passwordCopyError = isValidPassword(passwordCopy) ? "" : "Mot de passe invalide : il doit contenir au moins 8 caractères, avec une majuscule, une minuscule, un chiffre et un caractère spécial"        }
-        nomFamilleError = isValidPseudo(nomFamille) ? "" : "Nom de Famille invalide : il doit contenir au moins 6 caractères et pas de caractère spéciaux"
+        nomFamilleError = isValidNomFamille(nomFamille) ? "" : "Nom de Famille invalide : il doit contenir au moins 6 caractères et pas de caractère spéciaux"
         passwordError = isValidPassword(password) ? "" : "Mot de passe invalide : il doit contenir au moins 8 caractères, avec une majuscule, une minuscule, un chiffre et un caractère spécial"
         
         if abbvFamilleError == "" && nomFamilleError == "" && passwordError == "" && passwordCopyError == ""{
@@ -137,9 +137,9 @@ struct FamilleView: View {
             let (data,response) = try await URLSession.shared.upload(for : request, from: encoded)
             let httpResponse = response as? HTTPURLResponse
             if httpResponse?.statusCode == 201 {
-                if let decodedResponse = try? JSONDecoder().decode(Famille.self, from: data) {
+                if let decodedResponse = try? JSONDecoder().decode([Famille].self, from: data) {
                     await MainActor.run{
-                        AppUser.shared.setFamille(famille: decodedResponse)
+                        AppUser.shared.setFamille(famille: decodedResponse[0])
                     }
                 }
             } else {

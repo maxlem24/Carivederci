@@ -45,16 +45,16 @@ struct CarouselView: View {
                     }}
                 }
                 HStack {
-                    Capsule().fill(Color.white.opacity(0.33))
+                    Capsule().fill(Color("Bordeaux").opacity(0.33))
                         .frame(width: geometry.size.width*0.25,height: 8)
                         .onTapGesture {
                             withAnimation(.default){
                                 selectedView = selectedView - 1
                             }
                         }
-                    Capsule().fill(Color.white)
+                    Capsule().fill(Color("Bordeaux"))
                         .frame(width: geometry.size.width*0.25,height: 8)
-                    Capsule().fill(Color.white.opacity(0.33))
+                    Capsule().fill(Color("Bordeaux").opacity(0.33))
                         .frame(width: geometry.size.width*0.25,height: 8)
                         .onTapGesture {
                             withAnimation(.default){
