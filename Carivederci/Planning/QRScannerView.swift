@@ -56,8 +56,8 @@ struct QRScannerView: View {
             let (data,response) = try await URLSession.shared.data(for : request)
             let httpResponse = response as? HTTPURLResponse
             if httpResponse?.statusCode == 201 {
-                if let decodedError = try? JSONDecoder().decode([Score].self, from: data) {
-                    AppUser.shared.user?.score = decodedError[0].score
+                if let decodedMessage = try? JSONDecoder().decode([Score].self, from: data) {
+                    AppUser.shared.setScore(score: decodedMessage[0].score)
                 }
             }else {
                 if let decodedError = try? JSONDecoder().decode(Message.self, from: data) {

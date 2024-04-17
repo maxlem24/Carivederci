@@ -45,20 +45,25 @@ struct CarouselView: View {
                     }}
                 }
                 HStack {
-                    Capsule().fill(Color("Bordeaux").opacity(0.33))
+                    Capsule().fill(Color("Bordeaux").opacity(selectedView == 1 ? 1 :0.33))
                         .frame(width: geometry.size.width*0.25,height: 8)
                         .onTapGesture {
                             withAnimation(.default){
-                                selectedView = selectedView - 1
+                                selectedView = 1
                             }
                         }
-                    Capsule().fill(Color("Bordeaux"))
-                        .frame(width: geometry.size.width*0.25,height: 8)
-                    Capsule().fill(Color("Bordeaux").opacity(0.33))
+                    Capsule().fill(Color("Bordeaux").opacity(selectedView == 2 ? 1 :0.33))
                         .frame(width: geometry.size.width*0.25,height: 8)
                         .onTapGesture {
                             withAnimation(.default){
-                                selectedView = selectedView + 1
+                                selectedView = 2
+                            }
+                        }                    
+                    Capsule().fill(Color("Bordeaux").opacity(selectedView == 3 ? 1 :0.33))
+                        .frame(width: geometry.size.width*0.25,height: 8)
+                        .onTapGesture {
+                            withAnimation(.default){
+                                selectedView = 3
                             }
                         }
                 }.padding(EdgeInsets(top: 0, leading: 0, bottom: 20, trailing: 0))
@@ -67,8 +72,3 @@ struct CarouselView: View {
     }
 }
 
-struct CarouselView_Previews: PreviewProvider {
-    static var previews: some View {
-        CarouselView()
-    }
-}

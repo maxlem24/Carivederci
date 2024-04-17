@@ -62,9 +62,9 @@ struct LoginMenuView: View {
             let (data,response) = try await URLSession.shared.data(for : request)
             let httpResponse = response as? HTTPURLResponse
             if httpResponse?.statusCode == 201 {
-                if let decodedResponse = try? JSONDecoder().decode(UserResponse.self, from: data) {
+                if let decodedResponse = try? JSONDecoder().decode(Reconnect.self, from: data) {
                     await MainActor.run{
-                        AppUser.shared.setUser(user: ResponseToApp(res: decodedResponse))
+                        AppUser.shared.setUser(user: ResponseToApp(res: decodedResponse.json[0]))
                     }
                     await getFamille()
                 }

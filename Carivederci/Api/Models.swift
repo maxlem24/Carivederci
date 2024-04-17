@@ -34,6 +34,13 @@ class AppUser : ObservableObject {
     func setFamille(famille : Famille?) {
         self.famille = famille
     }
+    func setScore(score : Int) {
+        guard var userNotNil = getUser() else {
+            return
+        }
+        userNotNil.score = score
+        setUser(user: userNotNil)
+    }
 }
 
 struct User : Codable {
@@ -78,7 +85,10 @@ extension Sponsor {
         Sponsor(imageName: "le HI", marqueName: "Le Hi"),
         Sponsor(imageName: "Les 3 brasseurs", marqueName: "Les 3 Brasseurs"),
         Sponsor(imageName: "Reve d'O", marqueName: "Le RÊVE D'Ô"),
-    ]
+        Sponsor(imageName: "Karos", marqueName: "Karos"),
+        Sponsor(imageName: "Lydia", marqueName: "Lydia"),
+        Sponsor(imageName: "Intersport", marqueName: "Intersport"),
+        Sponsor(imageName: "Dominos", marqueName: "Domino's Pizza"),    ]
 }
 
 struct Message : Codable {
@@ -131,4 +141,8 @@ struct PasswordChange :Codable {
     let password : String
     let newPassword : String
     let repeatNewPassword : String
+}
+
+struct Reconnect : Codable {
+    let json : [UserResponse]
 }

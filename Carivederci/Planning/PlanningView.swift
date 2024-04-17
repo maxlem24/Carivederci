@@ -42,16 +42,16 @@ struct PlanningView: View {
     func getDay() -> Jours {
         let jour = Date().formatted(Date.FormatStyle().weekday(.oneDigit))
         switch jour {
-        case "1","2":
-            return .Lundi
-        case "3":
+        case "2":
             return .Mardi
-        case "4":
+        case "3":
             return .Mercredi
-        case "5" :
+        case "4" :
             return .Jeudi
-        default :
+        case "5" :
             return .Vendredi
+        default :
+            return .Lundi
         }
     }
 }
