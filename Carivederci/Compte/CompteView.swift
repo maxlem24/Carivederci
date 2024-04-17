@@ -24,11 +24,12 @@ struct CompteView: View {
                         ZStack{
                             Color("BlancRosé").ignoresSafeArea()
                             VStack{
+                                ScrollView{
                                 HStack{
                                     Spacer()
                                     Image("Logo").resizable().scaledToFit().frame(
-                                        width: geometry.size.height*(AppUser.shared.getUser()?.isAdmin ?? false ? 0.15 : 0.3),
-                                        height: geometry.size.height*(AppUser.shared.getUser()?.isAdmin ?? false ? 0.15 : 0.3))
+                                        width: geometry.size.height*0.3,
+                                        height: geometry.size.height*0.3)
                                     Spacer()
                                 }
                                 HStack{
@@ -45,7 +46,6 @@ struct CompteView: View {
                                         Spacer()
                                     }
                                 }
-                                ScrollView{
                                     HStack{
                                         NavigationLink(destination: PasswordView()) { Label("Changer de mot de passe", systemImage: "lock.shield.fill")
                                                 .font(.title3)
@@ -76,14 +76,15 @@ struct CompteView: View {
                                     if(AppUser.shared.getUser()?.isAdmin ?? false) {
                                         VStack{
                                             Text("Generer un QR-Code")
-                                                .font(.title3)
-                                                .foregroundColor(Color("Marron"))
+                                                .font(.title3).bold()
+                                                .foregroundColor(Color("RoseBlanc")).padding(5).frame(width: geometry.size.width*0.9)
+                                                .background(Rectangle().fill(Color("Bordeaux")).cornerRadius(10))
                                             TextField("Nombre de points", text: $points)
-                                                .keyboardType(.numberPad)
                                                 .font(.title3)
                                                 .foregroundColor(Color("Marron"))
                                                 .padding(.horizontal,5)
-                                                .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color("Marron")))
+                                                .overlay(RoundedRectangle(cornerRadius: 10)
+                                                    .stroke(Color("Marron")))
                                             NavigationLink(destination :
                                                             QRCodeView(points: .constant (Int(points) ?? 0))
                                             ){

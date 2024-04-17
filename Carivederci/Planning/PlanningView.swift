@@ -25,7 +25,7 @@ struct PlanningView: View {
                             })
                             Spacer()
                         }
-                        Link("Le standard",destination: URL(string: "tel:+33366596050")!).font(.title)
+                        Link("N° standard",destination: URL(string: "tel:+33366596050")!).font(.title)
                             .padding(5).background(RoundedRectangle(cornerRadius: 8)
                                 .fill( Color("Taupe")) )
                             .frame(width: geometry.size.width*0.5)                       

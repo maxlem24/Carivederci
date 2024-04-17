@@ -29,12 +29,13 @@ struct LoginView: View {
             ZStack{
                 Color("Bordeaux").ignoresSafeArea()
                 VStack(alignment : .leading){
+                    ScrollView{
                     HStack{
                         Spacer()
-                        Image("Logo").resizable().scaledToFit().frame(width: geometry.size.height*0.3, height: geometry.size.height*0.3).padding(.vertical,10)
+                        Image("Logo").resizable().scaledToFit().frame(width: geometry.size.height*0.4, height: geometry.size.height*0.4).padding(.vertical,10)
                         Spacer()
                     }
-                    ScrollView{
+                    
                         let width = geometry.size.width*0.9
                         if(newUser){
                             FieldView(nom:"Nom",field:$nom,errorField : $nomError, width : width)
@@ -78,16 +79,16 @@ struct LoginView: View {
     func checkFields() {
         pseudoError = isValidPseudo(pseudo) ? "" : "Pseudo invalide : il doit contenir au moins 6 caractères et pas de caractère spéciaux"
         if newUser {
-            nomError = isValidNom(nom) ? "" : "Nom invalide : il doit contenir uniquement des lettres et au moins 2 lettres"
-            prenomError = isValidPrenom(prenom) ? "" : "Prenom invalide : il doit contenir uniquement des lettres et au moins 2 lettres"
+            nomError = isValidNom(nom) ? "" : "Nom invalide : il doit contenir uniquement des lettres sans accents et au moins 2 lettres"
+            prenomError = isValidPrenom(prenom) ? "" : "Prenom invalide : il doit contenir uniquement des lettres sans accents et au moins 2 lettres"
             mailError = isValidMail(mail) ? "" : "Adresse Mail invalide : le format ne correspond pas"
             passwordCopyError = isValidPassword(passwordCopy) ? "" : "Mot de passe invalide : il doit contenir au moins 8 caractères, avec une majuscule, une minuscule, un chiffre et un caractère spécial"
         }
         passwordError = isValidPassword(password) ? "" : "Mot de passe invalide : il doit contenir au moins 8 caractères, avec une majuscule, une minuscule, un chiffre et un caractère spécial"
         if pseudoError == "" && nomError == "" && prenomError == "" && mailError == "" && passwordError == "" && passwordCopyError == ""{
             if password != passwordCopy && newUser{
-                passwordError = "Le mot de passe saisie n'est pas identique"
-                passwordCopyError = "Le mot de passe saisie n'est pas identique"
+                passwordError = "Le mot de passe saisi n'est pas identique"
+                passwordCopyError = "Le mot de passe saisi n'est pas identique"
             }else {
                     Task {
                         if newUser {

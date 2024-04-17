@@ -31,7 +31,7 @@ struct CarouselView: View {
                         case .teams :
                             TeamsView()
                         case .youtube :
-                            YoutubeView()
+                            ReseauxView()
                         }
                     }
                 }

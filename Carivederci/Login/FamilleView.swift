@@ -23,12 +23,13 @@ struct FamilleView: View {
             ZStack{
                 Color("Bordeaux").ignoresSafeArea()
                 VStack(alignment : .leading){
+                    ScrollView{
                     HStack{
                         Spacer()
-                        Image("Logo").resizable().scaledToFit().frame(width: geometry.size.height*0.3, height: geometry.size.height*0.3).padding(.vertical,10)
+                        Image("Logo").resizable().scaledToFit().frame(width: geometry.size.height*0.4, height: geometry.size.height*0.4).padding(.vertical,10)
                         Spacer()
                     }
-                    ScrollView{
+                    
                         if newFamily {
                             FieldView(nom: "Abbreviation de la famille", field: $abbvFamille, errorField: $abbvFamilleError, width: geometry.size.width*0.9)
                         }
@@ -57,15 +58,15 @@ struct FamilleView: View {
     }
     func checkFields() {
         if newFamily {
-            abbvFamilleError = isValidAbbreviation(abbvFamille) ? "" : "L'abbréviation doit être uniquement composée de 3 lettres"
+            abbvFamilleError = isValidAbbreviation(abbvFamille) ? "" : "L'abbréviation doit être uniquement composée de 3 lettres sans accents"
             passwordCopyError = isValidPassword(passwordCopy) ? "" : "Mot de passe invalide : il doit contenir au moins 8 caractères, avec une majuscule, une minuscule, un chiffre et un caractère spécial"        }
         nomFamilleError = isValidNomFamille(nomFamille) ? "" : "Nom de Famille invalide : il doit contenir au moins 6 caractères et pas de caractère spéciaux"
         passwordError = isValidPassword(password) ? "" : "Mot de passe invalide : il doit contenir au moins 8 caractères, avec une majuscule, une minuscule, un chiffre et un caractère spécial"
         
         if abbvFamilleError == "" && nomFamilleError == "" && passwordError == "" && passwordCopyError == ""{
             if password != passwordCopy && newFamily {
-                passwordError = "Le mot de passe saisie n'est pas identique"
-                passwordCopyError = "Le mot de passe saisie n'est pas identique"
+                passwordError = "Le mot de passe saisi n'est pas identique"
+                passwordCopyError = "Le mot de passe saisi n'est pas identique"
             }else {
                 Task{
                     if newFamily {
@@ -87,7 +88,7 @@ struct FamilleView: View {
             return
         }
         do{
-            guard let encoded = try? JSONEncoder().encode(FamilleAPI(name: nomFamille, logo: nil, password: password, repeatPassword: nil))
+            guard let encoded = try? JSONEncoder().encode(FamilleAPI(name: nomFamille.uppercased(), logo: nil, password: password, repeatPassword: nil))
             else {
                 errorText = "Une erreur est survenue, veuillez réessayer"
                 return

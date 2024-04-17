@@ -35,7 +35,7 @@ func isValidMail(_ email : String) -> Bool {
 }
 
 func isValidPassword(_ password : String) -> Bool {
-    let passwordRegEx = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[@$!?%*&])[A-Za-z\\d@$!%*?&]{8,}"
+    let passwordRegEx = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[@$!?%*&\\/\\\\\\-\\._])[A-Za-z\\d@$!?%*&\\/\\\\\\-\\._]{8,}"
     let passwordPred = NSPredicate(format: "SELF MATCHES %@",passwordRegEx)
     return passwordPred.evaluate(with: password)
 }
@@ -51,6 +51,7 @@ func isValidNomFamille(_ nom : String) -> Bool {
     let nomPred = NSPredicate(format: "SELF MATCHES %@",nomRegEx)
     return nomPred.evaluate(with: nom)
 }
+
 func hash(password : String) -> String? {
     guard let data = password.data(using: .utf8) else {
         return nil

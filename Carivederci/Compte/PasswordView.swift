@@ -75,8 +75,8 @@ struct PasswordView: View {
         newPasswdCopyError = isValidPassword(newPasswdCopy) ? "" : "Mot de passe invalide : il doit contenir au moins 8 caractères, avec une majuscule, une minuscule, un chiffre et un caractère spécial"
         if oldPasswdError == "" && newPasswdError == "" && newPasswdCopyError == "" {
             if newPasswd != newPasswdCopy {
-                newPasswdError = "Le nouveau mot de passe saisie n'est pas identique"
-                newPasswdCopyError = "Le nouveau mot de passe saisie n'est pas identique"
+                newPasswdError = "Le nouveau mot de passe saisi n'est pas identique"
+                newPasswdCopyError = "Le nouveau mot de passe saisi n'est pas identique"
             }else {
                 showMessage = true
             }
@@ -97,16 +97,12 @@ struct PasswordView: View {
                 errorText = "Une erreur est survenue, veuillez réessayer"
                 return
             }
-            
-            print(String(decoding: encoded, as: UTF8.self))
-            print(url.description)
             var request = URLRequest(url : url)
             request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
             request.httpMethod = "POST"
             
             let (data,response) = try await URLSession.shared.upload(for : request, from: encoded)
             let httpResponse = response as? HTTPURLResponse
-            print(String(decoding: data, as: UTF8.self))
             if httpResponse?.statusCode != 201 {
                 if let decodedResponse = try? JSONDecoder().decode(Message.self, from: data) {
                     errorText = decodedResponse.message
