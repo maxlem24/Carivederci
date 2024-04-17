@@ -25,7 +25,7 @@ struct FamilleView: View {
                 VStack(alignment : .leading){
                     HStack{
                         Spacer()
-                        Image("Logo").resizable().scaledToFit().frame(width: geometry.size.height*0.4, height: geometry.size.height*0.4).padding(.vertical,20)
+                        Image("Logo").resizable().scaledToFit().frame(width: geometry.size.height*0.3, height: geometry.size.height*0.3).padding(.vertical,10)
                         Spacer()
                     }
                     ScrollView{

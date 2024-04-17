@@ -26,7 +26,9 @@ struct CompteView: View {
                             VStack{
                                 HStack{
                                     Spacer()
-                                    Image("Logo").resizable().scaledToFit().frame(width: geometry.size.height*0.3, height: geometry.size.height*0.3)
+                                    Image("Logo").resizable().scaledToFit().frame(
+                                        width: geometry.size.height*(AppUser.shared.getUser()?.isAdmin ?? false ? 0.15 : 0.3),
+                                        height: geometry.size.height*(AppUser.shared.getUser()?.isAdmin ?? false ? 0.15 : 0.3))
                                     Spacer()
                                 }
                                 HStack{
@@ -95,7 +97,7 @@ struct CompteView: View {
                                         }
                                     }
                                     
-                                }.padding(.horizontal,15)
+                                }.padding(.horizontal,10)
                                 Spacer()
                                 VStack{
                                     Text("L'association Carivederci est responsable du traitement des données nécessaires au fonctionnement de l'application")
@@ -138,7 +140,40 @@ struct CompteView: View {
                         errorText = ""
                     }
                 }
+            }.task {
+                await getUser()
             }
+        }
+    }
+    func getUser() async {
+        guard let url = URL(string : hostName+"/current-user") else {
+            errorText = "Une erreur est survenue, veuillez vous reconnecter"
+            return
+        }
+        guard let token = Auth.shared.getAccessToken() else {
+            errorText = "Une erreur est survenue, veuillez vous reconnecter"
+            return
+        }
+        do{
+            var request = URLRequest(url : url)
+            request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+            request.httpMethod = "GET"
+            
+            let (data,response) = try await URLSession.shared.data(for : request)
+            let httpResponse = response as? HTTPURLResponse
+            if httpResponse?.statusCode == 201 {
+                if let decodedResponse = try? JSONDecoder().decode(Reconnect.self, from: data) {
+                    await MainActor.run{
+                        AppUser.shared.setUser(user: ResponseToApp(res: decodedResponse.json[0]))
+                    }
+                }
+            } else {
+                if let decodedResponse = try? JSONDecoder().decode(Message.self, from: data) {
+                    errorText = decodedResponse.message
+                }
+            }
+        } catch {
+            errorText = error.localizedDescription
         }
     }
     func leave() async {
