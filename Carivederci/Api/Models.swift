@@ -88,7 +88,8 @@ extension Sponsor {
         Sponsor(imageName: "Karos", marqueName: "Karos"),
         Sponsor(imageName: "Lydia", marqueName: "Lydia"),
         Sponsor(imageName: "Intersport", marqueName: "Intersport"),
-        Sponsor(imageName: "Dominos", marqueName: "Domino's Pizza"),    ]
+        Sponsor(imageName: "Dominos", marqueName: "Domino's Pizza"),    
+    ]
 }
 
 struct Message : Codable {

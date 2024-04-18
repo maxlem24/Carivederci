@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct CompteView: View {
+    @ObservedObject var appUser : AppUser = AppUser.shared
     @State var points : String = ""
     @State var showMessage : Bool = false
     @State var showQuit : Bool = false
@@ -36,11 +37,11 @@ struct CompteView: View {
                                     }
                                     HStack{
                                         Spacer()
-                                        Text(AppUser.shared.getUser()?.pseudo ?? "Error").bold().font(.title3)
+                                        Text(appUser.getUser()?.pseudo ?? "Error").bold().font(.title3)
                                             .foregroundColor(Color("Marron"))
                                         Spacer()
                                     }
-                                    if (AppUser.shared.getFamille() != nil){
+                                    if (appUser.getFamille() != nil){
                                         HStack{
                                             Spacer()
                                             Text(AppUser.shared.getFamille()?.name ?? "Error").bold().font(.title3)
@@ -60,7 +61,7 @@ struct CompteView: View {
                                             .font(.title3)
                                             .foregroundColor(Color("Marron"))
                                         Spacer()
-                                        Text("\(AppUser.shared.getUser()?.score ?? -1) points")
+                                        Text("\(appUser.getUser()?.score ?? -1) points")
                                             .font(.title3)
                                             .foregroundColor(Color("Marron"))
                                         
@@ -75,7 +76,7 @@ struct CompteView: View {
                                         }.frame(width: geometry.size.width*0.9)
                                             .background(Rectangle().fill(Color("Bordeaux")).cornerRadius(10))
                                     }
-                                    if(AppUser.shared.getUser()?.isAdmin ?? false) {
+                                    if(appUser.getUser()?.isAdmin ?? false) {
                                         VStack{
                                             Text("Generer un QR-Code")
                                                 .font(.title3).bold()
@@ -161,7 +162,8 @@ struct CompteView: View {
                         HStack{
                             Spacer()
                             Button{
-                                AppUser.shared.setUser(user: nil)
+                                appUser.setUser(user: nil)
+                                Auth.shared.logout()
                             }label :{
                                 Text("Ok").bold().foregroundColor(Color("Marron")).padding(5)
                             }
@@ -172,39 +174,6 @@ struct CompteView: View {
                     }
                 }
             }
-        }.task {
-            await getUser()
-        }
-    }
-    func getUser() async {
-        guard let url = URL(string : hostName+"/current-user") else {
-            errorText = "Une erreur est survenue, veuillez vous reconnecter"
-            return
-        }
-        guard let token = Auth.shared.getAccessToken() else {
-            errorText = "Une erreur est survenue, veuillez vous reconnecter"
-            return
-        }
-        do{
-            var request = URLRequest(url : url)
-            request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
-            request.httpMethod = "GET"
-            
-            let (data,response) = try await URLSession.shared.data(for : request)
-            let httpResponse = response as? HTTPURLResponse
-            if httpResponse?.statusCode == 201 {
-                if let decodedResponse = try? JSONDecoder().decode(Reconnect.self, from: data) {
-                    await MainActor.run{
-                        AppUser.shared.setUser(user: ResponseToApp(res: decodedResponse.json[0]))
-                    }
-                }
-            } else {
-                if let decodedResponse = try? JSONDecoder().decode(Message.self, from: data) {
-                    errorText = decodedResponse.message
-                }
-            }
-        } catch {
-            errorText = error.localizedDescription
         }
     }
     func leave() async {
@@ -230,7 +199,7 @@ struct CompteView: View {
             } else {
                 showMessage = false
                 await MainActor.run{
-                    AppUser.shared.setFamille(famille: nil)
+                    appUser.setFamille(famille: nil)
                 }
             }
         } catch {
@@ -256,6 +225,8 @@ struct CompteView: View {
             if httpResponse?.statusCode != 201 {
                 if let decodedResponse = try? JSONDecoder().decode(Message.self, from: data) {
                     errorTextQuit = decodedResponse.message
+                }else {
+                    errorTextQuit = "Une erreur est survenue, veuillez réessayer"
                 }
             } else {
                 showQuit = true
@@ -263,9 +234,5 @@ struct CompteView: View {
         } catch {
             errorText = error.localizedDescription
         }
-    }}
-
-
-
-
-
+    }
+}

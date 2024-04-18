@@ -15,7 +15,7 @@ enum Jours : String,CaseIterable {
     case Vendredi
 }
 
-struct Activite :Identifiable{
+struct Activite : Identifiable{
     var id : String {
         return nom
     }
@@ -36,35 +36,33 @@ extension Journee {
     static let semaine : [Jours : Journee] = [
         Jours.Lundi : Journee(
                     Allo : [Activite(nom :"Allo Turn-Up"),Activite(nom: "Allo Crêpes")],
-                    Matin: [Activite(nom: "Petit Dej", heure: "7h30-9h45")],
-                    Midi: [Activite(nom: "Tournoi Smash"),Activite(nom: "Question pour un Mafieux"),Activite(nom : "Activités sportives du BDS"),Activite(nom: "Concert BDA", lieu: "Hall CLJ1")],
-                    Soir: [Activite(nom: "Murder Party"),Activite(nom: "Carinostra", lieu: "Le HI")]
+                    Midi: [Activite(nom: "Tournoi Smash"),Activite(nom: "Question pour un Mafieux"),Activite(nom : "Activités sportives du BDS"),Activite(nom: "Concert BDA")],
+                    Soir: [Activite(nom: "Murder Party"),Activite(nom: "Carinostra", lieu: "Le Hï")]
                 ),
                 Jours.Mardi : Journee(
-                    Allo : [Activite(nom:"Allo Enlevement"),Activite(nom:"Allo Mugshot")],
-                    Matin: [Activite(nom: "Petit Dej", heure: "7h30-9h45")],
-                    Midi: [Activite(nom: "Tournoi Smash"), Activite(nom: "Question pour un Mafieux"), Activite(nom : "Activités sportives du BDS"),Activite(nom: "Fresque BDA")],
-                    Soir: [Activite(nom: "Carick'n'Roll",lieu: "L'imaginaire"), Activite(nom: "Allo Turn-up")]
+                    Allo : [Activite(nom:"Allo Enlèvement"),Activite(nom:"Allo Mugshot")],
+                    Matin: [Activite(nom: "Petit Dej")],
+                    Midi: [Activite(nom: "Tournoi Smash"), Activite(nom: "Questions pour un Mafieux"), Activite(nom : "Activités sportives du BDS"),Activite(nom: "Fresque BDA")],
+                    Soir: [Activite(nom: "Carick'n'Roll",lieu: "L'Imaginaire"), Activite(nom: "Allo Turn-up")]
                 ),
                 Jours.Mercredi : Journee(
                     Allo : [Activite(nom:"Allo Body Guard")],
-                    Matin: [Activite(nom: "Petit Dej", heure: "7h30-9h45")],
-                    Midi: [Activite(nom: "Tournoi Smash"), Activite(nom: "Question pour un Mafieux"), Activite(nom : "Activités sportives du BDS"), Activite(nom: "Just Dance"),Activite(nom: "Opé Allié/Ennemi")],
-                    Soir: [Activite(nom: "Talent Show"),Activite(nom: "Apéro Visio")]
+                    Matin: [Activite(nom: "Petit Dej")],
+                    Midi: [Activite(nom: "Tournoi Smash"), Activite(nom: "Questions pour un Mafieux"), Activite(nom : "Activités sportives du BDS"), Activite(nom: "Just Dance"),Activite(nom: "Opé Allié/Ennemi")],
+                    Soir: [Activite(nom: "Talent Show",lieu: "V&B l'Arsenal"), Activite(nom: "Apéro Visio")]
                 ),
                 Jours.Jeudi :Journee(
                     Allo: [Activite(nom : "Allo Tattoo")],
-                    Midi: [Activite(nom: "Tournoi Smash"),Activite(nom: "Question pour un Mafieux"), Activite(nom : "Activités sportives du BDS"),Activite(nom: "Projection de film")],
-                    ApresMidi: [Activite(nom:"Après midi BDS")],
-                    Soir: [Activite(nom: "La nuit des Parrains", lieu: "Reves d'Ô")]
+                    Matin: [Activite(nom: "Petit Dej")],
+                    Midi: [Activite(nom: "Tournoi Smash"), Activite(nom: "Questions pour un Mafieux"), Activite(nom: "Projection de film")],
+                    ApresMidi: [Activite(nom:"Après midi BDS",lieu : "Etang du Vignoble")],
+                    Soir: [Activite(nom: "La nuit des Parrains", lieu: "Rêve d'Ô")]
                 ),
                 Jours.Vendredi : Journee(
-                    Midi: [Activite(nom: "Finale du tournoi Smash"),Activite(nom: "Finale des jeux du midi"),Activite(nom : "Activités sportives du BDS")],
-                    ApresMidi: [Activite(nom:"Remise des lots",  lieu: "CLJ3-E14")],
-                    Soir: [Activite(nom:"Omerta", lieu: "Pixel Bar")]
+                    Matin: [Activite(nom: "Petit Dej")],
+                    Midi: [Activite(nom: "Finale du tournoi Smash"),Activite(nom: "Finale de Questions pour un Mafieux"),Activite(nom : "Activités sportives du BDS")],
+                    ApresMidi: [Activite(nom:"Remise des lots")],
+                    Soir: [Activite(nom:"L'Omerta",  lieu: "Pixel")]
                 )
     ]
 }
-
-
-
