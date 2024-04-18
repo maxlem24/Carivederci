@@ -138,9 +138,5 @@ struct ScoreView : View {
     }
 }
 
-struct ScoreboardView_Previews: PreviewProvider {
-    static var previews: some View {
-        ScoreboardView()
-    }
-}
+
 

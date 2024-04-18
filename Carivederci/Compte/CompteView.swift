@@ -10,7 +10,9 @@ import SwiftUI
 struct CompteView: View {
     @State var points : String = ""
     @State var showMessage : Bool = false
+    @State var showQuit : Bool = false
     @State var errorText : String = ""
+    @State var errorTextQuit : String = ""
     var body: some View {
         GeometryReader {
             geometry in
@@ -25,27 +27,27 @@ struct CompteView: View {
                             Color("BlancRosé").ignoresSafeArea()
                             VStack{
                                 ScrollView{
-                                HStack{
-                                    Spacer()
-                                    Image("Logo").resizable().scaledToFit().frame(
-                                        width: geometry.size.height*0.3,
-                                        height: geometry.size.height*0.3)
-                                    Spacer()
-                                }
-                                HStack{
-                                    Spacer()
-                                    Text(AppUser.shared.getUser()?.pseudo ?? "Error").bold().font(.title3)
-                                        .foregroundColor(Color("Marron"))
-                                    Spacer()
-                                }
-                                if (AppUser.shared.getFamille() != nil){
                                     HStack{
                                         Spacer()
-                                        Text(AppUser.shared.getFamille()?.name ?? "Error").bold().font(.title3)
+                                        Image("Logo").resizable().scaledToFit().frame(
+                                            width: geometry.size.height*0.3,
+                                            height: geometry.size.height*0.3)
+                                        Spacer()
+                                    }
+                                    HStack{
+                                        Spacer()
+                                        Text(AppUser.shared.getUser()?.pseudo ?? "Error").bold().font(.title3)
                                             .foregroundColor(Color("Marron"))
                                         Spacer()
                                     }
-                                }
+                                    if (AppUser.shared.getFamille() != nil){
+                                        HStack{
+                                            Spacer()
+                                            Text(AppUser.shared.getFamille()?.name ?? "Error").bold().font(.title3)
+                                                .foregroundColor(Color("Marron"))
+                                            Spacer()
+                                        }
+                                    }
                                     HStack{
                                         NavigationLink(destination: PasswordView()) { Label("Changer de mot de passe", systemImage: "lock.shield.fill")
                                                 .font(.title3)
@@ -96,7 +98,15 @@ struct CompteView: View {
                                                         .fill(Color("Bordeaux")))
                                             }
                                         }
-                                    }
+                                        Button{
+                                            Task{
+                                                await quit()
+                                            }
+                                        }label :{
+                                            Text("Supprimer le compte").font(.title3).bold()
+                                                .foregroundColor(Color("RoseBlanc")).padding(5)
+                                        }.frame(width: geometry.size.width*0.9)
+                                        .background(Rectangle().fill(Color("Bordeaux")).cornerRadius(10))                                    }
                                     
                                 }.padding(.horizontal,10)
                                 Spacer()
@@ -111,7 +121,7 @@ struct CompteView: View {
                             }
                         }
                     }.accentColor(Color("Marron"))
-                        .allowsHitTesting(!showMessage)
+                        .allowsHitTesting(!showMessage && !showQuit)
                         .edgesIgnoringSafeArea([.top, .bottom])
                 }
                 if (showMessage) {
@@ -141,9 +151,29 @@ struct CompteView: View {
                         errorText = ""
                     }
                 }
-            }.task {
-                await getUser()
+                if (showQuit) {
+                    VStack(alignment : .leading) {
+                        Text("Votre demande a été prise en compte, un mail a été envoyé")
+                            .foregroundColor(Color("Marron")).padding(5)
+                        Text("Vous allez être remis déconnecté de l'appli")
+                            .foregroundColor(Color("Marron")).padding(5)
+                        Text(errorTextQuit).font(.callout).foregroundColor(.red).padding(5)
+                        HStack{
+                            Spacer()
+                            Button{
+                                AppUser.shared.setUser(user: nil)
+                            }label :{
+                                Text("Ok").bold().foregroundColor(Color("Marron")).padding(5)
+                            }
+                            Spacer()
+                        }
+                    }.padding().background(Rectangle().fill(Color("Rose")).cornerRadius(10)).frame(width: geometry.size.width*0.9).navigationBarBackButtonHidden(showMessage).onAppear(){
+                        errorTextQuit = ""
+                    }
+                }
             }
+        }.task {
+            await getUser()
         }
     }
     func getUser() async {
@@ -207,7 +237,33 @@ struct CompteView: View {
             errorText = error.localizedDescription
         }
     }
-}
+    func quit() async {
+        guard let url = URL(string : hostName+"/remove") else {
+            errorTextQuit = "Une erreur est survenue, veuillez réessayer"
+            return
+        }
+        guard let token = Auth.shared.getAccessToken() else {
+            errorTextQuit = "Une erreur est survenue, veuillez réessayer"
+            return
+        }
+        do{
+            var request = URLRequest(url : url)
+            request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+            request.httpMethod = "GET"
+            
+            let (data,response) = try await URLSession.shared.data(for : request)
+            let httpResponse = response as? HTTPURLResponse
+            if httpResponse?.statusCode != 201 {
+                if let decodedResponse = try? JSONDecoder().decode(Message.self, from: data) {
+                    errorTextQuit = decodedResponse.message
+                }
+            } else {
+                showQuit = true
+            }
+        } catch {
+            errorText = error.localizedDescription
+        }
+    }}
 
 
 
