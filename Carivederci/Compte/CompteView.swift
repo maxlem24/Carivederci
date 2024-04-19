@@ -99,16 +99,16 @@ struct CompteView: View {
                                                         .fill(Color("Bordeaux")))
                                             }
                                         }
-                                        Button{
-                                            Task{
-                                                await quit()
-                                            }
-                                        }label :{
-                                            Text("Supprimer le compte").font(.title3).bold()
-                                                .foregroundColor(Color("RoseBlanc")).padding(5)
-                                        }.frame(width: geometry.size.width*0.9)
-                                        .background(Rectangle().fill(Color("Bordeaux")).cornerRadius(10))                                    }
-                                    
+                                    }
+                                    Button{
+                                        Task{
+                                            await quit()
+                                        }
+                                    }label :{
+                                        Text("Supprimer le compte").font(.title3).bold()
+                                            .foregroundColor(Color("RoseBlanc")).padding(5)
+                                    }.frame(width: geometry.size.width*0.9)
+                                        .background(Rectangle().fill(Color("Bordeaux")).cornerRadius(10))
                                 }.padding(.horizontal,10)
                                 Spacer()
                                 VStack{
@@ -120,10 +120,10 @@ struct CompteView: View {
                                         .foregroundColor(Color("Marron"))
                                 }
                             }
-                        }
-                    }.accentColor(Color("Marron"))
-                        .allowsHitTesting(!showMessage && !showQuit)
-                        .edgesIgnoringSafeArea([.top, .bottom])
+                        }.accentColor(Color("Marron"))
+                            .allowsHitTesting(!showMessage && !showQuit)
+                            .edgesIgnoringSafeArea([.top, .bottom])
+                    }
                 }
                 if (showMessage) {
                     VStack(alignment : .leading) {
