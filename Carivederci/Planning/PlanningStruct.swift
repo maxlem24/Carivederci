@@ -36,11 +36,11 @@ extension Journee {
     static let semaine : [Jours : Journee] = [
         Jours.Lundi : Journee(
                     Allo : [Activite(nom :"Allo Turn-Up"),Activite(nom: "Allo Crêpes")],
-                    Midi: [Activite(nom: "Tournoi Smash"),Activite(nom: "Question pour un Mafieux"),Activite(nom : "Activités sportives du BDS"),Activite(nom: "Concert BDA")],
-                    Soir: [Activite(nom: "Murder Party"),Activite(nom: "Carinostra", lieu: "Le Hï")]
+                    Midi: [Activite(nom: "Tournoi Smash"),Activite(nom: "Questions pour un Mafieux"),Activite(nom : "Activités sportives du BDS"),Activite(nom: "Concert BDA")],
+                    Soir: [Activite(nom: "Drame à Chicago"),Activite(nom: "Carinostra", lieu: "Le Hï")]
                 ),
                 Jours.Mardi : Journee(
-                    Allo : [Activite(nom:"Allo Enlèvement"),Activite(nom:"Allo Mugshot")],
+                    Allo : [Activite(nom:"Allo Exfiltration"),Activite(nom:"Allo Mugshot")],
                     Matin: [Activite(nom: "Petit Dej")],
                     Midi: [Activite(nom: "Tournoi Smash"), Activite(nom: "Questions pour un Mafieux"), Activite(nom : "Activités sportives du BDS"),Activite(nom: "Fresque BDA")],
                     Soir: [Activite(nom: "Carick'n'Roll",lieu: "L'Imaginaire"), Activite(nom: "Allo Turn-up")]

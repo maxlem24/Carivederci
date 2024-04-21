@@ -120,10 +120,11 @@ struct CompteView: View {
                                         .foregroundColor(Color("Marron"))
                                 }
                             }
-                        }.accentColor(Color("Marron"))
+                        }
+                    }.accentColor(Color("Marron"))
                             .allowsHitTesting(!showMessage && !showQuit)
                             .edgesIgnoringSafeArea([.top, .bottom])
-                    }
+                    
                 }
                 if (showMessage) {
                     VStack(alignment : .leading) {
